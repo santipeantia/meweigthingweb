@@ -1,0 +1,1 @@
+﻿Provider=vfpoledb;Data Source=C:\MedesignData\DataExpress;Collating Sequence=machine;

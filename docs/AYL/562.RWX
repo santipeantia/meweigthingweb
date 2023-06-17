@@ -1,0 +1,932 @@
+[Preference]
+	vert align=Center
+	horz align=Left
+	border=No
+	curve=0
+	font name=Angsana New
+	font size=14
+	bold=No
+	italic=No
+	underline=No
+	clr=0,0,0
+	bgclr=255,255,255
+	bdclr=0,0,0
+	bkmode=Transparent
+	secheight=0.2000 inch
+	secclr=255,255,255
+	pcurve=1
+	line clr=0,0,0
+	pixel=1
+	exc font name=
+	exc font size=
+	exc freeze=Yes
+[Report]
+	caption=Report
+	edit copy=ทุกชุด
+	show excel=Yes
+	width=14.8910 inch
+	psize=0, "ตามเครื่องพิมพ์"
+	tblvw hi=179
+	tblvw mode=2
+	secvw wd=150
+	left margin=0.5000 inch
+	top margin=0.2912 inch
+	right margin=0.2500 inch
+	bot margin=0.2500 inch
+	set margin=Yes
+	printer=
+	to border=Yes
+	col wd=1.0000
+	col gap=0.5000
+	printpref=2
+	horzalign=0
+	calculation= "1,Totbf_DB=0","1,Totbf_CR=0","1,TotDB=0","1,TotCR=0","1,Totbal_DB=0","1,Totbal_CR=0"
+	query=ACCNUM>='Acc1()'.AND.ACCNUM<='Acc2()' .AND. GLACC->ACCTYP='0'
+	datefmt=
+	horgap=2.2000
+	vergap=1.2000
+	stwd=2.0000
+	sthg=1.0000
+	strow=5
+	stcol=4
+	st how column=1
+	st type=Junk A4
+[File]
+	[Variable]
+		dimension=0,0,100,150
+
+	[Master File]
+		file name=GLBAL
+		alias=B
+		tag=GLBAL1
+		dimension=100,0,200,150
+
+	[Related File]
+		file name=GLACC
+		alias=A
+		tag=GLACC1
+		master file=GLBAL
+		related fld=ACCNUM
+		dimension=200,0,300,150
+
+		file name=ISTAB
+		alias=T
+		tag=ISTAB2
+		master file=GLBAL
+		related fld=DEPCOD
+		dimension=300,0,400,150
+
+[Table]
+	visible=Yes
+	can move=Yes
+	curvelt=1
+	curvert=1
+	curvelb=1
+	curverb=1
+	line clr=0,0,0
+	xpoint=[     8,  1787][  1325,  1787][  1740,  1787][  5858,  1787][  7308,  1787][  8725,  1787][ 10183,  1787][ 11617,  1787][ 13075,  1787][ 14540,  1787]
+	ypoint=[     8,  1787][     8,  2129][     8,  2475][     8,  3219]
+	invisible line=[H1,0][H1,1][H1,2][V0,4][V0,6][V0,8]
+	[Cell]
+		name=C0,0
+		name=C1,0
+		name=C2,0
+		name=C0,1
+		name=C1,1
+		name=C2,1
+		name=C0,2
+		name=C1,2
+		name=C2,2
+		name=C0,3
+		name=C1,3
+		name=C2,3
+		name=C0,4
+		name=C1,4
+		name=C2,4
+		name=C0,5
+		name=C1,5
+		name=C2,5
+		name=C0,6
+		name=C1,6
+		name=C2,6
+		name=C0,7
+		name=C1,7
+		name=C2,7
+		name=C0,8
+		name=C1,8
+		name=C2,8
+	[EndCell]
+	visible=Yes
+	can move=Yes
+	curvelt=1
+	curvert=1
+	curvelb=1
+	curverb=1
+	line clr=0,0,0
+	xpoint=[     8,  3336][  1325,  3336][  1740,  3336][  5858,  3336][  7308,  3336][  8725,  3336][ 10183,  3336][ 11617,  3336][ 13075,  3336][ 14540,  3336]
+	ypoint=[     8,  3336][     8,  3795]
+	invisible line=[V0,1][V0,2]
+	[Cell]
+		name=C0,0
+		name=C0,1
+		name=C0,2
+		name=C0,3
+		name=C0,4
+		name=C0,5
+		name=C0,6
+		name=C0,7
+		name=C0,8
+	[EndCell]
+[ExcelColumn]
+	print=Yes
+	width=1.3320 inch
+	name=A
+	print=Yes
+	width=0.4250 inch
+	name=B
+	print=Yes
+	width=4.1090 inch
+	name=C
+	print=Yes
+	width=1.4400 inch
+	name=D
+	print=Yes
+	width=1.4340 inch
+	name=E
+	print=Yes
+	width=1.4320 inch
+	name=F
+	print=Yes
+	width=1.4420 inch
+	name=G
+	print=Yes
+	width=1.4400 inch
+	name=H
+	print=Yes
+	width=1.5620 inch
+	name=I
+	print=Yes
+	width=0.2740 inch
+	name=J
+[Section]
+[Ti]
+	name=Ti1
+	secheight=0.2840 inch
+	order objs=1
+	shrink=Yes
+	exc visible=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=TEXT
+		name=TEXT1
+		visible=No
+		print with=::INIT_VAR
+		calculation= "1,CNT=0","1,P0=@yesno()","1,Totdb=0","1,Totcr=0","1,Totbf_db=0","1,Totbf_cr=0","1,TotBal_DB=0","1,TotBal_CR=0"
+		order=1
+		dimension=146,0,906,265
+		exc dimension=146,0,906,265
+
+[He]
+	name=He1
+	secheight=0.2840 inch
+	order objs=4
+	shrink=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=TEXT
+		name=TEXT2
+		print with=_NAME
+		order=1
+		dimension=66,0,8586,265
+		exc dimension=66,0,8586,265
+
+		obj type=LABEL
+		caption=หน้า
+		name=LABEL1
+		order=2
+		dimension=12577,0,13102,265
+		exc dimension=12097,0,12622,265
+
+		obj type=LABEL
+		caption=:
+		name=LABEL2
+		order=3
+		dimension=13161,0,13446,265
+		exc dimension=12681,0,12966,265
+
+		obj type=TEXT
+		name=TEXT3
+		print with=_PAGE
+		format=99999
+		order=4
+		dimension=13835,0,14400,265
+		exc dimension=13835,0,14400,265
+		horz align=Right
+
+[He]
+	name=He2
+	secheight=0.3140 inch
+	order objs=3
+	shrink=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=งบทดลอง
+		name=LABEL3
+		order=1
+		dimension=66,0,1404,299
+		exc dimension=66,0,1404,299
+		font size=22
+
+		obj type=LABEL
+		caption=ณ วันที่ 
+		name=LABEL4
+		order=2
+		dimension=1654,16,2313,281
+		exc dimension=1814,16,2473,281
+
+		obj type=TEXT
+		name=TEXT4
+		print with=@date2()
+		format=dd ดดด ปปปป
+		order=3
+		dimension=2563,16,3806,281
+		exc dimension=2579,16,3822,281
+
+[He]
+	name=He3
+	secheight=0.2840 inch
+	order objs=7
+	shrink=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=เลขที่บัญชีจาก
+		name=LABEL5
+		order=1
+		dimension=66,0,1049,265
+		exc dimension=66,0,1049,265
+
+		obj type=TEXT
+		name=TEXT5
+		print with=Acc1()
+		order=2
+		dimension=1346,0,2666,265
+		exc dimension=1810,0,3130,265
+
+		obj type=LABEL
+		caption=ถึง
+		name=LABEL6
+		order=3
+		dimension=2706,0,3092,265
+		exc dimension=3170,0,3556,265
+
+		obj type=TEXT
+		name=TEXT6
+		print with=Acc2()
+		order=4
+		dimension=3106,0,3866,265
+		exc dimension=3570,0,4330,265
+
+		obj type=LABEL
+		caption=วันที่
+		name=LABEL7
+		order=5
+		dimension=12577,0,13111,265
+		exc dimension=12097,0,12631,265
+
+		obj type=LABEL
+		caption=:
+		name=LABEL8
+		order=6
+		dimension=13161,0,13446,265
+		exc dimension=12681,0,12966,265
+
+		obj type=TEXT
+		name=TEXT7
+		print with=_DATE
+		order=7
+		dimension=13496,0,14400,265
+		exc dimension=13496,0,14400,265
+		horz align=Right
+
+[He]
+	name=He4
+	secheight=0.2840 inch
+	order objs=4
+	how HE=1
+	shrink=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=วันที่จาก
+		name=LABEL9
+		order=1
+		dimension=66,0,757,265
+		exc dimension=66,0,757,265
+
+		obj type=TEXT
+		name=TEXT8
+		print with=@date1()
+		format=d ดดด ปปปป
+		order=2
+		dimension=1346,0,2476,265
+		exc dimension=1810,0,2940,265
+
+		obj type=LABEL
+		caption=ถึง
+		name=LABEL10
+		order=3
+		dimension=2706,0,3092,265
+		exc dimension=3170,0,3556,265
+
+		obj type=TEXT
+		name=TEXT9
+		print with=@date2()
+		format=dd ดดด ปปปป
+		order=4
+		dimension=3106,0,4349,265
+		exc dimension=3570,0,4813,265
+
+[He]
+	name=He5
+	secheight=0.2840 inch
+	order objs=4
+	how HE=1
+	shrink=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=เลือกแผนก
+		name=LABEL11
+		order=1
+		dimension=66,0,887,265
+		exc dimension=66,0,887,265
+
+		obj type=TEXT
+		name=TEXT10
+		print with=Dep1()
+		order=2
+		dimension=1346,0,2666,265
+		exc dimension=1810,0,3130,265
+
+		obj type=LABEL
+		caption=รวมบัญชียอดเป็น 0
+		name=LABEL12
+		order=3
+		dimension=2706,0,3955,265
+		exc dimension=3170,0,4419,265
+
+		obj type=TEXT
+		name=TEXT11
+		print with=P0
+		order=4
+		dimension=4226,0,8746,265
+		exc dimension=4690,0,9210,265
+
+[He]
+	name=He6
+	secheight=0.1250 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+[He]
+	name=He7
+	secheight=0.5830 inch
+	order objs=12
+	shrink=No
+	exc merge=Yes
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=เลขที่บัญชี
+		name=LABEL0
+		order=1
+		dimension=290,25,1074,565
+		exc dimension=290,25,1074,565
+		horz align=Center
+
+		obj type=LABEL
+		caption=แผนก
+		name=LABEL13
+		order=2
+		dimension=1346,32,1724,564
+		exc dimension=1346,32,1724,564
+		horz align=Center
+
+		obj type=LABEL
+		caption=ชื่อบัญชี
+		name=LABEL15
+		order=3
+		dimension=3266,33,3934,565
+		exc dimension=3266,33,3934,565
+		horz align=Center
+
+		obj type=LABEL
+		caption=ยอดยกมา
+		name=LABEL14
+		order=4
+		dimension=6317,0,8262,265
+		exc dimension=6317,0,8262,265
+		horz align=Center
+
+		obj type=LABEL
+		caption=ยอดเคลื่อนไหว
+		name=LABEL17
+		order=5
+		dimension=9170,0,11115,265
+		exc dimension=9170,0,11115,265
+		horz align=Center
+
+		obj type=LABEL
+		caption=ยอดคงเหลือ
+		name=LABEL20
+		order=6
+		dimension=12114,0,14059,265
+		exc dimension=12114,0,14059,265
+		horz align=Center
+
+		obj type=LABEL
+		caption=เดบิท
+		name=LABEL16
+		order=7
+		dimension=6123,300,7013,565
+		exc dimension=6123,300,7013,565
+		horz align=Center
+		newrow=Yes
+
+		obj type=LABEL
+		caption=เครดิต
+		name=LABEL18
+		order=8
+		dimension=7600,300,8436,565
+		exc dimension=7600,300,8436,565
+		horz align=Center
+
+		obj type=LABEL
+		caption=เดบิท
+		name=LABEL19
+		order=9
+		dimension=9056,299,9845,564
+		exc dimension=9056,299,9845,564
+		horz align=Center
+
+		obj type=LABEL
+		caption=เครดิต
+		name=LABEL21
+		order=10
+		dimension=10490,300,11284,565
+		exc dimension=10490,300,11284,565
+		horz align=Center
+
+		obj type=LABEL
+		caption=เดบิท
+		name=LABEL22
+		order=11
+		dimension=11959,300,12757,565
+		exc dimension=11959,300,12757,565
+		horz align=Center
+
+		obj type=LABEL
+		caption=เครดิต
+		name=LABEL23
+		order=12
+		dimension=13418,291,14196,556
+		exc dimension=13418,291,14196,556
+		horz align=Center
+
+[He]
+	name=He9
+	secheight=0.1250 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+[Bo]
+	name=Bo1
+	visible=No
+	secheight=0.2840 inch
+	order objs=4
+	shrink=Yes
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=TEXT
+		name=TEXT12
+		visible=No
+		print with=::Z1
+		calculation= "1,BF=@nBAL_LD()"
+		order=1
+		dimension=146,0,686,265
+		exc dimension=146,0,686,265
+
+		obj type=TEXT
+		name=TEXT13
+		visible=No
+		print with=::Z3
+		calculation= "1,pdb=@nPTD_DB()","1,pcr=@nPTD_CR()"
+		order=2
+		dimension=706,0,1306,265
+		exc dimension=706,0,1306,265
+
+		obj type=TEXT
+		name=TEXT14
+		visible=No
+		print with=::Z5
+		calculation= "1,BAL=BF+pdb-pcr"
+		order=3
+		dimension=1346,0,1946,265
+		exc dimension=1346,0,1946,265
+
+		obj type=TEXT
+		name=TEXT15
+		visible=No
+		print with=::ZZ
+		calculation= "1,WW=pdb + pcr"
+		order=4
+		dimension=1986,0,2266,265
+		exc dimension=1986,0,2266,265
+
+[Bo]
+	name=Bo2
+	secheight=0.2890 inch
+	order objs=11
+	shrink=Yes
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=TEXT
+		name=TEXT16
+		print with=NUM
+		calculation= "1,SK=IIF(P0='N',IIF(BF=0.and.WW=0,'}',' '),' ')","1,NUM=IIF(SK='}','}              ',B->ACCNUM)","1,[1-11].visible=IIF(NUM='}',.f.,.t.)","1,[2-11].enable=IIF(NUM='}',.f.,.t.)"
+		order=1
+		dimension=66,0,1306,265
+		exc dimension=66,0,1306,265
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT17
+		print with=B->DEPCOD
+		calculation= "1,X=IIF(B->DEPCOD#'  '.and. T->TYPCOD='  ','**','  ')","1,Y=IIF(A->USEDEP='M' .and. B->DEPCOD='  ','^^','  ')"
+		order=2
+		dimension=1346,0,1730,265
+		exc dimension=1346,0,1730,265
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT18
+		print with=X
+		calculation= "1,Y=IIF(A->USEDEP='N' .and. B->DEPCOD#'  ','^^', Y )","1,X=IIF(X#'  ',X,Y)"
+		order=3
+		dimension=1778,0,1918,265
+		exc dimension=1778,0,1918,265
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT19
+		print with=A->ACCNAM
+		order=4
+		dimension=1938,0,5811,265
+		exc dimension=1938,0,5811,265
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT20
+		print with=B1
+		format=9,999,999,999.99
+		calculation= "1,B1=IIF(BF>0,   BF,0)","1,TotBF_DB = Totbf_DB + B1"
+		order=5
+		dimension=5986,0,7266,265
+		exc dimension=5986,0,7266,265
+		horz align=Right
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT21
+		print with=B2
+		format=9,999,999,999.99
+		calculation= "1,B2=IIF(BF<0,-1*BF,0)","1,TotBF_CR = Totbf_CR + B2"
+		order=6
+		dimension=7426,0,8706,265
+		exc dimension=7426,0,8706,265
+		horz align=Right
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT22
+		print with=pdb
+		format=9,999,999,999.99
+		calculation= "1,TotDB = TotDB + pdb"
+		order=7
+		dimension=8866,0,10146,265
+		exc dimension=8866,0,10146,265
+		horz align=Right
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT23
+		print with=pcr
+		format=9,999,999,999.99
+		calculation= "1,TotCR = TotCR + pcr"
+		order=8
+		dimension=10306,0,11586,265
+		exc dimension=10306,0,11586,265
+		horz align=Right
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT24
+		print with=B1
+		format=9,999,999,999.99
+		calculation= "1,B1=IIF(BAL>0,   BAL,0)","1,TotBal_DB = Totbal_DB + B1"
+		order=9
+		dimension=11746,0,13026,265
+		exc dimension=11746,0,13026,265
+		horz align=Right
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT25
+		print with=B2
+		format=9,999,999,999.99
+		calculation= "1,B2=IIF(BAL<0,-1*BAL,0)","1,TotBal_CR = Totbal_CR + B2"
+		order=10
+		dimension=13186,0,14466,265
+		exc dimension=13186,0,14466,265
+		horz align=Right
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT26
+		visible=No
+		print with=::N
+		calculation= "1,CNT=CNT+1"
+		order=11
+		dimension=14488,9,14655,274
+		exc dimension=14722,9,14889,274
+		objexc visible=No
+		objexc border=Yes
+
+[Fo]
+	name=Fo1
+	secheight=0.1280 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+[Su]
+	name=Su1
+	secheight=0.1530 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+[Su]
+	name=Su2
+	secheight=0.2910 inch
+	order objs=9
+	shrink=Yes
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=รวม
+		name=LABEL31
+		order=1
+		dimension=3106,0,3406,265
+		exc dimension=3106,0,3406,265
+		horz align=Center
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT27
+		print with=CNT
+		format=99,999
+		order=2
+		dimension=3426,0,3906,265
+		exc dimension=3426,0,3906,265
+		horz align=Center
+		objexc border=Yes
+		bold=Yes
+
+		obj type=LABEL
+		caption=บัญชี
+		name=LABEL32
+		order=3
+		dimension=3986,0,4500,265
+		exc dimension=3986,0,4500,265
+		horz align=Center
+		objexc border=Yes
+
+		obj type=TEXT
+		name=TEXT28
+		print with=Totbf_DB
+		format=99,999,999,999.99
+		order=4
+		dimension=5906,0,7266,271
+		exc dimension=5906,0,7266,271
+		horz align=Right
+		objexc border=Yes
+		bold=Yes
+
+		obj type=TEXT
+		name=TEXT29
+		print with=Totbf_CR
+		format=99,999,999,999.99
+		order=5
+		dimension=7346,0,8706,271
+		exc dimension=7346,0,8706,271
+		horz align=Right
+		objexc border=Yes
+		bold=Yes
+
+		obj type=TEXT
+		name=TEXT30
+		print with=TotDB
+		format=99,999,999,999.99
+		order=6
+		dimension=8786,0,10146,271
+		exc dimension=8786,0,10146,271
+		horz align=Right
+		objexc border=Yes
+		bold=Yes
+
+		obj type=TEXT
+		name=TEXT31
+		print with=TotCR
+		format=99,999,999,999.99
+		order=7
+		dimension=10226,0,11586,271
+		exc dimension=10226,0,11586,271
+		horz align=Right
+		objexc border=Yes
+		bold=Yes
+
+		obj type=TEXT
+		name=TEXT32
+		print with=TotBal_DB
+		format=99,999,999,999.99
+		order=8
+		dimension=11666,0,13026,271
+		exc dimension=11666,0,13026,271
+		horz align=Right
+		objexc border=Yes
+		bold=Yes
+
+		obj type=TEXT
+		name=TEXT33
+		print with=TotBal_CR
+		format=99,999,999,999.99
+		order=9
+		dimension=13106,0,14466,271
+		exc dimension=13106,0,14466,271
+		horz align=Right
+		objexc border=Yes
+		bold=Yes
+
+[Su]
+	name=Su3
+	secheight=0.2170 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+[Su]
+	name=Su4
+	enable=No
+	secheight=0.2840 inch
+	order objs=3
+	shrink=Yes
+	n_sticker=
+	stlm=0.0500
+	sttm=0.0500
+	strm=0.0500
+	stbm=0.0500
+	sthorcenter=Yes
+	stvercenter=Yes
+	stfit=No
+	[Object]
+		obj type=LABEL
+		caption=>>>>
+		name=LABEL33
+		order=1
+		dimension=66,0,446,265
+		exc dimension=66,0,446,265
+
+		obj type=LABEL
+		caption=จบรายงาน
+		name=LABEL34
+		order=2
+		dimension=466,0,1166,265
+		exc dimension=466,0,1166,265
+
+		obj type=LABEL
+		caption=<<<<
+		name=LABEL35
+		order=3
+		dimension=1186,0,1720,265
+		exc dimension=1186,0,1720,265
+

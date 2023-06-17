@@ -1,0 +1,75 @@
+SAYC3,00030,00400,alltrim(cHLine)
+*IMAGE,00020,00100,C:\TRUCKOEM\LOGO.BMP
+SAYC2,00060,00400,alltrim(cHAddr1)+' '+alltrim(cHAddr2)
+SAYC2,00080,00400,alltrim(cHAddr3)
+SAYC3,00110,00400,'ใบชั่งน้ำหนัก'
+
+SAYR2,00140,00100,'ลำดับเข้า'
+SAYR2,00160,00100,'เลขบัตรชั่ง'
+SAYR2,00180,00100,'ทะเบียนรถ'
+SAYR2,00200,00100,'ประเภท'
+SAYR2,00220,00100,'บริษัท'
+SAYR2,00240,00100,'สินค้า'
+SAYR2,00260,00100,'การขนส่ง'
+SAYR2,00280,00100,cremark1
+SAYR2,00300,00100,'ความชื้น'
+SAYR2,00320,00100,'สิ่งเจือปน'
+
+SAYR2,00140,00200,wdata->ticket1
+SAYR2,00160,00200,wdata->ticket2
+SAYR2,00180,00200,wdata->truck
+SAYR2,00200,00200,alltrim(cartype->name)+' ('+alltrim(wdata->cartype)+')'
+SAYR2,00220,00200,alltrim(company->name)+' ('+alltrim(wdata->company)+')'
+SAYR2,00240,00200,alltrim(product->name)+' ('+alltrim(wdata->product)+')'
+SAYR2,00260,00200,alltrim(subcon->name)+' ('+alltrim(wdata->subcon)+')'
+SAYR2,00280,00200,alltrim(wdata->remark1)
+** ค่าความชื้น
+SAYR2,00300,00200,alltrim(SPLIT(wdata->remark2,1,'/','C'))+' %'
+SAYR2,00320,00200,alltrim(SPLIT(wdata->remark3,1,'/','C'))+' %'
+
+SAYR2,00340,00100,'ราคา/'+alltrim(substr(cssay1,6,10))
+SAYR2,00340,00200,alltrim(tran(wdata->price,'999,999,999.99'))+'  บาท'
+SAYC2,00360,00250,'('+baht(Total)+')'
+
+SAYR2,00140,00400,'รถชั่งเข้า'
+SAYR2,00140,00470,dtoc(wdata->dayin)+','+wdata->tmin
+SAYL2,00140,00700,tran(wdata->w1,'999,999')
+SAYR2,00140,00720,'กิโลกรัม'
+SAYR2,00160,00400,'รถชั่งออก'
+SAYR2,00160,00470,dtoc(wdata->dayout)+','+wdata->tmout
+SAYL2,00160,00700,tran(wdata->w2,'999,999')
+SAYR2,00160,00720,'กิโลกรัม'
+SAYR2,00180,00450,'น้ำหนักสุทธิ'
+SAYL2,00180,00700,tran(Net,'999,999')
+SAYR2,00180,00720,'กิโลกรัม'
+SAYR2,00200,00450,'หัก ความชื้น '+alltrim(SPLIT(wdata->remark2,2,'/','C'))+' %'
+SAYL2,00200,00700,tran(wdata->adj_w1,'999,999.999')
+SAYR2,00200,00720,'กิโลกรัม'
+SAYR2,00220,00450,'หักเจือปน'
+SAYL2,00220,00700,tran(wdata->adj_w2*wdata->rate,'999,999.999')
+SAYR2,00220,00720,'กิโลกรัม'
+SAYR3,00263,00450,'น้ำหนักคงเหลือ'
+SAYL3,00263,00700,tran(Qty,'999,999.999')
+SAYR3,00263,00720,alltrim(substr(cssay1,6,10))
+
+SAYR2,00300,00450,'จำนวนเงิน'
+SAYL2,00300,00700,tran(Amount,'999,999,999.99')
+SAYR2,00300,00720,'บาท'
+SAYR2,00320,00450,'หักค่าชั่ง'
+SAYL2,00320,00700,tran(wdata->adj_m,'999,999,999.99')
+SAYR2,00320,00720,'บาท'
+SAYR3,00360,00450,'ยอดเงิน'
+SAYL3,00360,00700,tran(Total,'999,999,999.99')
+SAYR3,00360,00720,'บาท'
+
+SAYC2,00400,00250,'............................................................'
+SAYC2,00400,00600,'............................................................'
+SAYC2,00420,00250,'พนักงานชั่ง'
+SAYC2,00420,00600,'พนักงานขับรถ'
+
+**[Condition]
+**Value1=round(abs(csay22-csay26)*split(csay09,2,'/')/-100,0)
+**Value2=round(abs(csay22-csay26)*split(csay10,1,'/')/-100,0)
+
+**Adj.W.=cvar1
+**Adj.Q.=cvar2/csay17

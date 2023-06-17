@@ -1,0 +1,559 @@
+[Preference]
+	vert align=Center
+	horz align=Left
+	border=No
+	curve=0
+	font name=Angsana New
+	font size=14
+	bold=No
+	italic=No
+	underline=No
+	clr=0,0,0
+	bgclr=255,255,255
+	bdclr=0,0,0
+	bkmode=Transparent
+	secheight=0.2000 inch
+	secclr=255,255,255
+	pcurve=1
+	line clr=0,0,0
+	pixel=1
+	exc font name=
+	exc font size=
+	exc freeze=Yes
+[Report]
+	caption=Report
+	edit copy=ทุกชุด
+	show excel=Yes
+	width=10.7080 inch
+	psize=0, "ตามเครื่องพิมพ์"
+	pw=8.2700
+	ph=11.6900
+	tblvw hi=72
+	tblvw mode=2
+	secvw wd=68
+	left margin=0.5000 inch
+	top margin=0.5000 inch
+	right margin=0.2500 inch
+	bot margin=0.2500 inch
+	set margin=No
+	supg=No
+	printer=
+	to border=Yes
+	col wd=1.0000
+	col gap=0.5000
+	printpref=1
+	multipg=1
+	sepset=Yes
+	horzalign=0
+	datefmt=
+	horgap=2.2000
+	vergap=1.2000
+	stwd=2.0000
+	sthg=1.0000
+	strow=5
+	stcol=4
+	st how column=1
+	st type=Junk A4
+	stcustom=No
+[File]
+	[Variable]
+		dimension=0,0,100,150
+
+	[Master File]
+		file name=GLACC
+		alias=A
+		tag=GLACC1
+		dimension=100,0,200,150
+
+[ExcelColumn]
+	print=Yes
+	width=1.0940 inch
+	name=A
+	print=Yes
+	width=0.2500 inch
+	name=B
+	print=Yes
+	width=4.6870 inch
+	name=C
+	print=Yes
+	width=1.2090 inch
+	name=D
+	print=Yes
+	width=0.5000 inch
+	name=E
+	print=Yes
+	width=0.5830 inch
+	name=F
+	print=Yes
+	width=0.9380 inch
+	name=G
+	print=Yes
+	width=1.4470 inch
+	name=H
+[Section]
+[Ti]
+	name=Ti1
+	secheight=0.2850 inch
+	order objs=1
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=TEXT
+		name=TEXT1
+		visible=No
+		print with=start_rep()
+		calculation= "1,cnt=0","1,par=0","1,child=0"
+		order=1
+		dimension=146,0,4666,265
+		exc dimension=146,0,4666,265
+		insu=0
+
+[He]
+	name=He1
+	secheight=0.2850 inch
+	order objs=4
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=TEXT
+		name=TEXT2
+		print with=_NAME
+		order=1
+		dimension=66,0,4827,265
+		exc dimension=66,0,4827,265
+		insu=0
+
+		obj type=LABEL
+		caption=หน้า
+		name=LABEL1
+		order=2
+		dimension=8161,0,8686,265
+		exc dimension=7537,0,8062,265
+
+		obj type=LABEL
+		caption=:
+		name=LABEL2
+		order=3
+		dimension=8745,0,9030,265
+		exc dimension=8121,0,8406,265
+
+		obj type=TEXT
+		name=TEXT3
+		print with=_PAGE
+		format=99999
+		order=4
+		dimension=9584,0,9984,265
+		exc dimension=9200,0,9600,265
+		horz align=Right
+		insu=0
+
+[He]
+	name=He2
+	secheight=0.3810 inch
+	order objs=1
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=ผังบัญชี
+		name=LABEL3
+		order=1
+		dimension=66,0,1208,371
+		exc dimension=66,0,1208,371
+		font size=22
+
+[He]
+	name=He3
+	secheight=0.2850 inch
+	order objs=7
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=เลขที่บัญชีจาก
+		name=LABEL4
+		order=1
+		dimension=66,0,1049,265
+		exc dimension=66,0,1049,265
+
+		obj type=TEXT
+		name=TEXT4
+		print with=Acc1()
+		order=2
+		dimension=1346,0,2666,265
+		exc dimension=1346,0,2666,265
+		insu=0
+
+		obj type=LABEL
+		caption=ถึง
+		name=LABEL5
+		order=3
+		dimension=2706,0,3092,265
+		exc dimension=2706,0,3092,265
+
+		obj type=TEXT
+		name=TEXT5
+		print with=Acc2()
+		order=4
+		dimension=3106,0,3866,265
+		exc dimension=3106,0,3866,265
+		insu=0
+
+		obj type=LABEL
+		caption=วันที่
+		name=LABEL6
+		order=5
+		dimension=8161,0,8695,265
+		exc dimension=7553,0,8087,265
+
+		obj type=LABEL
+		caption=:
+		name=LABEL7
+		order=6
+		dimension=8745,0,9030,265
+		exc dimension=8137,0,8422,265
+
+		obj type=TEXT
+		name=TEXT6
+		print with=_DATE
+		order=7
+		dimension=9080,0,9984,265
+		exc dimension=8696,0,9600,265
+		horz align=Right
+		insu=0
+
+[He]
+	name=He4
+	secheight=0.1250 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+[He]
+	name=He5
+	secheight=0.3930 inch
+	order objs=7
+	shrink=No
+	[Object]
+		obj type=LABEL
+		caption=เลขที่บัญชี
+		name=LABEL8
+		order=1
+		dimension=66,80,1199,345
+		exc dimension=66,80,1199,345
+		horz align=Center
+		objexc border=Yes
+
+		obj type=LABEL
+		caption=ชื่อบัญชี
+		name=LABEL9
+		order=2
+		dimension=1426,80,6622,345
+		exc dimension=1426,80,6622,345
+		horz align=Center
+		objexc border=Yes
+
+		obj type=LABEL
+		caption=หมวด
+		name=LABEL10
+		order=3
+		dimension=6786,80,7464,345
+		exc dimension=6786,80,7464,345
+		horz align=Center
+		objexc border=Yes
+
+		obj type=LABEL
+		caption=ระดับ
+		name=LABEL11
+		order=4
+		dimension=7511,80,7876,345
+		exc dimension=7511,80,7876,345
+		horz align=Center
+		objexc border=Yes
+
+		obj type=LABEL
+		caption=ประเภท
+		name=LABEL12
+		order=5
+		dimension=7906,80,8435,345
+		exc dimension=7906,80,8435,345
+		horz align=Center
+		objexc border=Yes
+
+		obj type=LABEL
+		caption=บัญชีคุม
+		name=LABEL13
+		order=6
+		dimension=8546,80,9547,345
+		exc dimension=8546,80,9547,345
+		horz align=Center
+		objexc border=Yes
+
+		obj type=LABEL
+		name=LABEL0
+		order=7
+		dimension=9708,90,9874,340
+		exc dimension=9708,90,9874,340
+		objexc border=Yes
+
+[He]
+	name=He6
+	secheight=0.1350 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+[Bo]
+	name=Bo1
+	secheight=0.2850 inch
+	order objs=10
+	shrink=Yes
+	[Object]
+		obj type=TEXT
+		name=TEXT7
+		print with=GLACC->ACCNUM
+		order=1
+		dimension=66,0,1246,265
+		exc dimension=66,0,1246,265
+		horz align=Center
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT8
+		print with=test_parent()
+		order=2
+		dimension=1266,0,1406,265
+		exc dimension=1266,0,1406,265
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT9
+		grid=Yes
+		print with=acname()
+		order=3
+		dimension=1426,0,6746,265
+		exc dimension=1426,0,6746,265
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT10
+		print with=acgroup()
+		order=4
+		dimension=6786,0,7466,265
+		exc dimension=6786,0,7466,265
+		horz align=Center
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT11
+		print with=GLACC->LEVEL
+		format=99999
+		order=5
+		dimension=7506,0,7886,265
+		exc dimension=7506,0,7886,265
+		horz align=Center
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT12
+		print with=TYP
+		calculation= "1,TYP=IIF(GLACC->ACCTYP='0', '---', IIF(GLACC->ACCTYP='1','คุม','ERR'))"
+		order=6
+		dimension=7906,0,8426,265
+		exc dimension=7906,0,8426,265
+		horz align=Center
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT13
+		print with=GLACC->PARENT
+		order=7
+		dimension=8466,0,9600,265
+		exc dimension=8466,0,9600,265
+		horz align=Center
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT14
+		print with=GG
+		calculation= "1,GG=IIF(GLACC->GROUP<'1' .OR. GLACC->GROUP>'5','G',' ')"
+		order=8
+		dimension=9746,0,9886,265
+		exc dimension=9746,0,9886,265
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT15
+		print with=TT
+		calculation= "1,TT=IIF(GLACC->NATURE#'0' .AND. GLACC->NATURE#'1','T',' ')"
+		order=9
+		dimension=9906,0,10046,265
+		exc dimension=9906,0,10046,265
+		objexc border=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT16
+		visible=No
+		print with=::N
+		calculation= "1,par=par+IIF(GLACC->ACCTYP='1', 1, 0)","1,child=child+IIF(GLACC->ACCTYP='0', 1, 0)"
+		order=10
+		dimension=10066,0,10147,265
+		exc dimension=10066,0,10147,265
+		objexc border=Yes
+		insu=0
+
+[Bo]
+	name=Bo2
+	enable=No
+	secheight=0.2850 inch
+	order objs=1
+	shrink=Yes
+	[Object]
+		obj type=TEXT
+		name=TEXT17
+		print with=acname2()
+		order=1
+		dimension=1426,0,5946,265
+		exc dimension=1426,0,5946,265
+		objexc border=Yes
+		insu=0
+
+[Fo]
+	name=Fo1
+	secheight=0.1350 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+[Su]
+	name=Su1
+	secheight=0.1350 inch
+	order objs=0
+	shrink=No
+	exc visible=No
+[Su]
+	name=Su2
+	secheight=0.2850 inch
+	order objs=2
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=บัญชีคุม
+		name=LABEL14
+		order=1
+		dimension=306,0,977,265
+		exc dimension=306,0,977,265
+
+		obj type=TEXT
+		name=TEXT18
+		print with=par
+		format=99999
+		order=2
+		dimension=1106,0,1506,265
+		exc dimension=1314,0,1714,265
+		insu=0
+
+[Su]
+	name=Su3
+	secheight=0.2850 inch
+	order objs=2
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=บัญชีย่อย
+		name=LABEL15
+		order=1
+		dimension=306,0,1028,265
+		exc dimension=306,0,1028,265
+
+		obj type=TEXT
+		name=TEXT19
+		print with=child
+		format=99999
+		order=2
+		dimension=1106,0,1506,265
+		exc dimension=1314,0,1714,265
+		insu=0
+
+[Su]
+	name=Su4
+	secheight=0.2850 inch
+	order objs=3
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=รวม
+		name=LABEL16
+		order=1
+		dimension=306,0,771,265
+		exc dimension=306,0,771,265
+
+		obj type=TEXT
+		name=TEXT20
+		print with=cnt
+		format=99999
+		calculation= "1,cnt=par+child"
+		order=2
+		dimension=1106,0,1506,265
+		exc dimension=1314,0,1714,265
+		insu=0
+
+		obj type=LABEL
+		caption=บัญชี
+		name=LABEL17
+		order=3
+		dimension=1586,0,2100,265
+		exc dimension=1794,0,2308,265
+
+[Su]
+	name=Su5
+	secheight=0.1250 inch
+	order objs=0
+	shrink=Yes
+	exc visible=No
+[Su]
+	name=Su6
+	visible=No
+	secheight=0.2850 inch
+	order objs=4
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=>>>>
+		name=LABEL18
+		order=1
+		dimension=66,0,446,265
+		exc dimension=66,0,446,265
+
+		obj type=LABEL
+		caption=จบรายงาน
+		name=LABEL19
+		order=2
+		dimension=466,0,1166,265
+		exc dimension=466,0,1166,265
+
+		obj type=LABEL
+		caption=<<<<
+		name=LABEL20
+		order=3
+		dimension=1186,0,1646,265
+		exc dimension=1186,0,1646,265
+
+		obj type=TEXT
+		name=TEXT21
+		print with=stop_rep()
+		order=4
+		dimension=1666,0,6186,265
+		exc dimension=1666,0,6186,265
+		insu=0
+

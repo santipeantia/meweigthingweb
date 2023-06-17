@@ -1,0 +1,80 @@
+I,INDEX,PRODUCT+DTOS(DAYIN)+TMIN+WDATA->REMARK1
+I,GROUP,WDATA->PRODUCT+WDATA->REMARK1
+I,BLOCK,WDATA->PRODUCT+WDATA->REMARK1
+
+G,LF,SAYR1,00010,'Detail33'
+G,NF,SAYL1,00760,'Page '+ALLTRIM(STR(nPage))
+G,NF,SAYC3,00385,'บริษัท โรงงานเหล็กกรุงเทพฯ จำกัด'
+G,LF,SAYC3,00385,RepList->Name
+G,LF,SAYC3,00385,'บริษัท '+ALLTRIM(CCOMBEG)+' - '+ALLTRIM(CCOMEND)
+G,LF,SAYC3,00385,ALLTRIM(DTOC(DDAYBEG))+','+ALLTRIM(CTIMBEG)+' ถึง '+ALLTRIM(DTOC(DDAYEND))+','+ALLTRIM(CTIMEND)
+
+G,LF,SAYR1,00050,WDATA->PRODUCT
+
+G,LH,LINE1,00000,00800
+G,LF,SAYC2,00010,'ข้อมูลที่'
+G,NF,SAYC2,00075,'รหัส+ชื่อลูกค้า'
+G,NF,SAYC2,00150,'รหัส-ชื่อสินค้า'
+G,NF,SAYC2,00225,'ทะเบียนรถ'
+G,NF,SAYC2,00330,'เลขที่บัตร'
+G,NF,SAYC2,00400,'วันที่ออก'
+G,NF,SAYC2,00450,'เวลา'
+G,NF,SAYC2,00550,'นน.รวม'
+G,NF,SAYC2,00650,'นน.รถ'
+G,NF,SAYC2,00750,'นน.สุทธิ'
+G,NF,SAYC2,00800,'นน.หัก'
+
+G,LH,LINE1,00000,00800
+
+G,LF,SAYR1,00050,WDATA->REMARK1
+
+D,SM,00100,00100,if(wdata->w1>wdata->w2,1,0)
+D,SM,00200,00200,if(wdata->w1>wdata->w2,nNet,0)
+D,SM,00300,00300,if(wdata->w1>wdata->w2,nGTotal,0)
+
+D,SM,00600,00600,if(wdata->w1<wdata->w2,1,0)
+D,SM,00700,00700,if(wdata->w1<wdata->w2,nNet,0)
+D,SM,00800,00800,if(wdata->w1<wdata->w2,nGTotal,0)
+
+
+D,LF,SAYC1,00010,right(wdata->ticket1,3)
+D,NF,SAYL1,00075,company->code
+D,NF,SAYL1,00085,company->name
+D,NF,SAYR1,00120,product->code
+D,NF,SAYL1,00130,product->name
+D,NF,SAYR1,00150,left(wdata->truck,10)
+D,NF,SAYL1,00200,right(wdata->ticket2,5)
+D,NF,SAYR1,00250,subcon->code
+D,NF,SAYL1,00300,subcon->name
+D,NF,SAYC1,00250,dtoc(wdata->dayout)
+D,NF,SAYC1,00330,wdata->tmout
+D,NF,SAYL1,00600,tran(wdata->w1,'999,999,999')
+D,NF,SAYL1,00680,tran(wdata->w2,'999,999,999')
+D,NF,SAYL1,00780,tran(nNet     ,'999,999,999')
+ 
+
+S,LF,SAYR1,00050,'รวมซื้อ'
+S,NF,SAYL1,00250,tran(cSum[1],'999,999')
+S,NF,SAYR1,00270,'คัน'
+S,NF,SAYL1,00500,tran(cSum[2],'999,999,999')+' กิโลกรัม'
+ 
+
+S,LF,SAYR1,00050,'รวมขาย'
+S,NF,SAYL1,00250,tran(cSum[6],'999,999')
+S,NF,SAYR1,00270,'คัน'
+S,NF,SAYL1,00500,tran(cSum[7],'999,999,999')+' กิโลกรัม'
+S,LH,LINE1,00000,00800
+
+T,LF,SAYR2,00050,'รวมซื้อทั้งหมด'
+T,NF,SAYL2,00250,tran(cTot[1],'999,999')
+T,NF,SAYR2,00270,'คัน'
+T,NF,SAYL2,00500,tran(cTot[2],'999,999,999')+' กิโลกรัม'
+ 
+
+T,LF,SAYR2,00050,'รวมขายทั้งหมด'
+T,NF,SAYL2,00250,tran(cTot[6],'999,999')
+T,NF,SAYR2,00270,'คัน'
+T,NF,SAYL2,00500,tran(cTot[7],'999,999,999')+' กิโลกรัม'
+ 
+T,LH,LINE1,00000,00800
+

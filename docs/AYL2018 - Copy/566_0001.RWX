@@ -1,0 +1,597 @@
+[Preference]
+	vert align=Center
+	horz align=Left
+	border=No
+	curve=0
+	font name=Angsana New
+	font size=14
+	bold=No
+	italic=No
+	underline=No
+	clr=0,0,0
+	bgclr=255,255,255
+	bdclr=0,0,0
+	bkmode=Transparent
+	secheight=0.2000 inch
+	secclr=255,255,255
+	pcurve=1
+	line clr=0,0,0
+	pixel=1
+	exc font name=
+	exc font size=
+	exc freeze=No
+[Report]
+	caption=Report
+	edit copy=ทุกชุด
+	show excel=Yes
+	width=8.6540 inch
+	psize=0, "ตามเครื่องพิมพ์"
+	pw=8.2700
+	ph=11.6900
+	tblvw hi=94
+	tblvw mode=2
+	secvw wd=150
+	left margin=0.5000 inch
+	top margin=0.5000 inch
+	right margin=0.2500 inch
+	bot margin=0.2500 inch
+	set margin=No
+	supg=No
+	printer=
+	to border=Yes
+	col wd=1.0000
+	col gap=0.5000
+	printpref=1
+	multipg=1
+	sepset=Yes
+	horzalign=0
+	query=ACCNUM>='Acc1()'.AND.ACCNUM<='Acc2()' .AND. GLACC->ACCTYP='0'
+	datefmt=
+	horgap=2.2000
+	vergap=1.2000
+	stwd=2.0000
+	sthg=1.0000
+	strow=5
+	stcol=4
+	st how column=1
+	st type=Junk A4
+	stcustom=No
+[File]
+	[Variable]
+		dimension=0,0,100,150
+
+	[Master File]
+		file name=GLBAL
+		alias=A
+		tag=GLBAL1
+		dimension=100,0,200,150
+
+	[Related File]
+		file name=GLACC
+		alias=R
+		tag=GLACC1
+		master file=GLBAL
+		related fld=ACCNUM
+		dimension=200,0,300,150
+
+[ExcelColumn]
+	print=Yes
+	width=1.1040 inch
+	name=A
+	print=Yes
+	width=3.7190 inch
+	name=B
+	print=Yes
+	width=1.7610 inch
+	name=C
+	print=Yes
+	width=2.0700 inch
+	name=D
+[Section]
+[Ti]
+	name=Ti1
+	secheight=0.2880 inch
+	order objs=1
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=TEXT
+		name=TEXT1
+		visible=No
+		print with=::INIT_VAR
+		calculation= "1,CNT=0","1,P0=@yesno()","1,T1=0","1,T2=0"
+		order=1
+		dimension=146,0,906,268
+		exc dimension=146,0,906,268
+		insu=0
+
+[He]
+	name=He1
+	secheight=0.2880 inch
+	order objs=4
+	shrink=No
+	[Object]
+		obj type=TEXT
+		name=TEXT2
+		print with=_NAME
+		order=1
+		dimension=66,0,8160,268
+		exc dimension=66,0,8160,268
+		insu=0
+
+		obj type=LABEL
+		caption=หน้า
+		name=LABEL1
+		order=2
+		dimension=6666,0,7194,268
+		exc dimension=6666,0,7194,268
+
+		obj type=LABEL
+		caption=:
+		name=LABEL2
+		order=3
+		dimension=7244,0,7530,268
+		exc dimension=7244,0,7530,268
+
+		obj type=TEXT
+		name=TEXT3
+		print with=_PAGE
+		format=99999
+		order=4
+		dimension=7580,0,7980,268
+		exc dimension=7580,0,7980,268
+		horz align=Right
+		insu=0
+
+[He]
+	name=He2
+	secheight=0.4660 inch
+	order objs=3
+	shrink=No
+	[Object]
+		obj type=LABEL
+		caption=งบทดลอง BAL
+		name=LABEL3
+		order=1
+		dimension=66,0,1603,446
+		exc dimension=66,0,1603,446
+		font size=22
+
+		obj type=LABEL
+		caption=ณ วันที่ 
+		name=LABEL4
+		order=2
+		dimension=1919,0,2582,268
+		exc dimension=1919,0,2582,268
+
+		obj type=TEXT
+		name=TEXT4
+		print with=@date2()
+		format=d ดดด ปปปป
+		order=3
+		dimension=2898,0,4058,268
+		exc dimension=2898,0,4058,268
+		insu=0
+
+[He]
+	name=He3
+	secheight=0.2880 inch
+	order objs=7
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=เลขที่บัญชี
+		name=LABEL5
+		order=1
+		dimension=66,0,857,268
+		exc dimension=66,0,857,268
+
+		obj type=TEXT
+		name=TEXT5
+		print with=Acc1()
+		order=2
+		dimension=1106,0,2426,268
+		exc dimension=1106,0,2426,268
+		insu=0
+
+		obj type=LABEL
+		caption=ถึง
+		name=LABEL6
+		order=3
+		dimension=2466,0,2854,268
+		exc dimension=2466,0,2854,268
+
+		obj type=TEXT
+		name=TEXT6
+		print with=Acc2()
+		order=4
+		dimension=2866,0,3626,268
+		exc dimension=2866,0,3626,268
+		insu=0
+
+		obj type=LABEL
+		caption=วันที่
+		name=LABEL7
+		order=5
+		dimension=6356,0,6894,268
+		exc dimension=6356,0,6894,268
+
+		obj type=LABEL
+		caption=:
+		name=LABEL8
+		order=6
+		dimension=6944,0,7230,268
+		exc dimension=6944,0,7230,268
+
+		obj type=TEXT
+		name=TEXT7
+		print with=_DATE
+		order=7
+		dimension=7280,0,8160,268
+		exc dimension=7280,0,8160,268
+		horz align=Right
+		insu=0
+
+[He]
+	name=He4
+	secheight=0.2880 inch
+	order objs=2
+	how HE=1
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=เลือกแผนก
+		name=LABEL9
+		order=1
+		dimension=66,0,894,268
+		exc dimension=66,0,894,268
+
+		obj type=TEXT
+		name=TEXT8
+		print with=Dep1()
+		order=2
+		dimension=1106,0,5746,268
+		exc dimension=1106,0,5746,268
+		insu=0
+
+[He]
+	name=He5
+	secheight=0.2880 inch
+	order objs=4
+	how HE=1
+	shrink=No
+	[Object]
+		obj type=LABEL
+		caption=งวด
+		name=LABEL10
+		order=1
+		dimension=66,0,524,268
+		exc dimension=66,0,524,268
+
+		obj type=TEXT
+		name=TEXT9
+		print with=AsPeriod()
+		order=2
+		dimension=1106,0,1786,268
+		exc dimension=1106,0,1786,268
+		insu=0
+
+		obj type=LABEL
+		caption=รวมบัญชียอดเป็น 0
+		name=LABEL11
+		order=3
+		dimension=1826,0,3085,268
+		exc dimension=1826,0,3085,268
+
+		obj type=TEXT
+		name=TEXT10
+		print with=P0
+		order=4
+		dimension=3346,0,7986,268
+		exc dimension=3346,0,7986,268
+		insu=0
+
+[He]
+	name=He6
+	secheight=0.1250 inch
+	order objs=1
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=LINE
+		name=LINE1
+		order=1
+		dimension=0,62,8160,62
+		exc dimension=0,62,8160,62
+
+[He]
+	name=He7
+	secheight=0.2880 inch
+	order objs=4
+	shrink=No
+	[Object]
+		obj type=LABEL
+		caption=เลขที่บัญชี
+		name=LABEL12
+		order=1
+		dimension=146,0,937,268
+		exc dimension=146,0,937,268
+
+		obj type=LABEL
+		caption=ชื่อบัญชี
+		name=LABEL13
+		order=2
+		dimension=2306,0,2978,268
+		exc dimension=2306,0,2978,268
+
+		obj type=LABEL
+		caption=เดบิท
+		name=LABEL14
+		order=3
+		dimension=6066,0,6601,268
+		exc dimension=6066,0,6601,268
+
+		obj type=LABEL
+		caption=เครดิต
+		name=LABEL15
+		order=4
+		dimension=7426,0,8008,268
+		exc dimension=7426,0,8008,268
+
+[He]
+	name=He8
+	secheight=0.2880 inch
+	order objs=4
+	shrink=No
+	exc visible=No
+	[Object]
+		obj type=LINE
+		name=LINE2
+		order=1
+		dimension=66,134,1186,134
+		exc dimension=66,134,1186,134
+
+		obj type=LINE
+		name=LINE3
+		order=2
+		dimension=1346,134,5186,134
+		exc dimension=1346,134,5186,134
+
+		obj type=LINE
+		name=LINE4
+		order=3
+		dimension=5426,134,6786,134
+		exc dimension=5426,134,6786,134
+
+		obj type=LINE
+		name=LINE5
+		order=4
+		dimension=6866,134,8226,134
+		exc dimension=6866,134,8226,134
+
+[Gh]
+	name=Gh11
+	secheight=0.2880 inch
+	grp ID=1
+	grp fld=GLBAL->ACCNUM
+	order objs=1
+	shrink=Yes
+	before he=No
+	[Object]
+		obj type=TEXT
+		name=TEXT11
+		visible=No
+		print with=::CLR
+		calculation= "1,acc=A->ACCNUM","1,dep=A->DEPCOD","1,nam=R->ACCNAM","1,Bal=0"
+		order=1
+		dimension=146,0,666,268
+		exc dimension=146,0,666,268
+		insu=0
+
+[Bo]
+	name=Bo1
+	visible=No
+	secheight=0.2880 inch
+	order objs=2
+	shrink=Yes
+	[Object]
+		obj type=TEXT
+		name=TEXT12
+		visible=No
+		print with=::Z1
+		calculation= "1,amt=@nBAL()","1,Bal=Bal+amt"
+		order=1
+		dimension=146,0,366,268
+		exc dimension=146,0,366,268
+		insu=0
+
+		obj type=TEXT
+		name=TEXT13
+		visible=No
+		print with=::Z2
+		order=2
+		dimension=386,0,666,268
+		exc dimension=386,0,666,268
+		insu=0
+
+[Gf]
+	name=Gf11
+	secheight=0.2880 inch
+	grp ID=1
+	order objs=5
+	calculation= "1,acc=IIF(P0='N'.AND.Bal=0,'}              ',acc)","1,.visible=IIF(acc=':',.f.,.t.)","1,.enable=IIF(acc='}',.f.,.t.)"
+	shrink=Yes
+	[Object]
+		obj type=TEXT
+		name=TEXT14
+		visible=No
+		print with=acc
+		calculation= "1,.visible=IIF(acc='}',.f.,.t.)"
+		order=1
+		dimension=66,0,1306,268
+		exc dimension=66,0,1306,268
+		insu=0
+
+		obj type=TEXT
+		name=TEXT15
+		print with=nam
+		order=2
+		dimension=1346,0,5466,268
+		exc dimension=1346,0,5466,268
+		insu=0
+
+		obj type=TEXT
+		name=TEXT16
+		print with=dd
+		format=9,999,999,999.99
+		calculation= "1,dd=IIF(Bal>0,Bal,0)","1,T1=T1+dd"
+		order=3
+		dimension=5506,0,6786,268
+		exc dimension=5506,0,6786,268
+		horz align=Right
+		insu=0
+
+		obj type=TEXT
+		name=TEXT17
+		print with=cc
+		format=9,999,999,999.99
+		calculation= "1,cc=IIF(Bal<0,-1*Bal,0)","1,T2=T2+cc"
+		order=4
+		dimension=6946,0,8226,268
+		exc dimension=6946,0,8226,268
+		horz align=Right
+		insu=0
+
+		obj type=TEXT
+		name=TEXT18
+		visible=No
+		print with=::N
+		calculation= "1,CNT=CNT+1"
+		order=5
+		dimension=8306,0,8586,268
+		exc dimension=8306,0,8586,268
+		insu=0
+
+[Su]
+	name=Su1
+	secheight=0.2880 inch
+	order objs=2
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LINE
+		name=LINE6
+		order=1
+		dimension=5426,134,6786,134
+		exc dimension=5426,134,6786,134
+
+		obj type=LINE
+		name=LINE7
+		order=2
+		dimension=6866,134,8226,134
+		exc dimension=6866,134,8226,134
+
+[Su]
+	name=Su2
+	secheight=0.2940 inch
+	order objs=5
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=รวม
+		name=LABEL16
+		order=1
+		dimension=1586,0,1886,268
+		exc dimension=1586,0,1886,268
+
+		obj type=TEXT
+		name=TEXT19
+		print with=CNT
+		format=99,999
+		order=2
+		dimension=1906,0,2386,268
+		exc dimension=1906,0,2386,268
+		horz align=Right
+		insu=0
+
+		obj type=LABEL
+		caption=บัญชี
+		name=LABEL17
+		order=3
+		dimension=2466,0,2983,268
+		exc dimension=2466,0,2983,268
+
+		obj type=TEXT
+		name=TEXT20
+		print with=T1
+		format=99,999,999,999.99
+		order=4
+		dimension=5426,0,6786,274
+		exc dimension=5426,0,6786,274
+		horz align=Right
+		bold=Yes
+		insu=0
+
+		obj type=TEXT
+		name=TEXT21
+		print with=T2
+		format=99,999,999,999.99
+		order=5
+		dimension=6866,0,8226,274
+		exc dimension=6866,0,8226,274
+		horz align=Right
+		bold=Yes
+		insu=0
+
+[Su]
+	name=Su3
+	secheight=0.2880 inch
+	order objs=2
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LINE
+		name=LINE8
+		order=1
+		dimension=5426,134,6786,134
+		exc dimension=5426,134,6786,134
+		linepixel=2
+
+		obj type=LINE
+		name=LINE9
+		order=2
+		dimension=6866,134,8226,134
+		exc dimension=6866,134,8226,134
+		linepixel=2
+
+[Su]
+	name=Su4
+	secheight=0.2880 inch
+	order objs=3
+	shrink=Yes
+	exc visible=No
+	[Object]
+		obj type=LABEL
+		caption=>>>>
+		name=LABEL18
+		order=1
+		dimension=66,0,446,268
+		exc dimension=66,0,446,268
+
+		obj type=LABEL
+		caption=จบรายงาน
+		name=LABEL19
+		order=2
+		dimension=466,0,1166,268
+		exc dimension=466,0,1166,268
+
+		obj type=LABEL
+		caption=<<<<
+		name=LABEL20
+		order=3
+		dimension=1186,0,1724,268
+		exc dimension=1186,0,1724,268
+

@@ -1,0 +1,1 @@
+﻿server=SERVERAYL;database=DB_AYUTTAYALAND;uid=sa;pwd=CA42se@ayl;

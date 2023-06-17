@@ -1,0 +1,86 @@
+* GLSUM.RWT - Summary Journal for Period
+*
+[report frame]
+Ti::~INIT_VAR ~INIT_GT
+He:\NAME                                                ","","","","หน้า : \PAGE
+He:สรุปยอดเคลื่อนไหว                                    ","","","","วันที่ : \DATE
+H1:รายวันจาก  ","","~F ~B1         ถึง  ~T ~B2
+H1:วันที่จาก  ","","~FROMDATE     ถึง  ~TODATE
+*He:\LINE
+He:เลขที่บัญชี","แผนก","ชื่อบัญชี","เดบิท","เครดิต
+*He:\LINE
+*  xxxxxxxxx1xxxx! xxxx  xxxxxxxxx1xxxxxxxxx2xxxxxxxxx3xxxxxxxxx4xxxxxxxxx5  99,999,999,999.99 99,999,999,999.99
+Gh::        ; 1 ACCNUM
+Gh::~SAVE   ; 2 DEPCOD
+Bo::~SUM1  ~SUM2
+Gf:~ACCNUM         ~DEP  ~ACCNAM                                             ~TOTDB            ~TOTCR           ;2
+Gf::~INIT_VAR
+*Su:","","","-----------------","-----------------
+*Su:
+Su:                                                           รวมทั้งสิ้น    ~GTDB             ~GTCR            
+*Su:","","","=================","=================
+*Su:
+*Su:>>>> จบรายงาน <<<<
+[end frame]
+
+[print options]
+Top=0
+Right=109
+Lines=41
+Output=Select, Printer, Screen, File,
+File Name=GLSUMJNL.TXT
+Fix Foot Line=OFF
+Select Scope=OFF
+Select Page=OFF
+Select Paper=15_Inch, 8_Inch, Default
+8_Inch=\027\033\004
+15_Inch=\027\033\001
+Query=DTOS(VOUDAT)>='Date1()'.AND.DTOS(VOUDAT)<='Date2()'
+Query=.AND.GLJNL->JNLTYP>='Book1()'.AND.GLJNL->JNLTYP<='Book2()'
+
+[master file]
+File=GLJNLIT
+Alias=J
+Tag=GLJNLIT2
+System=DATA_PATH
+
+[relate file]
+File=GLACC
+Alias=A
+Tag=GLACC1
+System=DATA_PATH
+Master file=GLJNLIT
+Master-Related Field=ACCNUM
+
+File=GLJNL
+Alias=H
+Tag=GLJNL1
+System=DATA_PATH
+Master file=GLJNLIT
+Master-Related Field=VOUCHER
+
+[data spec]
+*           len  (0)default, (>0)cut, (<0)cut to new line
+*~dat:      len,    "pict",                 "data",         "exp"
+~INIT_VAR:  0,      "",                     "",             "TOTDB=0;TOTCR=0"
+~INIT_GT:   0,      "",                     "",             "GTDB=0;GTCR=0"
+~SAVE:      0,      "",                     "",             "ACNUM=J->ACCNUM;ACNAM=A->ACCNAM;DPCOD=J->DEPCOD;COD=GLACC->ACCNUM"
+~ACCNUM:    0,      "",                     "ACNUM",        ""
+~DEP:       0,      "",                     "DPCOD",        "",B
+~ACCNAM:    0,      "",                     "NAME",         "NAME=IIF(COD='   ','*** A/C Not Found ***                             ',ACNAM)",C
+~SUM1:      0,      "",                     "",             "TOTDB=TOTDB+IIF (J->TRNTYP='0', J->AMOUNT, 0)"
+~SUM2:      0,      "",                     "",             "TOTCR=TOTCR+IIF (J->TRNTYP='1', J->AMOUNT, 0)"
+~TOTDB:     0,      "ZZ,ZZZ,ZZZ,ZZZ.ZZ",    "TOTDB",        "GTDB=GTDB+TOTDB",D
+~TOTCR:     0,      "ZZ,ZZZ,ZZZ,ZZZ.ZZ",    "TOTCR",        "GTCR=GTCR+TOTCR",E
+~GTDB:      0,      "99,999,999,999.99",    "GTDB",         "",D
+~GTCR:      0,      "99,999,999,999.99",    "GTCR",         "",E
+~JNLNAME:   0,      "",                     "jnlname()",    ""
+~FROMDATE:  0,      "d ดดด ปปปป",           "@date1()",     ""
+~TODATE:    0,      "d ดดด ปปปป",           "@date2()",     ""
+~F:         0,      "",                     "Book1()",      ""
+~T:         0,      "",                     "Book2()",      ""
+~B1:        0,      "",                     "Book1sht()",   ""
+~B2:        0,      "",                     "Book2sht()",   ""
+
+
+

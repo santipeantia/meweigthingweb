@@ -1,0 +1,133 @@
+* ISTAX53.RN - แบบยื่น ภงด.53 ผ่าน Internet (Witholding Tax Listing)    
+* for support PND3_TRN version 5.00
+* ให้พิมพ์ออกแฟ้มข้อมูล->แฟ้มข้อมูลชนิดข้อความ(TextFile)->แล้วกำหนดชื่อของแฟ้มข้อมูลเอง
+*
+* รหัสข้อมูล
+*   รหัสเงื่อนไขการหักภาษี
+*   หัก ณ ที่จ่าย       1
+*   ออกภาษีให้          2               ตัวอักษรที่ใช้แบ่งแยกข้อมูล  | (ตัวไปป์)
+*
+* ตำแหน่งข้อมูล (ในหน้าจอ โอนย้ายข้อมูลแบบยื่นภาษีเงินได้หัก ณ ที่จ่าย.Version-4.0)
+*   ข้อมูล(จำนวนสูงสุด)         ตำแหน่งข้อมูล         จำนวนตัวอักษร
+*   1.ลำดับที่(5)                   1
+*   2.เลขประจำตัวผู้มีเงินได้(13)   2
+*   3.สาขาทื่(5)                    3
+*   4.คำนำหน้าชื่อ(40)              4
+*   5.ชื่อ(160)                     5
+*   6.ชื่ออาคาร/หมู่บ้าน(30)        6
+* กลุ่มที่ 1
+*  17.วดปที่จ่าย O พ.ศ.             7               dd/mm/yyyy
+*  18.ประเภทเงินได้ที่จ่าย(200)     8
+*  19.อัตราภาษี(4,2)                9
+*  20.จำนวนเงินที่จ่าย(15,2)       10
+*  21.จำนวนเงินภาษีที่หัก(15,2)    11
+*  22.เงื่อนไข(1)                  12
+* กลุ่มที่ 2
+*  23.วดปที่จ่าย O พ.ศ.            13               dd/mm/yyyy
+*  24.ประเภทเงินได้ที่จ่าย(200)    14
+*  25.อัตราภาษี(4,2)               15
+*  26.จำนวนเงินที่จ่าย(15,2)       16
+*  27.จำนวนเงินภาษีที่หัก(15,2)    17
+*  28.เงื่อนไข(2)                  18
+*
+*
+[report frame]
+Ti::~INIT ~PAGE_CLR ~LATE_CLR ~PAGE0 ~LATE  ~NOTPRN_FO
+Bo:|~SEQ |~TAXIDX      |~BR  |~PRENAM        |~NAME                                                       |~ADDR                                                                                               |~TAXDAT   |~TAXDES                  |~RATE|~AMOUNT       |~TAXAMT      |~C~TAXDAT2  |~TAXDES2                 |~RAT2|~AMOUNT2      |~TAXAMT2     |~C2
+[end frame]
+
+[print options]
+Top=0
+Left=0
+Right=136
+Lines=0
+Output=File,
+Prompt=เตรียมไฟล์ยื่น ภงด.53 ผ่านอินเตอร์เน็ท (ให้เลือกแฟ้มข้อมูลแบบ Text File)
+File Name=PND53.TXT
+Report Type=Listing
+Fix Foot Line=OFF
+Select Scope=OFF
+Select Page=OFF
+Select Paper=15_Inch, 8_Inch, Default
+8_Inch=\027\033\004
+15_Inch=\027\033\001
+*Printer=X
+
+[master file]
+File=ISTAX
+Alias=A
+Tag=ISTAX2
+*Key=TAXTYP+DTOS(TAXPRD)+REFNUM+DTOS(TAXDAT)+RECTYP+REFNUM
+*Filter=.NOT.DELETED()
+System=DATA_PATH
+
+[data spec]
+*               len (0)default, (>0)cut, (<0)cut to new line
+*~dat:          len, "pict",                "data",                 "exp"
+~INIT:          0,      "",                 "",                     "page=0; totamt1=0;tottax1=0; opage=1; amt_01=0;tax_01=0"
+~LATE:          0,      "",                 "latemsg",              "islate=@n_islate(); latemsg=IIF(islate>0,'(ยื่นเพิ่มเติม)', '               ')"
+~NOTPRN_FO:     0,      "",                 "",                     "isprn=':'; endgroup=0"
+~SN:            0,      "",                 "sending",              "sending=IIF(islate>0,'  ',' x')"
+~SL:            0,      "",                 "sending",              "sending=IIF(islate>0,' x','  ')"
+~PRN_FO:        0,      "",                 "",                     "isprn=IIF(islate>0,' ',':'); endgroup=1; opage=page"
+~L:             0,      "",                 "isprn",                ""
+~PP:            0,      "",                 "prnsumpage",           "prnsumpage=IIF(opage=1.and.endgroup=1,': ','…')"
+~P:             0,      "",                 "prnsumpage",           "prnsumpage=IIF(opage=1.and.endgroup=1,':',' ')"
+~LATE_SUM:      0,      "",                 "late_sum",             "fd=@Date1n(); td=@Date2n(); late_sum=latemsg+IIF(latemsg#'   ', ' งวด '+fd+' ถึง '+td, '                          ')"
+~ADDRESS:       0,      "",                 "p_addr()",             ""
+~TAX_ID:        0,      "",                 "p_taxid()",            ""
+~TEL:           0,      "",                 "p_telnum()",           ""
+~FROMDATE:      0,      "",                 "Date1n()",             ""
+~TODATE:        0,      "",                 "Date2n()",             ""
+~FROMDEP:       0,      "",                 "Dep1()",               ""
+
+~PAGE:          0,      "9999",             "page",                 "page=page+1"
+~T_PAGE:        0,      "99,999",           "page",                 ""
+~T_SEQ:         0,      "99999",            "seq",                  ""
+~SEQ:           0,      "00009",            "seq",                  "seq=seq+1"
+~TAXIDX:        0,      "",                 "tax_id",               "tax_id=IIF(A->TAXID='0000000000000', '                ', A->TAXID)"
+~BR:            0,      "",                 "br",                   "br=@p_orgnum_00009( A->ORGNUM ); br=IIF(tax_id='     ', '     ',br)" 
+~PRENAM:        0,      "",                 "A->PRENAM",            ""
+~NAME:          0,      "",                 "A->NAME",              ""
+~ADDR:          0,      "",                 "A->ADDR",              ""
+* Group 1
+~TAXDAT:        0,      "วว/ดด/ปปปป",       "A->TAXDAT",            ""
+~TAXDES:        0,      "",                 "A->TAXDES",            ""
+~RATE:          0,      "09.99",            "A->TAXRAT",            ""
+~AMOUNT:        0,      "00000000009.99",   "A->AMOUNT",            ""
+~TAXAMT:        0,      "0000000009.99",    "A->TAXAMT",            ""
+~C:             0,      "",                 "cond1"                 "cond1=A->TAXCOND-'|'"
+* Group 2
+~TAXDAT2:       0,      "วว/ดด/ปปปป",       "A->TAXDAT2",           ""
+~TAXDES2:       0,      "",                 "A->TAXDES2",           ""
+~RAT2:          0,      "0Z.ZZ",            "A->TAXRAT2",           ""
+~AMOUNT2:       0,      "0000000000Z.ZZ",   "A->AMOUNT2",           ""
+~TAXAMT2:       0,      "000000000Z.ZZ",    "A->TAXAMT2",           ""
+*~C2:           0,      "",                 "cond2"                 "cond2=A->TAXCOND2-'|'"
+~C2:            0,      "",                 "cond2"                 "cond2=IIF(STR(A->TAXAMT2,15,2)#'           0.00',A->TAXCOND-'|',' |')"
+*
+~TAXNUM:        0,      "",                 "A->TAXNUM",            ""
+~REFNUM:        0,      "",                 "A->REFNUM",            ""
+~SUMAMOUNT:     0,      "",                 "",                     "sumamt1=sumamt1+A->AMOUNT; totamt1=totamt1+A->AMOUNT; sumamtp1=sumamtp1+A->AMOUNT"
+~SUMTAXAMT:     0,      "",                 "",                     "sumtax1=sumtax1+A->TAXAMT; tottax1=tottax1+A->TAXAMT; sumtaxp1=sumtaxp1+A->TAXAMT"
+
+~SUMAMT1:       0,      "999,999,999.99",   "sumamt1",              ""
+~SUMTAX1:       0,      "99,999,999.99",    "sumtax1",              ""
+~SUMAMT1P:      0,      "999,999,999.99",   "sumamtp1",             ""
+~SUMTAX1P:      0,      "99,999,999.99",    "sumtaxp1",             ""
+
+~PRD:           0,      "ดดด/ปปปป",         "@d_fromprd()",         ""
+~LATE_CLR:      0,      "",                 "",                     "sumamt1=0;sumtax1=0"
+~CHK_LATE_CLR:  0,      "",                 "",                     "sumamt1=IIF(islate>0,0,sumamt1); sumtax1=IIF(islate>0,0,sumtax1)"
+~PAGE_CLR:      0,      "",                 "",                     "sumamtp1=0;sumtaxp1=0"
+~PAGE0:         0,      "",                 "",                     "page=0; seq=0"
+~CHK_PAGE0:     0,      "",                 "",                     "page=IIF(islate>0,0,page); seq=IIF(islate>0,0,seq)"
+
+~TOTAMT1:       0,      "999,999,999.99",   "totamt1",              ""
+~TOTTAX1:       0,      "99,999,999.99",    "tottax1",              ""
+~BAHT:          0,      "",                 "t_baht( tottax1 )",    ""
+
+~DEP:           0,      "",                 "A->DEPCOD",            ""
+~P_ISDEP:       0,      "",                 "p_isdep( A->DEPCOD )", ""
+
+

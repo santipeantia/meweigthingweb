@@ -1,0 +1,74 @@
+I,INDEX,CARTYPE+DTOS(DAYOUT)+TMOUT+TICKET2
+I,GROUP,WDATA->CARTYPE
+I,BLOCK,WDATA->CARTYPE
+
+H,LF,SAYR1,00010,'Detail05'
+H,NF,SAYL1,00760,'Page '+ALLTRIM(STR(nPage))
+H,NF,SAYC3,00385,cHLine
+H,LF,SAYC3,00385,RepList->Name
+H,LF,SAYC3,00385,'บริษัท '+ALLTRIM(CCOMBEG)+' - '+ALLTRIM(CCOMEND)
+H,LF,SAYC3,00385,ALLTRIM(DTOC(DDAYBEG))+','+ALLTRIM(CTIMBEG)+' ถึง '+ALLTRIM(DTOC(DDAYEND))+','+ALLTRIM(CTIMEND)
+
+H,LH,LINE2,00000,00770
+H,LF,SAYC2,00025,'ลำดับเข้า'
+H,NF,SAYC2,00075,'เลขที่ใบชั่ง'
+H,NF,SAYC2,00150,'ทะเบียนรถ'
+H,NF,SAYC2,00225,'วันที่'
+H,NF,SAYC2,00295,'เวลา'
+H,NF,SAYC2,00400,'บริษัท'
+H,NF,SAYC2,00525,'นน.เข้า'
+H,NF,SAYC2,00575,'นน.ออก'
+H,NF,SAYC2,00625,'นน.สุทธิ'
+H,NF,SAYC2,00675,'ราคา'
+H,NF,SAYC2,00735,'จำนวนเงิน'
+H,LH,LINE2,00000,00770
+
+D,SM,00100,00100,if(wdata->w1>=wdata->w2,1,0)
+D,SM,00200,00200,if(wdata->w1>=wdata->w2,nNet,0)
+D,SM,00300,00300,if(wdata->w1>=wdata->w2,nGTotal,0)
+
+D,SM,00600,00600,if(wdata->w1<wdata->w2,1,0)
+D,SM,00700,00700,if(wdata->w1<wdata->w2,nNet,0)
+D,SM,00800,00800,if(wdata->w1<wdata->w2,nGTotal,0)
+
+G,LF,SAYR1,00050,'ประเภท '+ALLTRIM(WDATA->CARTYPE)+' : '+CARTYPE->NAME
+
+D,LF,SAYC1,00025,right(wdata->ticket1,7)
+D,NF,SAYC1,00075,right(wdata->ticket2,7)
+D,NF,SAYR1,00105,left(wdata->truck,10)
+**D,NF,SAYC1,00225,dtoc(wdata->dayout)
+D,NF,SAYC1,00225,left(dtoc(wdata->dayout),6)+right(dtoc(wdata->dayout),2)
+D,NF,SAYC1,00295,wdata->tmout
+D,NF,SAYR1,00325,company->name
+D,NF,SAYL1,00550,tran(wdata->w1,'999,999,999')
+D,NF,SAYL1,00600,tran(wdata->w2,'999,999,999')
+D,NF,SAYL1,00650,tran(nNet     ,'999,999,999')
+D,NF,SAYL1,00700,tran(wdata->price,'999,999,999.99')
+D,NF,SAYL1,00770,tran(nGTotal,'999,999,999.99')
+
+S,LF,SAYR1,00050,'รวมรับย่อย'
+S,NF,SAYL1,00200,tran(cSum[1],'999,999')
+S,NF,SAYR1,00210,'รายการ'
+S,NF,SAYL1,00350,tran(cSum[2],'999,999,999')+' กิโลกรัม'
+S,NF,SAYL1,00500,tran(cSum[3],'999,999,999.999')+' บาท'
+
+S,LF,SAYR1,00050,'รวมส่งย่อย'
+S,NF,SAYL1,00200,tran(cSum[6],'999,999')
+S,NF,SAYR1,00210,'รายการ'
+S,NF,SAYL1,00350,tran(cSum[7],'999,999,999')+' กิโลกรัม'
+S,NF,SAYL1,00500,tran(cSum[8],'999,999,999.999')+' บาท'
+S,LH,LINE1,00000,00770
+
+T,LF,SAYR2,00050,'รวมรับทั้งหมด'
+T,NF,SAYL2,00200,tran(cTot[1],'999,999')
+T,NF,SAYR2,00210,'รายการ'
+T,NF,SAYL2,00350,tran(cTot[2],'999,999,999')+' กิโลกรัม'
+T,NF,SAYL2,00500,tran(cTot[3],'999,999,999.999')+' บาท'
+
+T,LF,SAYR2,00050,'รวมส่งทั้งหมด'
+T,NF,SAYL2,00200,tran(cTot[6],'999,999')
+T,NF,SAYR2,00210,'รายการ'
+T,NF,SAYL2,00350,tran(cTot[7],'999,999,999')+' กิโลกรัม'
+T,NF,SAYL2,00500,tran(cTot[8],'999,999,999.999')+' บาท'
+T,LH,LINE2,00000,00770
+

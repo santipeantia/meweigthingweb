@@ -1,0 +1,84 @@
+H,LF,SAYR1,00010,'DON-07'
+H,NF,SAYL1,00770,'Page '+ALLTRIM(STR(nPage))
+H,NF,SAYC3,00400,'บริษัท อิงอร ซัพพลาย จำกัด'
+H,LF,SAYC3,00400,'รายงานการชั่งเรียงลำดับตามลำดับบริษัท'
+H,LF,SAYC3,00400,'บริษัท '+ALLTRIM(CCOMBEG)+' - '+ALLTRIM(CCOMEND)
+H,LF,SAYC3,00400,ALLTRIM(DTOC(DDAYBEG))+','+ALLTRIM(CTIMBEG)+' ถึง '+ALLTRIM(DTOC(DDAYEND))+','+ALLTRIM(CTIMEND)
+
+H,LH,LINE2,00000,00810
+
+H,LF,SAYL2,00030,'ลำดับเข้า'
+H,NF,SAYL2,00120,'เลขที่ใบชั่ง'
+H,NF,SAYL2,00190,'ทะเบียนรถ'
+H,NF,SAYL2,00250,'วันที่'
+H,NF,SAYL2,00325,'เวลา'
+H,NF,SAYL2,00390,'สินค้า'
+H,NF,SAYL2,00490,'จำนวนน้ำหนัก'
+H,NF,SAYL2,00565,'จำนวนคิว'
+H,NF,SAYL2,00637,'ราคา'
+H,NF,SAYL2,00720,'มูลค่าส่วนลด'
+H,NF,SAYL2,00790,'จำนวนเงิน'
+
+
+H,LH,LINE2,00000,00810
+d,sm,00100,00100,if(wdata->w1>=wdata->w2,val('1'),0)
+d,SM,00200,00200,if(wdata->w1>=wdata->w2,nnet,0)
+d,SM,00300,00300,if(wdata->w1>=wdata->w2,nnet/1000,0)
+d,SM,00400,00400,if(wdata->w1>=wdata->w2,wdata->adj_m,0)
+d,SM,00500,00500,if(wdata->w1>=wdata->w2,ntotal,0)
+
+d,sm,00600,00600,if(wdata->w1>wdata->w2,0,val('1'))
+d,SM,00700,00700,if(wdata->w1>wdata->w2,0,nnet)
+d,SM,00800,00800,if(wdata->w1>wdata->w2,0,nnet/1000)
+d,SM,00900,00900,if(wdata->w1>wdata->w2,0,wdata->adj_m)
+d,sm,01000,01000,if(wdata->w1>wdata->w2,0,ntotal)
+
+G,LF,SAYL1,00020,company->name
+
+D,LF,SAYL1,00050,right(wdata->ticket1,7)
+D,NF,SAYL1,00115,right(wdata->ticket2,7)
+D,NF,SAYR1,00135,left(wdata->truck,10)
+D,NF,SAYL1,00270,dtoc(wdata->dayout)
+D,NF,SAYL1,00325,wdata->tmout
+D,NF,SAYR1,00360,left(product->name,15)
+D,NF,SAYL1,00475,tran(nnet,'999,999,999')
+D,NF,SAYL1,00565,tran(nnet/1000,'999,999,999.999')
+D,NF,SAYL1,00640,tran(wdata->price,'999,999,999.99')+'/ตัน'
+D,NF,SAYL1,00710,tran(wdata->adj_m,'999,999,999.99')
+D,NF,SAYL1,00785,tran(ntotal,'999,999,999.99')
+
+
+s,LF,sayL3,00100,'รวมรับย่อย                  รายการ'
+S,NF,SAYL2,00110,tran(cSum[1],'999')
+S,NF,SAYL2,00475,tran(cSum[2],'999,999,999')
+S,NF,SAYL2,00565,tran(cSum[3],'999,999,999.999')
+S,NF,SAYL2,00710,tran(cSum[4],'999,999,999.99')
+S,NF,SAYL2,00785,tran(cSum[5],'999,999,999.99')
+
+s,LF,sayL3,00100,'รวมส่งย่อย                  รายการ'
+S,NF,SAYL2,00110,tran(cSum[6],'999')
+S,NF,SAYL2,00475,tran(cSum[7],'999,999,999')
+S,NF,SAYL2,00565,tran(cSum[8],'999,999,999.999')
+S,NF,SAYL2,00710,tran(cSum[9],'999,999,999.99')
+S,NF,SAYL2,00785,tran(cSum[10],'999,999,999.99')
+
+
+s,LH,LINE2,00000,00810
+
+t,LF,sayl3,00100,'รวมรับทั้งหมด              รายการ'
+t,NF,SAYL2,00120,tran(ctot[1],'999')
+t,NF,SAYL2,00475,tran(ctot[2],'999,999,999')
+t,NF,SAYL2,00565,tran(ctot[3],'999,999,999.999')
+t,NF,SAYL2,00710,tran(ctot[4],'999,999,999.99')
+t,NF,SAYL2,00785,tran(ctot[5],'999,999,999.99')
+
+t,LF,sayL3,00100,'รวมส่งทั้งหมด              รายการ'
+t,NF,SAYL2,00120,tran(ctot[6],'999')
+t,NF,SAYL2,00475,tran(ctot[7],'999,999,999')
+t,NF,SAYL2,00565,tran(ctot[8],'999,999,999.999')
+t,NF,SAYL2,00710,tran(ctot[9],'999,999,999.99')
+t,NF,SAYL2,00785,tran(ctot[10],'999,999,999.99')
+
+t,LH,LINE2,00000,00810
+
+

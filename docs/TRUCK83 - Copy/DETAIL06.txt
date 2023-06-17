@@ -1,0 +1,50 @@
+I,INDEX,DTOS(DAYOUT)+TMIN+COMPANY+PRODUCT
+I,GROUP,DTOC(WDATA->DAYOUT)+COMPANY->NAME+WDATA->PRODUCT
+I,BLOCK,DTOC(WDATA->DAYOUT)
+*+COMPANY->NAME+WDATA->PRODUCT
+
+H,LF,SAYR1,00010,'Detail06'
+H,NF,SAYL1,00760,'หน้าที่  '+ALLTRIM(STR(nPage))
+H,NF,SAYC3,00385,alltrim(chline)
+H,LF,SAYC3,00250,RepList->Name
+*H,LF,SAYC3,00385,'บริษัท '+ALLTRIM(CCOMBEG)+' - '+ALLTRIM(CCOMEND)
+H,NF,SAYC2,00500,'รายงานการรับสินค้าประจำวันที่ '+'  '+ALLTRIM(DTOC(DDAYEND))
+H,NF,SAYL2,00770,'พิมพ์วันที่ '+dtoc(date())
+
+H,LH,LINE1,00010,00770
+H,LF,SAYC2,00050,'ลำดับ'
+H,NF,SAYC2,00130,'เลขที่'
+H,NF,SAYC2,00250,'ลูกค้า'
+H,NF,SAYC2,00410,'ประเภท'
+H,NF,SAYC2,00600,'จำนวนเงิน'
+H,NF,SAYC2,00720,'พนักงาน'
+
+H,LH,LINE1,00010,00770
+
+G,LF,SAYC1,00070,dtoc(wdata->dayout)
+
+D,SM,00100,00100,if(wdata->w1>=wdata->w2,1,0)
+D,SM,00200,00200,if(wdata->w1>=wdata->w2,wdata->w1,0)
+D,SM,00300,00300,if(wdata->w1>=wdata->w2,wdata->w2,0)
+D,SM,00400,00400,if(wdata->w1>=wdata->w2,nAmount,0)
+D,SM,00500,00500,if(wdata->w1>=wdata->w2,wdata->adj_w1,0)
+
+D,SM,00600,00600,if(wdata->w1<wdata->w2,1,0)
+D,SM,00700,00700,if(wdata->w1<wdata->w2,if(wdata->w1<wdata->w2,wdata->w2,wdata->w1),0)
+D,SM,00800,00800,if(wdata->w1<wdata->w2,if(wdata->w1<wdata->w2,wdata->w1,wdata->w2),0)
+D,SM,00900,00900,if(wdata->w1<wdata->w2,nAmount,0)
+D,SM,01000,01000,if(wdata->w1<wdata->w2,wdata->adj_w1,0)
+ 
+D,LF,SAYL1,00050,Tran(nitem,'999,999')
+D,NF,SAYL1,00150,right(wdata->ticket2,5)
+D,NF,SAYR1,00170,company->name
+D,NF,SAYR1,00350,product->name
+D,NF,SAYL1,00620,tran(nAmount     ,'999,999.99')
+D,NF,SAYR1,00670,alltrim(wdata->remark3)
+
+S,LH,LINE1,00010,00770
+S,LF,SAYR1,00200,'รวม'
+S,NF,SAYL1,00620,tran(cSum[4],'999,999,999.99')
+S,LH,LINE1,00010,00770
+ 
+*T,LH,LINE1,00010,00770

@@ -1,0 +1,180 @@
+[Main]
+Name=บริษัท แอ๊ดวานซ์ โซลูชั่น อินเตอร์เนชั่นแนล จำกัด
+Address1=2009/3-4 เจริญกรุง 77 แขวงวัดพระยาไกร
+Address2=เขตบางคอแหลม
+Address3=กรุงเทพฯ 10120
+Tax ID=123456789
+S/N=18312000
+Register=8609
+Identify=20587
+OverSea=
+Zone=12000
+Post=99
+
+[Path]
+Table=.\
+Exe=.\
+BackUp=A:\
+Work=.\WORK\
+Export=
+
+[Comm]
+Port#1=01200,E,7,1,002,005,005
+Port#2=02400,N,8,1,002,005,005
+Port#3=01200,E,7,1,002,005,005
+Port#4=01200,E,7,1,002,005,005
+Default=112
+I/O=640
+Out#1=000
+Out#2=255
+Out#3=000
+Out#4=001
+Out#5=001
+Out#6=001
+Reset=255
+Mode=130
+LPT=111
+Feed=5
+Modem=2
+Respond=N
+W.Factor=1
+W.Form=1
+W.Read=2
+Minus=1
+Stable=2
+Timer=300
+StatBit=3
+Zero=0
+Exit=0
+SignBit=7
+
+[Assign]
+Table=การขนส่ง
+Remark#1=%ความชื้น/%หัก
+Remark#2=หักสิ่งเจือปน(%)
+Remark#3=หมายเหตุ
+Unit=คิว
+Disc#1=เพิ่ม/ลด นน.
+Disc#2=เพิ่ม/ลดจำนวน
+Disc#3=เพิ่ม/ลด เงิน
+
+[Misc]
+Method=1
+Screen=1
+Sound=N
+PageL=45
+Tax Rate=00.0
+VatCase=Y
+RecTare=N
+Ticket=NY
+Printer=N
+Audit=N
+Price=999,999.99
+Factor=2.7
+ZeroTare=0
+Track=0
+ExTicket=Alltrim('TICKET3.TXT')
+System=CD
+LastTran=0
+Fact=0
+RealTime=0
+Machine=X
+
+[Font]
+Font0=MS Sans Serif
+Width0=0
+Height0=-14
+Font1=EucrosiaUPC
+Width1=3.08
+Height1=-11.9
+Font2=EucrosiaUPC
+Width2=3.08
+Height2=-11.9
+Font3=EucrosiaUPC
+Width3=3.52
+Height3=-13.6
+Font4=AngsanaUPC
+Width4=0
+Height4=-29
+Font5=AngsanaUPC
+Width5=0
+Height5=-37
+Font6=EucrosiaUPC
+Width6=0
+Height6=-45
+Pen1=1
+Pen2=3
+Pen3=6
+Ratio=1
+
+[Page]
+Top=0.2
+Bottom=1.0
+Left=0.2
+Right=0.2
+
+[Condition]
+* หักความชื้น คำนวณจาก REMARK1
+Value1=round(split(csay08,2,'/')*abs(csay22-csay26)/-100,0)
+
+* หัก สิ่งเจือปน คำนวนจาก REMARK2
+Value2=round(abs(csay22-csay26)*val(csay09)/-100,0)
+
+Value3=
+Value4=
+Value5=
+Remark1=
+Remark2=
+Remark3=
+Adj.W.=cVar1+cVar2
+Adj.Q.=
+Adj.M.=
+Checker=
+Minimum=
+Maximum=
+Message=
+Valid=123456789
+Price=
+Lock=0
+Step=24
+AmtDec=0
+CarIn=0
+
+[Export]
+File=wdata->ticket+('.txt')
+
+
+
+*** ตัวอย่าง CONDITION
+**[Condition]
+*** เปรียบเทียบ นน.NET กับ REMARK3 กรณีค่าชั่งเป็นตัน
+**Value1=MAX(abs(csay22-csay26),VAL(cSay10))-abs(csay22-csay26)
+*Value1=ROUND(VAL(SUBCON->NAME)*(ABS(CSAY22-CSAY26)-ROUND(SPLIT(CSAY10,1,'/')*SPLIT(CSAY10,2,'/'),0))/-1000,0)
+*Value2=ROUND(VAL(CSAY09)*(ABS(CSAY22-CSAY26)-ROUND(SPLIT(CSAY10,1,'/')*SPLIT(CSAY10,2,'/'),0))/-100,0)
+*Value3=ROUND(SPLIT(CSAY10,1,'/')*SPLIT(CSAY10,2,'/')*-1,0)
+
+*** หักความชื้น คำนวณจาก REMARK1
+**Value1=round(split(csay08,2,'/')*abs(csay22-csay26)/-100,0)
+
+***หัก สิ่งเจือปน คำนวนจาก REMARK2
+**Value2=round(abs(csay22-csay26)*val(csay09)/-100,0)
+
+*** หัก ค่าฝากคำนวนจาก นน.สุทธิ*2%
+**Value3=(abs(csay22-csay26)*2/100)*-1
+** เช็คเรื่องให้เตือน รถออก
+**Remark1=if(nstep=2.and.empty(cSay08),   if(msgYESNO("TRUCK OUT"),'OUT','OUT')    ,cSay08)
+
+**Remark1=if(empty(remark1),alltrim(product->remarks)+' /',remark1)
+**Remark2=
+**Remark3=
+**Adj.W.=cvar1+cvar2+cvar3
+** ตัวแปร RATE  คือ  CSAY17 เช่นค่า ตัน RATE คือ 1000
+** ตัวแปร ประเภทการชั่ง cSay02
+** ตัวแปร ราคาตามสินค้า cSay16
+** ตัวแปร จำนวน cSay29 (UNIT) ก่อนหัก จำนวน
+** ตัวแปร จำนวน สุทธิ (QTY) cSay31
+** ตัวแปร จำนวนเงิน (Amount) cSay32
+** Price=if(alltrim(cSay02)='2',val(cSay08),cSay16)
+**Lock=(0=เตือน , 1=Confirm,2=Lock ไม่ให้ผ่าน)
+**Message=('กรุณาเช็คน้ำหนักก่อน'+chr(13)+chr(10)+'คุณต้องการบันทึกหรือไม่ ?')
+**Lock=(0=เตือน , 1=Confirm,2=Lock ไม่ให้ผ่าน)

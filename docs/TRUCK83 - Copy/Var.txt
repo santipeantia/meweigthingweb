@@ -1,0 +1,234 @@
+T R U C K   8 3
+===============
+
+การกำหนดเงื่อนไขการคำนวณจะต้องใช้ตัวแปรเท่านั้น
+แต่การกำหนดการพิมพ์บัตรชั่งควรใช้ Field
+
+cHline   = ชื่อที่ Register
+cHAddr1  = ที่อยู่ 1
+cHAddr2  = ที่อยู่ 2
+cHAddr3  = ที่อยู่ 3
+cHTaxId  = เลขประจำตัวผู้เสียภาษี
+cSerial  = Serial No.
+cTable   = ชื่อตารางพิเศษ
+cUnit    = ชื่อหน่วยนับพิเศษ
+cRemark1 = ชื่อหมายเหตุ 1
+cRemark2 = ชื่อหมายเหตุ 2
+cRemark3 = ชื่อหมายเหตุ 3
+cDisc1   = ชื่อปรับปรุงน้ำหนัก 1 (กก.)
+cDisc2   = ชื่อปรับปรุงหน่วยนับ
+cDisc3   = ชื่อปรับปรุงจำนวนเงิน
+
+NET      = น้ำหนักสุทธิ หน่วย กก.
+UNIT     = จำนวนหน่วย หลังหัก Disc1
+QTY      = จำนวนหน่วย หลังหัก Disc2
+AMOUNT   = จำนวนเงิน
+TOTAL    = จำนวนเงิน หลังหัก Disc3
+AMVAT    = ภาษีมูลค่าเพิ่ม
+GTOTAL   = จำนวนเงิน หลังหัก ภาษี
+
+cSSay1 = ราคา/กก.,ราคา/ตัน,ราคา/Unit,ราคา/เที่ยว
+cSSay2 = กก./Unit
+cSSay3 = สั่งลบ,รอออก,เสร็จ
+
+cSay01 = wdata->truck
+cSay02 = wdata->cartype
+cSay03 = wdata->factor
+cSay04 = wdata->company
+cSay05 = wdata->vatcase
+cSay06 = wdata->product
+cSay07 = wdata->subcon
+cSay08 = wdata->remark1
+cSay09 = wdata->remark2
+cSay10 = wdata->remark3
+cSay11 = CARTYPE->NAME
+cSay12 = COMPANY->NAME
+cSay13 = PRODUCT->NAME
+cSay14 = SUBCON->NAME
+cSay15 = alltrim(str(ntxpos(2,recno())))+'/'+alltrim(str(reccount()))
+cSay16 = wdata->price
+cSay17 = wdata->rate
+cSay18 = wdata->vat_r
+cSay19 = wdata->ticket1
+cSay20 = wdata->dayin
+cSay21 = wdata->tmin
+cSay22 = wdata->w1
+cSay23 = wdata->ticket2
+cSay24 = wdata->dayout
+cSay25 = wdata->tmout
+cSay26 = wdata->w2
+cSay27 = NET
+cSay28 = WDATA->ADJ_W1
+cSay29 = UNIT
+cSay30 = WDATA->ADJ_W2
+cSay31 = QTY
+cSay32 = AMOUNT
+cSay33 = WDATA->ADJ_M
+cSay34 = TOTAL
+cSay35 = AMVAT
+cSay36 = GTOTAL
+cScaleIn  = wdata->ScaleIn
+cScaleOut = wdata->ScaleOut
+
+***************   Field description   ******************
+
+company
+    1  CODE        Character     10
+    2  NAME        Character     60
+    3  ADDR1       Character     60
+    4  ADDR2       Character     60
+    5  PLACE1      Character     60
+    6  PLACE2      Character     60
+    7  REMARKS     Character     60
+
+product
+    1  CODE        Character     10
+    2  NAME        Character     60
+    3  RATE        Numeric       10      3
+    4  PRICE_K     Numeric       10      2
+    5  PRICE_T     Numeric       10      2
+    6  PRICE_Q     Numeric       10      2
+    7  PRICE_C     Numeric       10      2
+    8  REMARKS     Character     60
+
+cartype
+    1  CODE        Character     10
+    2  NAME        Character     60
+    3  QIN         Numeric       10
+    4  QOUT        Numeric       10
+    5  FACTOR      Character      1
+    6  LDATE       Date           8
+    7  REMARKS     Character     60
+
+truckdt
+    1  CODE        Character     20
+    2  NAME        Character     60
+    3  DRIVER      Character     60
+    4  WEIGHT      Numeric       10
+    5  LDATE       Date           8
+    6  REMARKS     Character     60
+
+subcon
+    1  CODE        Character     10
+    2  NAME        Character     60
+    3  DESCRIP     Character     60
+    4  REMARKS     Character     60
+
+wdata
+    1  STAT        Character      1
+    2  TRUCK       Character     20
+    3  CARTYPE     Character     10
+    4  COMPANY     Character     10
+    5  PRODUCT     Character     10
+    6  SUBCON      Character     10
+    7  REMARK1     Character     20
+    8  REMARK2     Character     20
+    9  REMARK3     Character     20
+   10  FACTOR      Character      1
+   11  VATCASE     Character      1
+   12  PRICE       Numeric       10      2
+   13  RATE        Numeric       10      3
+   14  VAT_R       Numeric       10      2
+   15  TICKET1     Character     10
+   16  DAYIN       Date           8
+   17  TMIN        Character      5
+   18  W1          Numeric        6
+   19  TICKET2     Character     10
+   20  DAYOUT      Date           8
+   21  TMOUT       Character      5
+   22  W2          Numeric        6
+   23  ADJ_W1      Numeric       10
+   24  ADJ_W2      Numeric       10      3
+   25  ADJ_M       Numeric       10      2
+   26  STAFF       Character      6
+   27  PROCESS     Character      1
+   28  PRINT1      Numeric        2
+   29  PRINT2      Numeric        2
+   30  SCALEIN     Numeric        1
+   31  SCALEOUT    Numeric        1
+
+
+***************   Report description   ******************
+
+X,XXXXX,MMMMMMMMMMMMMM
+|   |     |
+|   |     +----------  เนื้อหา
+|   +----------------  คำสั่ง
++--------------------  กลุ่มคำสั่ง
+
+กลุ่มคำสั่ง - I การกำหนดค่า Initial
+คำสั่ง  - INDEX การเรียงลำดับข้อมูล
+        - GROUP การจัด Subtotal
+        - BLOCK การจัด Group
+ตัวอย่าง
+I,INDEX,PRODUCT+DTOS(DAYIN)+TMIN
+I,GROUP,WDATA->PRODUCT
+I,BLOCK,WDATA->PRODUCT
+
+==========================================================
+
+X,XX,XXXXX,99999,MMMMMMMMMMMMMMM
+|  |   |     |      |
+|  |   |     |      +---  เนื้อหาคำสั่ง
+|  |   |     +----------  ระยะแนวนอน 1/100 นิ้ว
+|  |   +----------------  ลักษณะการทำงาน,ลำดับตัวแปร
+|  +--------------------  คำสั่ง
++-----------------------  กลุ่มคำสั่ง
+
+กลุ่มคำสั่ง - H กำหนดการพิมพ์ส่วนหัวรายงาน
+        - G กำหนดการพิมพ์ส่วนหัว Subtotal
+        - S กำหนดการพิมพ์ส่วนท้าย Subtotal
+        - B กำหนดการพิมพ์ส่วนหัว Subgroup
+        - E กำหนดการพิมพ์ส่วนท้าย Subgroup
+        - D กำหนดการพิมพ์ส่วนหัวรายงาน
+        - F กำหนดการพิมพ์ส่วนท้ายหน้ากระดาษ
+        - F กำหนดการพิมพ์ส่วนท้ายรายงาน
+
+----------------------------------------------------------
+
+คำสั่ง  - LF ขึ้นบรรทัดใหม่
+        - NF ไม่ต้องขึ้นบรรทัดใหม่
+ลักษณะ  - SAYCn พิมพ์จัดตำแหน่งกลาง
+        - SAYLn พิมพ์จัดตำแหน่งไปทางซ้าย
+        - SAYRn พิมพ์จัดตำแหน่งไปทางขวา
+ตัวอย่าง
+H,LF,SAYC3,00400,ALLTRIM(DTOC(DDAYBEG))+','+ALLTRIM(CTIMBEG)+' ถึง '+ALLTRIM(DTOC(DDAYEND))+','+ALLTRIM(CTIMEND)
+
+----------------------------------------------------------
+
+คำสั่ง  - SM เก็บค่าเข้าตัวแปร cSUB[nn],cSUM[nn],cTOT[nn]
+        - NA เก็บข้อความเข้าตัวแปร cDNAME[nn]
+        - NH กำหนดตำแหน่งบนสุดของเส้นตั้งใหม่ (ปกติจะอยู่ที่เส้นนอนเส้นแรก)
+ตัวแปร  - nnnnn,nnnnn  (00100 = ตัวแปรที่ 1)
+ตัวอย่าง
+D,SM,00100,00100,if(wdata->w1>wdata->w2,1,0)
+B,NA,00100,00100,company->name
+H,NH
+----------------------------------------------------------
+
+คำสั่ง  - LV เขียนเส้นแนวตั้ง
+        - LH เขียนเส้นแนวนอน
+ลักษณะ  - LINEn ขนาดเส้นที่เขียน
+ตัวอย่าง
+T,LV,LINE1,00050
+T,LH,LINE1,00050,00750
+
+
+
+***************   Ticket description   ******************
+
+XXXXX,99999,99999,MMMMMMMMMMMMMMMMMMMMM
+  |     |     |     |
+  |     |     |     +---  เนื้อหา
+  |     |     +---------  ระยะแนวนอน 1/100 นิ้ว
+  |     +---------------  ระยะแนวตั้ง 1/100 นิ้ว
+  +---------------------  คำสั่ง
+
+คำสั่ง  - SAYCn พิมพ์จัดตำแหน่งกลาง
+        - SAYLn พิมพ์จัดตำแหน่งไปทางซ้าย
+        - SAYRn พิมพ์จัดตำแหน่งไปทางขวา
+        - LINEn ขนาดเส้นที่เขียน
+ตัวอย่าง
+SAYR2,00100,00200,IF(WDATA->STAT='1',WDATA->TICKET1,WDATA->TICKET2)
+LINE2,00190,00100,00190,00700
+

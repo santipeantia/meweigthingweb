@@ -1,0 +1,78 @@
+*I,INDEX,DTOS(DAYIN)+SUBCON+TMIN
+*I,GROUP,DTOS(WDATA->DAYIN)+SUBCON
+*I,BLOCK,DTOS(WDATA->DAYIN)+SUBCON
+
+I,INDEX,DTOS(DAYIN)+TICKET1+TICKET2+DTOS(DAYOUT)+TRUCK+CARTYPE+COMPANY+PRODUCT+SUBCON+TMIN+STR(W1)+STR(W2)
+I,GROUP,DTOS(DAYIN)+TICKET1+TICKET2+DTOS(DAYOUT)+TRUCK+CARTYPE+COMPANY+PRODUCT+SUBCON+TMIN+STR(W1)+STR(W2)
+I,BLOCK,DTOS(DAYIN)+TICKET1+TICKET2+DTOS(DAYOUT)+TRUCK+CARTYPE+COMPANY+PRODUCT+SUBCON+TMIN+STR(W1)+STR(W2)
+
+ 
+ 
+H,LF,SAYR1,00010,'Detail29'
+H,NF,SAYL1,00760,'Page '+ALLTRIM(STR(nPage))
+H,NF,SAYC3,00385,cHLine
+H,LF,SAYC3,00385,RepList->Name
+H,LF,SAYC3,00385,'ใบชั่งน้ำหนัก '
+H,LF,SAYR3,00300,'ประจำวันที่  '+ALLTRIM(DTOC(DDAYBEG))+'   ถึง   '+ALLTRIM(DTOC(DDAYEND))
+H,LF,SAYR3,00300,'ตั้งแต่เวลา    '+LEFT(CTIMBEG,8)+'           ถึง   '+LEFT(CTIMEND,8)
+ 
+
+
+H,LH,LINE1,00000,00770
+
+D,SM,00100,00100,WDATA->W1
+D,SM,00200,00200,WDATA->W2
+D,SM,00300,00300,NNET
+ 
+D,LF,SAYR2,00010,'เที่ยวที่' 
+D,NF,SAYR2,00150,':'
+D,NF,SAYR2,00200,right(wdata->ticket1,5)
+ 
+D,NF,SAYR2,00430,'เลขที่ใบชั่ง'
+D,NF,SAYR2,00600,':' 
+D,NF,SAYR2,00650,right(wdata->ticket2,7)  
+
+D,LF,SAYR2,00010,'วันที่'
+D,NF,SAYR2,00150,':'
+D,NF,SAYR2,00200,dtoc(wdata->dayout)
+
+D,NF,SAYR2,00430,'เวลา'
+D,NF,SAYR2,00600,':' 
+D,NF,SAYR2,00650,wdata->tmout
+
+D,LF,SAYR2,00010,'เบอร์รถ'
+D,NF,SAYR2,00150,':'
+D,NF,SAYR2,00200,left(wdata->truck,10)
+
+D,LF,SAYR2,00010,'รถขุด'
+D,NF,SAYR2,00150,':'
+D,NF,SAYR2,00200,left(company->name,10)
+
+D,NF,SAYR2,00430,'น้ำหนักรวม'
+D,NF,SAYR2,00600,':' 
+D,NF,SAYL2,00720,if(wdata->w1>wdata->w2,tran(wdata->w1,'9,999,999'),tran(wdata->w2,'9,999,999'))+'  กก.' 
+ 
+D,LF,SAYR2,00010,'เครื่องโม่'
+D,NF,SAYR2,00150,':'
+D,NF,SAYR2,00200,left(subcon->name,5)
+ 
+D,NF,SAYR2,00430,'น้ำหนักรถ'
+D,NF,SAYR2,00600,':' 
+D,NF,SAYL2,00720,if(wdata->w1>wdata->w2,tran(wdata->w2,'9,999,999'),tran(wdata->w1,'9,999,999'))+'  กก.'
+ 
+D,LF,SAYR2,00010,'ชนิดถ่าน'
+D,NF,SAYR2,00150,':'
+D,NF,SAYR2,00200,left(product->name,10)
+
+D,NF,SAYR2,00430,'น้ำหนักสุทธิ'
+D,NF,SAYR2,00600,':' 
+D,NF,SAYL2,00720,tran(Nnet,'9,999,999')+'  กก.' 
+
+S,LF,SAYR1,00200,''
+S,LH,LINE1,00000,00770
+
+ 
+  
+ 
+ 
+                                                                                                      
