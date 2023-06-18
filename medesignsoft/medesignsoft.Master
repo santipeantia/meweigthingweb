@@ -1869,6 +1869,16 @@
                 format: 'yyyy-mm-dd'
             });
 
+            $('#datestart8').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
+            $('#datestop8').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
 
             $('#datevendorstart').datepicker({
                 autoclose: true,

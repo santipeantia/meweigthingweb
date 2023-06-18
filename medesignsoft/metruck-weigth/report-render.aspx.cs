@@ -53,12 +53,11 @@ namespace medesignsoft.metruck_weigth
             else if (rpt_id == "truck_report1_pdf" && sdate != null && edate != null) { truck_report1_pdf(rpt_id, sdate, edate); }
             else if (rpt_id == "truck_report1_excel" && sdate != null && edate != null) { truck_report1_excel(rpt_id, sdate, edate); }
             else if (rpt_id == "truck_reportamount_pdf" && sdate != null && edate != null) { truck_reportamount_pdf(rpt_id, sdate, edate); }
-            else if (rpt_id == "truck_reportamount_excel" && sdate != null && edate != null) { truck_reportamount_excel(rpt_id, sdate, edate); }            
+            else if (rpt_id == "truck_reportamount_excel" && sdate != null && edate != null) { truck_reportamount_excel(rpt_id, sdate, edate); }
+            else if (rpt_id == "truck_reportproductgroup2_pdf" && sdate != null && edate != null) { truck_reportproductgroup2_pdf(rpt_id, sdate, edate); }
+            else if (rpt_id == "truck_reportproductgroup2_excel" && sdate != null && edate != null) { truck_reportproductgroup2_excel(rpt_id, sdate, edate); }            
             
             else { Response.Write("<script>alert('พบข้อผิดพลาด..!, ข้อมูลรายงานไม่ถูกต้องโปรดตรวจตสอบ...');</script>"); }
-
-
-
         }
 
         protected void truckdailyreport_excel(string sdate, string edate) {
@@ -1112,5 +1111,78 @@ namespace medesignsoft.metruck_weigth
                 return;
             }
         }
+
+        protected void truck_reportproductgroup2_pdf(string rep_ticket, string sdate, string edate) {
+            try
+            {
+                string refno = Request.Params["refno"];
+                string comp1 = Request.Params["comcode1"];               
+
+                string prod1 = Request.Params["prod1"];               
+
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+                rpt = new ReportDocument();
+
+                if (refno == "true") {
+                    rpt.Load(Server.MapPath("../Reports/truck/truck_report_productgroup2.rpt"));
+                }
+                else
+                {
+                    rpt.Load(Server.MapPath("../Reports/truck/truck_report_productgroup1.rpt"));
+                }
+                
+                rpt.SetDatabaseLogon(strUser, strPassword, strServer, strSource);
+                rpt.SetParameterValue("@sdate", sdate);
+                rpt.SetParameterValue("@edate", edate);
+                rpt.SetParameterValue("@custcode", comp1);
+                rpt.SetParameterValue("@groupcode", prod1);
+
+                rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Response, false, "TruckReportProductGroup_" + sdate + "_" + edate + ".pdf");
+            }
+            catch (Exception ex)
+            {
+                string exError = ex.Message;
+                Response.Write("<script>alert('พบข้อผิดพลาด..!, " + exError + "');</script>");
+                return;
+            }
+        }
+
+        protected void truck_reportproductgroup2_excel(string rep_ticket, string sdate, string edate)
+        {
+            try
+            {
+                string refno = Request.Params["refno"];
+                string comp1 = Request.Params["comcode1"];
+
+                string prod1 = Request.Params["prod1"];
+
+                string strDate = DateTime.Now.ToString("yyyy-MM-dd");
+                rpt = new ReportDocument();
+
+                if (refno == "true")
+                {
+                    rpt.Load(Server.MapPath("../Reports/truck/truck_report_productgroup2.rpt"));
+                }
+                else
+                {
+                    rpt.Load(Server.MapPath("../Reports/truck/truck_report_productgroup1.rpt"));
+                }
+
+                rpt.SetDatabaseLogon(strUser, strPassword, strServer, strSource);
+                rpt.SetParameterValue("@sdate", sdate);
+                rpt.SetParameterValue("@edate", edate);
+                rpt.SetParameterValue("@custcode", comp1);
+                rpt.SetParameterValue("@groupcode", prod1);
+
+                rpt.ExportToHttpResponse(CrystalDecisions.Shared.ExportFormatType.Excel, Response, false, "TruckReportProductGroup_" + sdate + "_" + edate + "");
+            }
+            catch (Exception ex)
+            {
+                string exError = ex.Message;
+                Response.Write("<script>alert('พบข้อผิดพลาด..!, " + exError + "');</script>");
+                return;
+            }
+        }
+
     }
 }

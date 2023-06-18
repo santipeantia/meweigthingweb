@@ -57,9 +57,10 @@
 
 
                 //$('#btnReportTruck7').attr("disabled", true);
-                $('#btnReportTruck8').attr("disabled", true);
+                //$('#btnReportTruck8').attr("disabled", true);
                 $('#btnReportTruck9').attr("disabled", true);
                 $('#btnReportTruck10').attr("disabled", true);
+                $('#btnReportTruck11').attr("disabled", true);
 
                 //reloaddata();
 
@@ -81,6 +82,9 @@
                 $('#datestart7').val(ssdate);
                 $('#datestop7').val(eedate);
 
+                $('#datestart8').val(ssdate);
+                $('#datestop8').val(eedate);
+
                 getCustomerList();
                 getProductList();
 
@@ -93,6 +97,45 @@
                 btnreload.click(function () {
                    
                 });
+
+                var chkrpt1 = $('#chkrpt1');
+                var chkrpt2 = $('#chkrpt2');
+                chkrpt1.click(function () {
+                    var sure = this.checked;
+                    if (sure == true) {
+                        //alert(sure);
+                        //chkrpt2.attr("checked", false);
+
+                        chkrpt2.prop( "checked", false );
+                        console.log('chkrpt2 : 1 : ' + sure);
+                    } else {
+                        //alert(sure);
+                        //chkrpt2.attr("checked", true);
+
+                        chkrpt2.prop("checked", true);
+                        console.log('chkrpt2 : 2 : ' + sure);
+                    }
+                });
+                
+                chkrpt2.click(function () {
+                    var sure = this.checked;
+                    if (sure == true) {
+                        //alert(sure);
+                        //chkrpt1.attr("checked", false);
+
+                        chkrpt1.prop( "checked", false );
+                        console.log('chkrpt1 : 1 : ' + sure);
+                    } else {
+                        //alert(sure);
+                        //chkrpt1.attr("checked", true);
+
+                        chkrpt1.prop("checked", true);
+                        console.log('chkrpt1 : 2 : ' + sure);
+                    }
+                });
+
+
+
 
                 var btnFilterdata = $('#btnFilterdata');
                 btnFilterdata.click(function () {
@@ -129,6 +172,41 @@
                    
                 });
 
+                var btnFilterdata8 = $('#btnFilterdata8');
+                btnFilterdata8.click(function () {
+                    var sdate = $('#datestart8').val();
+                    var edate = $('#datestop8').val();
+
+                    if (sdate == '' || edate == '') {
+
+                        //7.รายงานจำนวนเที่ยว(ตัน) / บริษัท
+                        Swal.fire(
+                            '<span class="txtLabel">กำหนดช่วงเวลาไม่ถูกต้องโปรดตรวจสอบ..!</span>',
+                            '',
+                            'error'
+                        );
+
+                        $('#selectcustomer8').val('-1');
+                        $('#selectcustomer8').change();
+                        $('#selectproduct8').val('-1');
+                        $('#selectproduct8').change();
+
+                        $('#selectcustomer8').attr("disabled", true);
+                        $('#selectproduct8').attr("disabled", true);
+                        
+
+                        return;
+                    } else {
+
+                        getCustomerBydate(sdate, edate);
+                        getProductGroupBydate(sdate, edate);
+
+                        $('#selectcustomer8').attr("disabled", false);
+                        $('#selectproduct8').attr("disabled", false);
+                    }
+                   
+                });
+                
                 var btnReportTicket1 = $('#btnReportTicket1');
                 btnReportTicket1.click(function () {
 
@@ -340,26 +418,29 @@
                 var btnReportTruck8 = $('#btnReportTruck8');
                 btnReportTruck8.click(function () {
 
-                    //8.รายงานการชั่งค้างสร้างใบสั่งขาย
-                     Swal.fire(
-                        '<span class="txtLabel">ข้อมูลรายงานอยู่ระหว่างดำเนินการ..!</span>',
-                        '',
-                        'error'
-                    )
-                    return;
+                    //8.รายงานแยกประเภทตามกลุ่มสินค้า
+                    $('#selectreport8').val(8);
+                    $('#selectreport8').change();
+                    $('#selectreport8').attr("disabled", true);
 
-                    $('#selectreport').val(8);
-                    $('#selectreport').change();
-                    $('#selectreport').attr("disabled", true);
+                    $('#selectcustomer8').val('-1');
+                    $('#selectcustomer8').change();
 
-                    $("#modal-reportticket").modal({ backdrop: false });
-                    $("#modal-reportticket").modal("show");
+                    $('#selectproduct8').val(-1);
+                    $('#selectproduct8').change();
+
+                    $('#selectcustomer8').attr("disabled", true);
+                    $('#selectproduct8').attr("disabled", true);
+                    
+
+                    $("#modal-reporttotalgroup").modal({ backdrop: false });
+                    $("#modal-reporttotalgroup").modal("show");
                 });
 
                 var btnReportTruck9 = $('#btnReportTruck9');
                 btnReportTruck9.click(function () {
 
-                    //9.รายงานการเรียกเก็บเงินลูกค้า
+                    //9.รายงานการชั่งค้างสร้างใบสั่งขาย
                      Swal.fire(
                         '<span class="txtLabel">ข้อมูลรายงานอยู่ระหว่างดำเนินการ..!</span>',
                         '',
@@ -394,11 +475,32 @@
                     $("#modal-reportticket").modal("show");
                 });
 
+                var btnReportTruck11 = $('#btnReportTruck11');
+                btnReportTruck11.click(function () {
+
+                    //9.รายงานการเรียกเก็บเงินลูกค้า
+                     Swal.fire(
+                        '<span class="txtLabel">ข้อมูลรายงานอยู่ระหว่างดำเนินการ..!</span>',
+                        '',
+                        'error'
+                    )
+                    return;
+
+                    $('#selectreport').val(11);
+                    $('#selectreport').change();
+                    $('#selectreport').attr("disabled", true);
+
+                    $("#modal-reportticket").modal({ backdrop: false });
+                    $("#modal-reportticket").modal("show");
+                });
+
+                                             
                 var selectcustomer = $('#selectcustomer');
                 var selectcustomer2 = $('#selectcustomer2');
 
                 var selectproduct = $('#selectproduct');
                 var selectproduct2 = $('#selectproduct2');
+                var selectproduct8 = $('#selectproduct8');
 
                 function getCustomerList() {
                     $.ajax({
@@ -411,8 +513,8 @@
                         success: function (data) {
                             selectcustomer.empty();
                             selectcustomer2.empty();
-                            selectcustomer.append($('<option/>', { value: -1, text: 'กรุณาระบุชื่อลูกค้า' }));
-                            selectcustomer2.append($('<option/>', { value: -1, text: 'กรุณาระบุชื่อลูกค้า' }));
+                            selectcustomer.append($('<option/>', { value: -1, text: 'เลือกรายชื่อลูกค้าทั้งหมด' }));
+                            selectcustomer2.append($('<option/>', { value: -1, text: 'เลือกรายชื่อลูกค้าทั้งหมด' }));
 
                             $(data).each(function (index, item) {
                                 selectcustomer.append($('<option/>', { value: item.CompCode, text: item.CompName }));
@@ -446,7 +548,26 @@
                    
                 };
 
+                function getProductGroupBydate() {
+                    $.ajax({
+                        url: 'servicetruck.asmx/GetTwProductGroupList',
+                        method: 'post',
+                        datatype: 'json',
+                        beforeSend: function () {
+
+                        },
+                        success: function (data) {
+                            selectproduct8.empty();      
+                            selectproduct8.append($('<option/>', { value: -1, text: 'เลือกสินค้าทั้งหมด' }));
+                            $(data).each(function (index, item) {
+                                selectproduct8.append($('<option/>', { value: item.GroupCode, text: item.GroupName }));
+                            });
+                        }
+                    });
+                }
+
                 var selectcustomer7 = $('#selectcustomer7');
+                var selectcustomer8 = $('#selectcustomer8');
                 function getCustomerBydate(sdate, edate) {
                     $.ajax({
                         url: 'servicetruck.asmx/GetTwCompanyBydate',
@@ -461,10 +582,14 @@
                         },
                         success: function (data) {
                             selectcustomer7.empty();                           
-                            selectcustomer7.append($('<option/>', { value: -1, text: 'กรุณาระบุชื่อลูกค้า' }));                          
+                            selectcustomer7.append($('<option/>', { value: -1, text: 'เลือกรายชื่อลูกค้าทั้งหมด' }));                          
+
+                            selectcustomer8.empty();                           
+                            selectcustomer8.append($('<option/>', { value: -1, text: 'เลือกรายชื่อลูกค้าทั้งหมด' }));
 
                             $(data).each(function (index, item) {
                                 selectcustomer7.append($('<option/>', { value: item.CompCode, text: item.CompName }));
+                                selectcustomer8.append($('<option/>', { value: item.CompCode, text: item.CompName }));
                             });
                         }
                     });
@@ -615,6 +740,7 @@
                     pdfReportRenderTruck(rpt_id, rpt_no, sdate, edate, comcode, comcode, prod, prod);
 
                 });
+                               
 
                 var btnPrintTruckReportExcel7 = $('#btnPrintTruckReportExcel7');
                 btnPrintTruckReportExcel7.click(function () {
@@ -635,12 +761,57 @@
 
                 })
 
+                var btnPrintTruckReport8 = $('#btnPrintTruckReport8');
+                btnPrintTruckReport8.click(function () {
+                    //var rpt_no = $('#selectreport8').val();
+
+                    var rpt_no = $('#chkrpt1').prop('checked'); //$('#chkrpt1').val();
+
+                    //alert(rpt_no);
+                    //return; 
+
+
+                    var rpt_id = "truck_reportproductgroup2_pdf";
+
+                    var sdate = $('#datestart8').val();
+                    var edate = $('#datestop8').val();
+
+                    var comcode = $('#selectcustomer8').val();
+                    var prod = $('#selectproduct8').val();
+
+                    pdfReportRenderTruck(rpt_id, rpt_no, sdate, edate, comcode, comcode, prod, prod);
+
+                });
+
+                 var btnPrintTruckReportExcel8 = $('#btnPrintTruckReportExcel8');
+                btnPrintTruckReportExcel8.click(function () {
+                     var rpt_no = $('#chkrpt1').prop('checked'); //$('#chkrpt1').val();
+
+                    //alert(rpt_no);
+                    //return; 
+
+                    var rpt_id = "truck_reportproductgroup2_excel";
+                   
+                    var sdate = $('#datestart8').val();
+                    var edate = $('#datestop8').val();
+
+                    var comcode = $('#selectcustomer8').val();
+                    var prod = $('#selectproduct8').val();
+
+                    pdfReportRenderTruck(rpt_id, rpt_no, sdate, edate, comcode, comcode, prod, prod);
+
+
+                })
+
+                
 
                 function pdfReportRenderTruck(rpt_id, rpt_no, sdate, edate, comp1, comp2, prod1, prod2) {
                     window.open('report-render.aspx?id=' + rpt_id  + '&refno=' + rpt_no + '&sdate=' + sdate + '&edate=' + edate + '&comcode1='+ comp1 + '&comcode2=' + comp2+ '&prod1=' + prod1+ '&prod2=' + prod2, '_blank');
                 }
             });
 
+
+            
         </script>
     </section>
 
@@ -726,31 +897,39 @@
                                             </tr>
                                             <tr>
                                                 <td style="vertical-align: middle; text-align: center;">7 </td>
-                                                <td style="vertical-align: middle;">รายงานจำนวนเที่ยว(ตัน)/บริษัท <span class="pull-right-container">
-                                                    <small class="label pull-right bg-green">new 06/06/2023 11:30:03</small>
-                                                </span></td>
+                                                <td style="vertical-align: middle;">รายงานจำนวนเที่ยว(ตัน)/บริษัท <span class="pull-right-container">                                                    
+                                                <small class="label pull-right bg-orange">ก่อนหน้า 06/06/2023 11:30:03</small></span></td>
                                                 <td class=" table-align-center" ><span id="btnReportTruck7" class="btn btn-primary outline btn-block " ><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
                                                 <%--<td class=" table-align-center"><span class="btn btn-success outline btn-block "><i class="fa fa-print"></i> พิมพ์รายงาน</span></td>--%>
                                             </tr>
                                             <tr>
-                                                <td style="vertical-align: middle; text-align: center;">8</td>
-                                                <td style="vertical-align: middle;">รายงานการชั่งค้างสร้างใบเสนอราคา</td>
-                                                <td class=" table-align-center" ><span id="btnReportTruck8" class="btn btn-danger outline btn-block " ><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
+                                                <td style="vertical-align: middle; text-align: center;">8 </td>
+                                                <td style="vertical-align: middle;">รายงานแยกประเภทตามกลุ่มสินค้า <span class="pull-right-container">
+                                                    <small class="label pull-right bg-green">ล่าสุด 18/06/2023 16:35:00</small>
+                                                </span></td>
+                                                <td class=" table-align-center" ><span id="btnReportTruck8" class="btn btn-primary outline btn-block " ><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
                                                 <%--<td class=" table-align-center"><span class="btn btn-success outline btn-block "><i class="fa fa-print"></i> พิมพ์รายงาน</span></td>--%>
                                             </tr>
+
                                             <tr>
                                                 <td style="vertical-align: middle; text-align: center;">9</td>
-                                                <td style="vertical-align: middle;">รายงานการชั่งค้างสร้างใบสั่งขาย</td>
-                                                <td class=" table-align-center"><span id="btnReportTruck9" class="btn btn-danger outline btn-block "><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
+                                                <td style="vertical-align: middle;">รายงานการชั่งค้างสร้างใบเสนอราคา</td>
+                                                <td class=" table-align-center" ><span id="btnReportTruck9" class="btn btn-danger outline btn-block " ><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
                                                 <%--<td class=" table-align-center"><span class="btn btn-success outline btn-block "><i class="fa fa-print"></i> พิมพ์รายงาน</span></td>--%>
                                             </tr>
                                             <tr>
                                                 <td style="vertical-align: middle; text-align: center;">10</td>
-                                                <td style="vertical-align: middle;">รายงานการเรียกเก็บเงินลูกค้า</td>
+                                                <td style="vertical-align: middle;">รายงานการชั่งค้างสร้างใบสั่งขาย</td>
                                                 <td class=" table-align-center"><span id="btnReportTruck10" class="btn btn-danger outline btn-block "><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
                                                 <%--<td class=" table-align-center"><span class="btn btn-success outline btn-block "><i class="fa fa-print"></i> พิมพ์รายงาน</span></td>--%>
                                             </tr>
-
+                                            <tr>
+                                                <td style="vertical-align: middle; text-align: center;">11</td>
+                                                <td style="vertical-align: middle;">รายงานการเรียกเก็บเงินลูกค้า</td>
+                                                <td class=" table-align-center"><span id="btnReportTruck11" class="btn btn-danger outline btn-block "><i class="fa fa-file-text-o"></i> พิมพ์รายงาน</span></td>
+                                                <%--<td class=" table-align-center"><span class="btn btn-success outline btn-block "><i class="fa fa-print"></i> พิมพ์รายงาน</span></td>--%>
+                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -789,9 +968,10 @@
                                         <option value="5">5.รายงานแยกตามประเภทสินค้า</option>
                                         <option value="6">6.รายงานการชั่งรูปแบบเงินสด</option>
                                         <option value="7">7.รายงานจำนวนเที่ยว(ตัน)/บริษัท</option>
-                                        <option value="8">8.รายงานการชั่งค้างสร้างใบเสนอราคา</option>
-                                        <option value="9">9.รายงานการชั่งค้างสร้างใบสั่งขาย</option>
-                                        <option value="10">10.รายงานการเรียกเก็บเงินลูกค้า</option>
+                                        <option value="8">8.รายงานแยกประเภทตามกลุ่มสินค้า</option>
+                                        <option value="9">9.รายงานการชั่งค้างสร้างใบเสนอราคา</option>
+                                        <option value="10">10.รายงานการชั่งค้างสร้างใบสั่งขาย</option>
+                                        <option value="11">11.รายงานการเรียกเก็บเงินลูกค้า</option>
 
                                     </select>
                                 </span>
@@ -913,9 +1093,10 @@
                                                 <option value="5">5.รายงานแยกตามประเภทสินค้า</option>
                                                 <option value="6">6.รายงานการชั่งรูปแบบเงินสด</option>--%>
                                                 <option value="7">7.รายงานจำนวนเที่ยว(ตัน)/บริษัท</option>
-                                                <%--<option value="8">8.รายงานการชั่งค้างสร้างใบเสนอราคา</option>
-                                                <option value="9">9.รายงานการชั่งค้างสร้างใบสั่งขาย</option>
-                                                <option value="10">10.รายงานการเรียกเก็บเงินลูกค้า</option> --%>                                                 
+                                                <%--<option value="8">8.รายงานแยกประเภทตามกลุ่มสินค้า</option>
+                                                <option value="9">9.รายงานการชั่งค้างสร้างใบเสนอราคา</option>
+                                                <option value="10">10.รายงานการชั่งค้างสร้างใบสั่งขาย</option>
+                                                <option value="11">11.รายงานการเรียกเก็บเงินลูกค้า</option>--%>                                                
                                             </select>
                                         </span>
                                 </div>
@@ -990,6 +1171,127 @@
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" id="btnPrintTruckReportExcel7" class="btn btn-primary outline btn-block "><i class="fa fa-table"></i>&nbsp; พิมพ์รายงาน (Excel)</button>
+                                    <%--<button type="button" class="btn btn-danger outline btn-block " data-dismiss="modal"><i class="fa fa-close"></i> ออกจากหน้าจอ</button>  --%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         <%--8.รายงานแยกประเภทตามกลุ่มสินค้า--%>
+        <div class="modal fade" id="modal-reporttotalgroup">
+                <div class="modal-dialog" style="width: 700px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">รายงานแยกประเภทตามกลุ่มสินค้า                     
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top: 5px;">                                
+                                <div class="col-md-4 text-right">เลือกข้อมูลรายงาน</div>
+                                <div class="col-md-6">
+                                    <span class="txtLabel " style="width: 100%">
+                                            <select id="selectreport8" name="selectreport8" class="form-control input-sm " style="width: 100%">
+                                                <%--<option value="1">1.รายงานใบชั่งน้ำหนัก</option>
+                                                <option value="2">2.รายงานการชั่งรถแยกตามบริษัท</option>
+                                                <option value="3">3.รายงานการชั่งรถแยกตามวัน</option>
+                                                <option value="4">4.รายงานการชั่งรถแยกตามเดือน</option>
+                                                <option value="5">5.รายงานแยกตามประเภทสินค้า</option>
+                                                <option value="6">6.รายงานการชั่งรูปแบบเงินสด</option>
+                                                <option value="7">7.รายงานจำนวนเที่ยว(ตัน)/บริษัท</option>--%>
+                                                <option value="8">8.รายงานแยกประเภทตามกลุ่มสินค้า</option>
+                                                 <%--<option value="9">9.รายงานการชั่งค้างสร้างใบเสนอราคา</option>
+                                                <option value="10">10.รายงานการชั่งค้างสร้างใบสั่งขาย</option>
+                                                <option value="11">11.รายงานการเรียกเก็บเงินลูกค้า</option>--%>                                                
+                                            </select>
+                                        </span>
+                                </div>
+                            </div>                           
+                            
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="col-md-4 text-right">วันที่เริ่มต้น</div>
+                                <div class="col-md-6">                                    
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control pull-right" autocomplete="off" id="datestart8">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                            </div>
+
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="col-md-4 text-right">วันที่สิ้นสุด</div>
+                                <div class="col-md-6">                                    
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control pull-right" autocomplete="off" id="datestop8">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                        </div>                                    
+                                </div>
+                            </div>
+
+                             <div class="row" style="margin-top: 5px;">
+                                <div class="col-md-4 text-right">กรองข้อมูลรายงาน</div>
+                                <div class="col-md-6">
+                                    <button type="button" id="btnFilterdata8" class="btn btn-success outline btn-block "><i class="fa fa-sort-amount-desc"></i>&nbsp; กรองข้อมูลรายงาน</button>
+                                </div>
+                            </div>   
+
+                            <div class="row" style="margin-top: 5px;">                                
+                                <div class="col-md-4 text-right">ระบุชื่อลูกค้า</div>
+                                <div class="col-md-6">
+                                    <span class="txtLabel " style="width: 100%">
+                                            <select id="selectcustomer8" name="selectcustomer7" class="form-control input-sm " style="width: 100%">
+                                                <option value="-1">เลือกรายชื่อลูกค้าทั้งหมด</option>
+                                            </select>
+                                        </span>
+                                </div>
+                            </div>                                                        
+
+                            <div class="row" id="divprod8" style="margin-top: 5px;">                                
+                                <div class="col-md-4 text-right">ระบุกลุ่มสินค้า</div>
+                                <div class="col-md-6">
+                                    <span class="txtLabel " style="width: 100%">
+                                            <select id="selectproduct8" name="selectproduct7" class="form-control input-sm " style="width: 100%">
+                                                <option value="-1">เลือกสินค้าทั้งหมด</option>
+                                            </select>
+                                        </span>
+                                </div>
+                            </div>  
+                            
+                            <div class="row" style="margin-top: 5px;">
+                                <!-- radio -->
+                                <div class="col-md-4 text-right">รูปแบบรายงาน</div>
+                                <div class="col-md-6 form-group">
+                                    <label>                                        
+                                       <input type="checkbox" id="chkrpt1" class="" checked />
+                                        <span class="txtLabel">แบบแจกแจง</span>
+                                    </label>
+                                    &nbsp;&nbsp;
+                                    <label>
+                                        <input type="checkbox" id="chkrpt2" class="" />
+                                        <span class="txtLabel">แบบสรุป</span>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+                                                                                         
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="col-md-4 text-right">&nbsp;</div>
+                                <div class="col-md-3">
+                                    <button type="button" id="btnPrintTruckReport8" class="btn btn-primary outline btn-block "><i class="fa fa-print"></i>&nbsp; พิมพ์รายงาน (PDF)</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" id="btnPrintTruckReportExcel8" class="btn btn-primary outline btn-block "><i class="fa fa-table"></i>&nbsp; พิมพ์รายงาน (Excel)</button>
                                     <%--<button type="button" class="btn btn-danger outline btn-block " data-dismiss="modal"><i class="fa fa-close"></i> ออกจากหน้าจอ</button>  --%>
                                 </div>
                             </div>

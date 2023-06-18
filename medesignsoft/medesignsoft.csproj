@@ -6949,6 +6949,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\cGetTwProductGroupList.cs" />
     <Compile Include="metruck-weigth\cGetTwProductList.cs" />
     <Compile Include="metruck-weigth\cGetTwCompanyList.cs" />
     <Compile Include="ClassConn\dbConnExpress.cs" />
@@ -7778,6 +7779,24 @@
       <DependentUpon>truck_reportamount_pdf.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\truck\truck_report_productgroup1_bk.cs">
+      <DependentUpon>truck_report_productgroup1_bk.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\truck\truck_report_productgroup1.cs">
+      <DependentUpon>truck_report_productgroup1.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\truck\truck_report_productgroup2.cs">
+      <DependentUpon>truck_report_productgroup2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\truck\truck_report_product.cs">
       <DependentUpon>truck_report_product.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -8450,6 +8469,18 @@
     <EmbeddedResource Include="Reports\truck\truck_reportamount_pdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>truck_reportamount_pdf.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\truck\truck_report_productgroup1_bk.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>truck_report_productgroup1_bk.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\truck\truck_report_productgroup1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>truck_report_productgroup1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\truck\truck_report_productgroup2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>truck_report_productgroup2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\truck\truck_report_product.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -142,6 +142,32 @@ namespace medesignsoft.metruck_weigth
         }
 
         [WebMethod]
+        public void GetTwProductGroupList()
+        {
+            List<cGetTwProductGroupList> datas = new List<cGetTwProductGroupList>();
+            SqlCommand comm = new SqlCommand("sptw_ProductGroupList", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandTimeout = 1200;
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetTwProductGroupList data = new cGetTwProductGroupList();
+                data.GroupCode = rdr["GroupCode"].ToString();
+                data.GroupName = rdr["GroupName"].ToString();
+                data.REMARKS = rdr["REMARKS"].ToString();
+                data.HSEQ = rdr["HSEQ"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+
+        [WebMethod]
         public void GetTwProductList() {
             List<cGetTwProductList> datas = new List<cGetTwProductList>();
             SqlCommand comm = new SqlCommand("sptw_ProductList", conn.OpenConn());
@@ -164,7 +190,7 @@ namespace medesignsoft.metruck_weigth
         }
 
         
-            [WebMethod]
+        [WebMethod]
         public void GetTwProducBydate(string sdate, string edate, string custcode)
         {
             List<cGetTwProductList> datas = new List<cGetTwProductList>();
