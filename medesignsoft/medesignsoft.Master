@@ -10,7 +10,7 @@
     <title>AYUTTHAYA</title>
 
     <%--<link rel="shortcut icon" href="../../ayutthayaland/Favicon.ico" type="image/x-icon">--%>
-    <link rel="icon" type="image/png" href="../../ayutthayaland/dev-logo.png" />
+    <link rel="icon" type="image/png" href="../../ayutthayaland/logo-ayl-icon.png" />
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../../ayutthayaland/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -265,8 +265,8 @@
                 <a href="../../ayutthayaland/index.aspx" class="logo">
                     <%--<span class="logo-mini"><b><%=stradCompanyID %></span>
                     <span class="logo-lg"><b><%=stradCompanyID %></b></span>   --%>
-                         <span class="">   <img src="../../ayutthayaland/image/dev-logo.png" class="user-image" alt="User Image" width="40" /></span>
-                    
+                         <span class="">   <img src="../../ayutthayaland/image/logo-ayl.png" class="user-image" alt="User Image" width="200" /></span>
+                   
                 </a>
 
                 <nav class="navbar navbar-static-top">

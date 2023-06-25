@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AYUTTHAYA | Log in</title>
     <%--<link rel="shortcut icon" href="../../ayutthayaland/icon.ico" type="image/x-icon">--%>
-    <link rel="icon" type="image/png" href="../../ayutthayaland/dev-logo.png" />
+    <link rel="icon" type="image/png" href="../../ayutthayaland/logo-ayl-icon.png" />
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -74,12 +74,13 @@
         <div class="login-box-body">
            
             <p class="login-box-msg">
-                <img src="../../ayutthayaland/image/dev-logo.png" width="100" />
+                <img src="../../ayutthayaland/image/logo-ayl.jpg" width="250" />
             </p>
 
-             <p class="login-box-msg" style="padding-top: 0px;">
-            <span class="txtHeader">บริษัท อยุธยาแลนด์ 2016 จำกัด</span>
-        </p>
+             <%--<p class="login-box-msg" style="padding-top: 0px;">--%>
+            <%--<span class="txtHeader">บริษัท อยุธยาแลนด์ 2016 จำกัด</span>--%>
+                
+        <%--</p>--%>
 
             <%--<p class="login-box-msg">Sign in to start your session</p>--%>
 

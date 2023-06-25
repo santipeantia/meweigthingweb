@@ -230,6 +230,20 @@ namespace medesignsoft
             //setting Chart type 
             Chart1.Series[0].ChartType = SeriesChartType.Pie;
 
+            foreach (Series charts in Chart1.Series)
+            {
+                foreach (DataPoint point in charts.Points)
+                {
+                    switch (point.AxisLabel)
+                    {
+                        case "ทรายหยาบ": point.Color = Color.DodgerBlue; break;
+                        case "ทรายละเอียด": point.Color = Color.Red; break;
+                        case "ทรายถม": point.Color = Color.Gray; break;
+                    }
+                    //point.Label = string.Format("{0:0} - {1}", point.YValues[0], point.AxisLabel);
+                }
+            }
+
 
             Chart1.Series[0].IsValueShownAsLabel = true;
 
@@ -237,9 +251,9 @@ namespace medesignsoft
             //Chart1.Series[1].Label = "ทรายละเอียด";
             //Chart1.Series[2].Label = "ทรายถม";
 
-            Chart1.Series[0].Points[0].Color = PieColors[0];
-            Chart1.Series[0].Points[1].Color = PieColors[1];
-            Chart1.Series[0].Points[2].Color = PieColors[2];
+            //Chart1.Series[0].Points[0].Color = PieColors[0];
+            //Chart1.Series[0].Points[1].Color = PieColors[1];
+            //Chart1.Series[0].Points[2].Color = PieColors[2];
 
             
 
@@ -296,9 +310,7 @@ namespace medesignsoft
             //Chart4.Series["ทรายละเอียด"].Points[0].Color = Color.Red;
             //Chart4.Series["ทรายถม"].Points[0].Color = Color.Orange;
 
-            Chart4.Series[0].Points[0].Color = PieColors[0];
-            Chart4.Series[0].Points[1].Color = PieColors[1];
-            Chart4.Series[0].Points[2].Color = PieColors[2];
+            
 
             // Chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
 
@@ -307,11 +319,29 @@ namespace medesignsoft
             //setting Chart type 
             Chart4.Series[0].ChartType = SeriesChartType.Pie;
 
+            foreach (Series charts in Chart4.Series)
+            {
+                foreach (DataPoint point in charts.Points)
+                {
+                    switch (point.AxisLabel)
+                    {
+                        case "ทรายหยาบ": point.Color = Color.DodgerBlue; break;
+                        case "ทรายละเอียด": point.Color = Color.Red; break;
+                        case "ทรายถม": point.Color = Color.Gray; break;
+                    }
+                    //point.Label = string.Format("{0:0} - {1}", point.YValues[0], point.AxisLabel);
+                }
+            }
+
             Chart4.Series[0].IsValueShownAsLabel = true;
 
             Chart4.Series[0].Label = "#PERCENT{P2}\n#VALX\n#VALY";
             //Chart3.Series[1].Label = "ทรายละเอียด";
             //Chart3.Series[2].Label = "ทรายถม";
+
+            //Chart4.Series[0].Points[0].Color = PieColors[0];
+            //Chart4.Series[0].Points[1].Color = PieColors[1];
+            //Chart4.Series[0].Points[2].Color = PieColors[2];
 
             //Chart1.Series("Default").Points(0)("Exploded") = "True";
 

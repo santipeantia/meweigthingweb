@@ -101,7 +101,7 @@
 
                 var btnaddnew = $('#btnaddnew');
                 btnaddnew.click(function () {
-                    window.location.href = "so-quotation-edit.aspx?opt=optsoe&mod=new";
+                    window.location.href = "so-truck-quotation-edit.aspx?opt=optsoe&mod=new";
                 });
 
                 var btnreload = $('#btnreload');
@@ -157,22 +157,17 @@
 
                                 //console.log(gid.text());
                                 if (rIndex != 0 & cIndex == 49) {
-                                    window.location.href = "so-quotation-edit.aspx?opt=optsoe&mod=edit&gid=" + gid.text();
+                                    window.location.href = "so-truck-quotation-edit.aspx?opt=optsoe&mod=edit&gid=" + gid.text();
                                 }
 
                                 if (rIndex != 0 & cIndex == 50) {
-                                    window.location.href = "so-quotation-edit.aspx?opt=optsoe&mod=del&gid=" + gid.text();
+                                    window.location.href = "so-truck-quotation-edit.aspx?opt=optsoe&mod=del&gid=" + gid.text();
                                 }
                             });
-
-
                         }
                     });
                 }
-
-
-            });
-                                 
+            });                                
 
         </script>
 
@@ -196,14 +191,12 @@
                         <div class="box-header with-border">
                             <i class="fa fa-gears text-orange"></i>
 
-
                             <span class="btn-group pull-right">
                                 <button type="button" id="btnaddnew" class="btn btn-default btn-sm" data-toggle="tooltip" title="new"><i class="fa fa-plus text-green"></i></button>
                                 <button type="button" id="btnreload" class="btn btn-default btn-sm" data-toggle="tooltip" title="reload"><i class="fa fa-refresh text-blue"></i></button>
                                 <button type="button" id="btnPdf1" class="btn btn-default btn-sm" data-toggle="tooltip" title="pdf"><i class="fa fa-file-pdf-o text-orange"></i></button>
                                 <button type="button" id="btnExcel" class="btn btn-default btn-sm" data-toggle="tooltip" title="excel"><i class="fa fa-table text-green"></i></button>
                             </span>
-
                             <label class="txtLabel">Quotation Lists</label>
                         </div>
 
@@ -217,16 +210,16 @@
                                         <th>QtGid</th>                                        
                                         <th>imBranchGid</th>
                                         <th>ชื่อสาขา</th>
-                                        <th>เลขที่เอกสาร</th>
+                                        <th width="100px" style="text-align: left;">เลขที่เอกสาร</th>
                                         <th>เลขที่อ้างอิง</th>
                                         <th>ประเภทโครงการ</th>
                                         <th>รหัสโครงการ</th>
                                         <th>ชื่อโครงการ</th>
-                                        <th>วันที่เอกสาร</th>
+                                        <th width="100px" style="text-align: left;">วันที่เอกสาร</th>
                                         <th>วันที่ส่งสินค้า</th>
                                         <th>ปีรายการ</th>
                                         <th>รหัสลูกค้า</th>
-                                        <th>ชื่อลูกค้า</th>
+                                        <th style="text-align: left;">ชื่อลูกค้า</th>
                                         <th>ชื่อผู้ติดต่อ</th>
                                         <th>เบอร์โทร</th>
                                         <th>อัตราแลกเปลี่ยน</th>
@@ -256,15 +249,15 @@
                                         <th>ApprovePositionName</th>
                                         <th>IsDelete</th>
                                         <th>FlagID</th>
-                                        <th style="width: 30px; text-align: center;">สถานะ</th>
+                                        <th width="100px" style="text-align: center;">สถานะ</th>
                                         <th>CreatedBy</th>
                                         <th>CreateName</th>
                                         <th>CreateDate</th>
                                         <th>UpdatedBy</th>
                                         <th>UpdateDate</th>
                                         <th>SaleEMail</th>
-                                        <th style="width: 30px; text-align: center;">#</th>
-                                        <th style="width: 30px; text-align: center;">#</th>
+                                        <th width="30px" style="text-align: center;">#</th>
+                                        <th width="30px" style="text-align: center;">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -6629,10 +6629,14 @@
     <Content Include="Favicon.ico" />
     <Content Include="image\2.png" />
     <Content Include="image\dev-logo.png" />
+    <Content Include="image\logo-ayl-icon.png" />
+    <Content Include="image\logo-ayl.jpg" />
+    <Content Include="image\logo-ayl.png" />
     <Content Include="image\spring-logo.png" />
     <Content Include="image\than-logo.png" />
     <Content Include="image\thanthara-logo.jpg" />
     <Content Include="image\working.gif" />
+    <Content Include="logo-ayl-icon.png" />
     <Content Include="mecrm-system\crm-analysis.aspx" />
     <Content Include="mecrm-system\crm-calendar.aspx" />
     <Content Include="mecrm-system\crm-entry.aspx" />
@@ -6748,6 +6752,7 @@
     <Content Include="mesales-order\so-quotation-review.aspx" />
     <Content Include="mesales-order\so-quotation-view.aspx" />
     <Content Include="mesales-order\so-report.aspx" />
+    <Content Include="mesales-order\so-truck-quotation-edit.aspx" />
     <Content Include="mesales-order\so-truck-quotation-view.aspx" />
     <Content Include="metruck-weigth\report-render.aspx" />
     <Content Include="metruck-weigth\servicetruck.asmx" />
@@ -6958,6 +6963,13 @@
     </Compile>
     <Compile Include="meenterprise-management\ar-vendor-edit.aspx.designer.cs">
       <DependentUpon>ar-vendor-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mesales-order\so-truck-quotation-edit.aspx.cs">
+      <DependentUpon>so-truck-quotation-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mesales-order\so-truck-quotation-edit.aspx.designer.cs">
+      <DependentUpon>so-truck-quotation-edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="mesales-order\so-truck-quotation-view.aspx.cs">
       <DependentUpon>so-truck-quotation-view.aspx</DependentUpon>
