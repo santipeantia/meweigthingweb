@@ -1283,6 +1283,75 @@ namespace medesignsoft.meenterprise_management
         }
 
         [WebMethod]
+        public void getVendorArList()
+        {
+            List<cVendorList> datas = new List<cVendorList>();
+            SqlCommand comm = new SqlCommand("spGetVendorArList", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cVendorList data = new cVendorList();
+                data.VendorID = rdr["VendorID"].ToString();
+                data.VendorCode = rdr["VendorCode"].ToString();
+                data.VendorName = rdr["VendorName"].ToString();
+                data.VendorNameEng = rdr["VendorNameEng"].ToString();
+                data.ShortName = rdr["ShortName"].ToString();
+                data.VendorStartDate = rdr["VendorStartDate"].ToString();
+                data.VendorGroupID = rdr["VendorGroupID"].ToString();
+                data.VendorGroupName = rdr["VendorGroupName"].ToString();
+                data.Active = rdr["Active"].ToString();
+                data.activename = rdr["activename"].ToString();
+                data.InactiveDate = rdr["InactiveDate"].ToString();
+                data.adPaymentTypeID = rdr["adPaymentTypeID"].ToString();
+                data.PaymentTypeDesc = rdr["PaymentTypeDesc"].ToString();
+                data.VendorTypeID = rdr["VendorTypeID"].ToString();
+                data.VendorTypeName = rdr["VendorTypeName"].ToString();
+                data.TaxId = rdr["TaxId"].ToString();
+                data.VendorAddr1 = rdr["VendorAddr1"].ToString();
+                data.VendorAddr2 = rdr["VendorAddr2"].ToString();
+                data.District = rdr["District"].ToString();
+                data.Amphur = rdr["Amphur"].ToString();
+                data.adProvinceID = rdr["adProvinceID"].ToString();
+                data.ProvinceName = rdr["ProvinceName"].ToString();
+                data.PostCode = rdr["PostCode"].ToString();
+                data.ContAddr1 = rdr["ContAddr1"].ToString();
+                data.ContAddr2 = rdr["ContAddr2"].ToString();
+                data.ContDistrict = rdr["ContDistrict"].ToString();
+                data.ContAmphur = rdr["ContAmphur"].ToString();
+                data.ContProvince = rdr["ContProvince"].ToString();
+                data.ContPostCode = rdr["ContPostCode"].ToString();
+                data.ContHomePage = rdr["ContHomePage"].ToString();
+                data.ContTel = rdr["ContTel"].ToString();
+                data.ContFax = rdr["ContFax"].ToString();
+                data.CardNo = rdr["CardNo"].ToString();
+                data.VATGroupID = rdr["VATGroupID"].ToString();
+                data.VATGroupDesc = rdr["VATGroupDesc"].ToString();
+                data.Birthdate = rdr["Birthdate"].ToString();
+                data.ContTelExtend1 = rdr["ContTelExtend1"].ToString();
+                data.ContTelExtend2 = rdr["ContTelExtend2"].ToString();
+                data.imBranchID = rdr["imBranchID"].ToString();
+                data.BranchCode = rdr["BranchCode"].ToString();
+                data.BranchName = rdr["BranchName"].ToString();
+                data.CreditDays = rdr["CreditDays"].ToString();
+                data.CreditAmnt = rdr["CreditAmnt"].ToString();
+                data.CreatedBy = rdr["CreatedBy"].ToString();
+                data.CreatedDate = rdr["CreatedDate"].ToString();
+                data.UpdatedBy = rdr["UpdatedBy"].ToString();
+                data.UpdateDate = rdr["UpdateDate"].ToString();
+                data.edit = rdr["edit"].ToString();
+                data.trash = rdr["trash"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+        [WebMethod]
         public void getVendorType()
         {
             List<cVendorType> datas = new List<cVendorType>();

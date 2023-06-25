@@ -120,7 +120,7 @@
 
                             <div class="col-md-12">
                                 <div class="col-md-2">
-                                    <a class="btn btn-app" href="so-quotation-view.aspx?opt=optsoe" style="width: 100%">
+                                    <a class="btn btn-app" href="so-truck-quotation-view.aspx?opt=optsoe" style="width: 100%">
                                         <span class="badge bg-yellow">1</span>
                                         <i class="fa fa-file-powerpoint-o"></i><span class="txtLabel">ใบเสนอราคาสินค้า </span>
                                     </a>

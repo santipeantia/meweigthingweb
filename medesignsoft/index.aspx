@@ -86,6 +86,20 @@
                 $('#datestart').val(ssdate);
                 $('#datestop').val(eedate);
 
+                var btnchangebar  = $('#btnchangebar');
+                btnchangebar.click(function () {
+                    $('#divbarchart').removeClass('hidden');
+                    $('#divlinechart').addClass('hidden');
+
+                });
+
+                var btnchangechart  = $('#btnchangechart');
+                btnchangechart.click(function () {
+                    $('#divbarchart').addClass('hidden');
+                    $('#divlinechart').removeClass('hidden');
+
+                });
+
             });
         </script>
 
@@ -98,7 +112,7 @@
         <div class="row">
 
           
-            <div class="col-xs-12">
+            <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <i class="fa fa-bar-chart-o"></i>
@@ -126,17 +140,25 @@
 
                             <div class="col-md-2">
                                 <button type="button" id="btnGetDataChart" runat="server" onserverclick="GetDataChart" class="btn btn-primary outline btn-block "><i class="fa fa-pie"></i>&nbsp; แสดงกราฟข้อมูล</button>
+                                
                             </div>
+                            <div class="col-md-2">
+                                <button type="button" id="btnchangebar"  class="btn btn-primary outline btn-block "><i class="fa fa-bar-chart"></i>&nbsp; แสดงกราฟแท่ง</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" id="btnchangechart"  class="btn btn-primary outline btn-block "><i class="fa fa-line-chart"></i>&nbsp; แสดงกราฟเส้น</button>
+                            </div>
+
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12 text-center">
+                        <div class="row" >
+                            <div class="col-md-12 text-center" id="divbarchart">
                                 <asp:Chart ID="Chart2" runat="server" BorderlineWidth="0" Height="400px"
                                     Width="1000px" Palette="None" BorderlineColor="253, 103, 0">
                                     <Series>
-                                        <asp:Series Name="ทรายหยาบ" ChartType="StackedBar" Color="Red" YValuesPerPoint="5"></asp:Series>
-                                        <asp:Series Name="ทรายละเอียด" ChartType="StackedBar" YValuesPerPoint="5"></asp:Series>
-                                        <asp:Series Name="ทรายถม" ChartType="StackedBar" YValuesPerPoint="5"></asp:Series>
+                                        <asp:Series Name="ทรายหยาบ" ChartType="StackedBar" Color="DodgerBlue" YValuesPerPoint="5"></asp:Series>
+                                        <asp:Series Name="ทรายละเอียด" ChartType="StackedBar" Color="Red" YValuesPerPoint="5"></asp:Series>
+                                        <asp:Series Name="ทรายถม" ChartType="StackedBar" Color="Gray" YValuesPerPoint="5"></asp:Series>
                                     </Series>
                                     <Legends>
                                         <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
@@ -147,6 +169,25 @@
                                     </ChartAreas>
                                 </asp:Chart>
                             </div>
+
+                            <div class="col-md-12 text-center hidden" id="divlinechart">
+                                <asp:Chart ID="Chart3" runat="server" BorderlineWidth="0" Height="400px"
+                                    Width="1000px" Palette="None" BorderlineColor="253, 103, 0">
+                                    <Series>
+                                        <asp:Series Name="ทรายหยาบ" ChartType="Line" Color="DodgerBlue" YValuesPerPoint="5"></asp:Series>
+                                        <asp:Series Name="ทรายละเอียด" ChartType="Line" Color="Red" YValuesPerPoint="5"></asp:Series>
+                                        <asp:Series Name="ทรายถม" ChartType="Line" Color="Gray" YValuesPerPoint="5"></asp:Series>
+                                    </Series>
+                                    <Legends>
+                                        <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
+                                            LegendStyle="Row" />
+                                    </Legends>
+                                    <ChartAreas>
+                                        <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                                    </ChartAreas>
+                                </asp:Chart>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -173,15 +214,15 @@
                     <div class="box-body text-center">
                         <asp:Chart ID="Chart1" runat="server" BorderlineWidth="0" Height="400px" Width="400px" Palette="None" BorderlineColor="253, 103, 0">
                             <Series>
-                                <asp:Series Name="ทรายหยาบ"  ChartType="Pie" BorderColor="White" BorderWidth="1"  YValuesPerPoint="5"></asp:Series>
-                                <asp:Series Name="ทรายละเอียด"  ChartType="Pie" YValuesPerPoint="5"></asp:Series>
-                                <asp:Series Name="ทรายถม"  ChartType="Pie" YValuesPerPoint="5"></asp:Series>
+                                <asp:Series Name="ทรายหยาบ"  ChartType="Pie" BorderColor="White"  Color="DodgerBlue" BorderWidth="1"  YValuesPerPoint="5"></asp:Series>
+                                <asp:Series Name="ทรายละเอียด"  ChartType="Pie" Color="Red" YValuesPerPoint="5"></asp:Series>
+                                <asp:Series Name="ทรายถม"  ChartType="Pie" Color="Gray" YValuesPerPoint="5"></asp:Series>
                             </Series>
-                            <%--<Legends>
-                                <asp:Legend BackColor="Transparent" Alignment="Far" Docking="Right" Font="Trebuchet MS, 8.25pt, style=Bold"
-                                    IsTextAutoFit="true" Name="Default" LegendStyle="Column">
+                            <Legends>
+                                <asp:Legend BackColor="Transparent" Alignment="Center" Docking="Bottom" Font="Trebuchet MS, 8.25pt, style=Bold"
+                                    IsTextAutoFit="false" Name="Default" LegendStyle="Row">
                                 </asp:Legend>
-                            </Legends>--%>
+                            </Legends>
                             <ChartAreas>
                                 <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
                             </ChartAreas>
@@ -213,10 +254,15 @@
                     <div class="box-body text-center">
                         <asp:Chart ID="Chart4" runat="server" BorderlineWidth="0" Height="400px" Width="400px" Palette="None" BorderlineColor="253, 103, 0">
                             <Series>
-                                <asp:Series Name="ทรายหยาบ"  ChartType="Pie" BorderColor="White" BorderWidth="1"  YValuesPerPoint="5"></asp:Series>
-                                <asp:Series Name="ทรายละเอียด"  ChartType="Pie" YValuesPerPoint="5"></asp:Series>
-                                <asp:Series Name="ทรายถม"  ChartType="Pie" YValuesPerPoint="5"></asp:Series>
+                                <asp:Series Name="ทรายหยาบ"  ChartType="Pie" BorderColor="White"  Color="DodgerBlue" BorderWidth="1"  YValuesPerPoint="5"></asp:Series>
+                                <asp:Series Name="ทรายละเอียด"  ChartType="Pie" Color="Red" YValuesPerPoint="5"></asp:Series>
+                                <asp:Series Name="ทรายถม"  ChartType="Pie" Color="Gray" YValuesPerPoint="5"></asp:Series>
                             </Series>
+                            <Legends>
+                                <asp:Legend BackColor="Transparent" Alignment="Center" Docking="Bottom" Font="Trebuchet MS, 8.25pt, style=Bold"
+                                    IsTextAutoFit="false" Name="Default" LegendStyle="Row">
+                                </asp:Legend>
+                            </Legends>
                             <ChartAreas>
                                 <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
                             </ChartAreas>

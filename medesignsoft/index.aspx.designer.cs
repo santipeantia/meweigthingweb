@@ -67,6 +67,15 @@ namespace medesignsoft {
         protected global::System.Web.UI.DataVisualization.Charting.Chart Chart2;
         
         /// <summary>
+        /// Chart3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart3;
+        
+        /// <summary>
         /// lbldateprodstart control.
         /// </summary>
         /// <remarks>

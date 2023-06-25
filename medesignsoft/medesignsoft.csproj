@@ -6640,6 +6640,7 @@
     <Content Include="meenterprise-management\ar-category-setup.aspx" />
     <Content Include="meenterprise-management\ar-group-setup.aspx" />
     <Content Include="meenterprise-management\ar-setup.aspx" />
+    <Content Include="meenterprise-management\ar-vendor-edit.aspx" />
     <Content Include="meenterprise-management\ar-vendor-setup.aspx" />
     <Content Include="meenterprise-management\cq-setup.aspx" />
     <Content Include="meenterprise-management\crm-setup.aspx" />
@@ -6747,6 +6748,7 @@
     <Content Include="mesales-order\so-quotation-review.aspx" />
     <Content Include="mesales-order\so-quotation-view.aspx" />
     <Content Include="mesales-order\so-report.aspx" />
+    <Content Include="mesales-order\so-truck-quotation-view.aspx" />
     <Content Include="metruck-weigth\report-render.aspx" />
     <Content Include="metruck-weigth\servicetruck.asmx" />
     <Content Include="metruck-weigth\truck-analysis.aspx" />
@@ -6950,6 +6952,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\cGetTwProductGroupList.cs" />
+    <Compile Include="meenterprise-management\ar-vendor-edit.aspx.cs">
+      <DependentUpon>ar-vendor-edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="meenterprise-management\ar-vendor-edit.aspx.designer.cs">
+      <DependentUpon>ar-vendor-edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mesales-order\so-truck-quotation-view.aspx.cs">
+      <DependentUpon>so-truck-quotation-view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mesales-order\so-truck-quotation-view.aspx.designer.cs">
+      <DependentUpon>so-truck-quotation-view.aspx</DependentUpon>
+    </Compile>
     <Compile Include="metruck-weigth\cGetTwProductList.cs" />
     <Compile Include="metruck-weigth\cGetTwCompanyList.cs" />
     <Compile Include="ClassConn\dbConnExpress.cs" />
