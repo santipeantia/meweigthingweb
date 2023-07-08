@@ -130,9 +130,23 @@ namespace medesignsoft
             Chart2.Series[1].IsValueShownAsLabel = true;
             Chart2.Series[2].IsValueShownAsLabel = true;
 
-            Chart2.Series[0].Points[0].Color = PieColors[0];
-            Chart2.Series[1].Points[1].Color = PieColors[1];
-            Chart2.Series[2].Points[2].Color = PieColors[2];
+            //Chart2.Series[0].Points[0].Color = PieColors[0];
+            //Chart2.Series[1].Points[1].Color = PieColors[1];
+            //Chart2.Series[2].Points[2].Color = PieColors[2];
+
+            foreach (Series charts in Chart2.Series)
+            {
+                foreach (DataPoint point in charts.Points)
+                {
+                    switch (point.AxisLabel)
+                    {
+                        case "ทรายหยาบ": point.Color = Color.DodgerBlue; break;
+                        case "ทรายละเอียด": point.Color = Color.Red; break;
+                        case "ทรายถม": point.Color = Color.Gray; break;
+                    }
+                    //point.Label = string.Format("{0:0} - {1}", point.YValues[0], point.AxisLabel);
+                }
+            }
 
             //Chart1.Series("Default").Points(0)("Exploded") = "True";
 
@@ -170,9 +184,23 @@ namespace medesignsoft
             Chart3.Series[1].IsValueShownAsLabel = true;
             Chart3.Series[2].IsValueShownAsLabel = true;
 
-            Chart3.Series[0].Points[0].Color = PieColors[0];
-            Chart3.Series[1].Points[1].Color = PieColors[1];
-            Chart3.Series[2].Points[2].Color = PieColors[2];
+            //Chart3.Series[0].Points[0].Color = PieColors[0];
+            //Chart3.Series[1].Points[1].Color = PieColors[1];
+            //Chart3.Series[2].Points[2].Color = PieColors[2];
+
+            foreach (Series charts in Chart3.Series)
+            {
+                foreach (DataPoint point in charts.Points)
+                {
+                    switch (point.AxisLabel)
+                    {
+                        case "ทรายหยาบ": point.Color = Color.DodgerBlue; break;
+                        case "ทรายละเอียด": point.Color = Color.Red; break;
+                        case "ทรายถม": point.Color = Color.Gray; break;
+                    }
+                    //point.Label = string.Format("{0:0} - {1}", point.YValues[0], point.AxisLabel);
+                }
+            }
 
             //Hide or show chart back GridLines
             Chart3.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
