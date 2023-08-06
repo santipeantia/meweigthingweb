@@ -11,14 +11,22 @@
             .hide_column {
                 display: none;
             }
+
             #tblsoquotationitem tbody tr:hover {
                 color: red;
                 background-color: rgba(252, 241, 154, 0.63);
             }
+
             #tblgoodcodeselectitem tbody tr:hover {
                 color: red;
                 background-color: rgba(252, 241, 154, 0.63);
             }
+                        
+            #tblreftrucktrip tbody tr:hover {
+                color: red;
+                background-color: rgba(252, 241, 154, 0.63);
+            }
+
             #overlay {
                 position: fixed;
                 top: 0;
@@ -28,12 +36,14 @@
                 display: none;
                 background: rgba(0,0,0,0.6);
             }
+
             .cv-spinner {
                 height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
+
             .spinner {
                 width: 40px;
                 height: 40px;
@@ -42,12 +52,15 @@
                 border-radius: 50%;
                 animation: sp-anime 0.8s infinite linear;
             }
+
             .myright {
                 text-align: right;
             }
+
             .mycenter {
                 text-align: center;
             }
+
             @keyframes sp-anime {
                 100% {
                     transform: rotate(360deg);
@@ -57,10 +70,12 @@
             .is-hide {
                 display: none;
             }
+
             .myclassblue {
                 text-align: right;
                 color: blue;
             }
+
             .fitwidth {
                 width: 1px;
                 white-space: nowrap;
@@ -69,7 +84,7 @@
 
         <script>
             $(document).ready(function () {
-                $('#loaderdiv1011').hide();
+                //$('#loaderdiv1011').hide();
 
                 $('input').on("keypress", function (e) {
                     /* ENTER PRESSED*/
@@ -90,6 +105,8 @@
 
                 var employeeid = '<%= Session["imEmployeeGid"] %>';
 
+                var empfullname = '<%= Session["FirstName"] %>' + ' ' + '<%= Session["LastName"] %>';
+
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var ddd = String(today.getDate() - 1).padStart(2, '0');
@@ -104,6 +121,9 @@
 
                 $('#datepickerstart').val(ssdate);
                 $('#datepickerend').val(eedate);
+
+                $('#datestarttruck').val(ssdate);
+                $('#datestoptruck').val(eedate);
 
                 var btncancel = $('#btncancel');
                 btncancel.click(function () {
@@ -124,7 +144,7 @@
                     //getRunningDocuNo('QT');                   
 
                     setTimeout(function () {
-                        $('#overlay').hide();
+                       
                         getBranch();
                         getProject();
                         getCustomerList();
@@ -133,6 +153,8 @@
                         getGoodCodeSelectList();
                         getSourceList();
                         getGoodUnit();
+
+                        $('#overlay').hide();
                     }, 3000);
 
 
@@ -307,7 +329,7 @@
                 var selectcustomer = $('#selectcustomer');
                 async function getCustomerList() {
                     var result = await $.ajax({
-                        url: '../meenterprise-management/general-services.asmx/getVendorList',
+                        url: '../meenterprise-management/general-services.asmx/getCustomerList',
                         method: 'post',
                         datatype: 'json',
                         beforeSend: function () {
@@ -830,6 +852,10 @@
                                         $('#btnupdateitem').removeClass('hidden');
                                         $('#btndeleteitem').addClass('hidden');
 
+
+                                        getQtRefItems($('#hidgid').val());
+
+
                                         $("#modaledititem").modal({ backdrop: false });
                                         $('#modaledititem').modal('show');
 
@@ -861,6 +887,8 @@
 
                                         $('#btnupdateitem').addClass('hidden');
                                         $('#btndeleteitem').removeClass('hidden');
+
+                                        getQtRefItems($('#hidgid').val());
 
                                         $("#modaledititem").modal({ backdrop: false });
                                         $('#modaledititem').modal('show');
@@ -1467,8 +1495,196 @@
 
                     $("#modalgoodcode").modal({ backdrop: false });
                     $('[id=modalgoodcode]').modal('show');
+                });
+                                
+                var btnadditemtruck = $('#btnadditemtruck');
+                btnadditemtruck.click(function () {
+
+                    var hidflagid = $('#hidflagid').val();
+                    if (hidflagid == '3002') {
+                        Swal.fire(
+                            '<span class="txtLabel">เอกสารผ่านการอนุมัติแล้วไม่สามารถแก้ไขได้..!</span>',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+                    var cusname = $('#selectcustomer option:selected').text();
+
+                    $('#txtsearch').val(cusname);
+
+                    var refid = $('#hidgid').val();
+
+                    //alert(refid);
+
+
+                    $("#modalrefitemtruck").modal({ backdrop: false });
+                    $('[id=modalrefitemtruck]').modal('show');
 
                 })
+
+                var btnloadticket = $('#btnloadticket');
+                btnloadticket.click(function () {
+
+                    var hidflagid = $('#hidflagid').val();
+                    if (hidflagid == '3002') {
+                        Swal.fire(
+                            '<span class="txtLabel">เอกสารผ่านการอนุมัติแล้วไม่สามารถแก้ไขได้..!</span>',
+                            '',
+                            'error'
+                        )
+                        return;
+                    }
+
+                    //alert('you click');   
+
+                    $.ajax({
+                        url: 'saleorder-services.asmx/GetTruckRefItems',
+                        method: 'post',
+                        data: {
+                            sdate: $('#datestarttruck').val(),
+                            edate: $('#datestoptruck').val(),
+                            search: $('#txtsearch').val()                          
+                        },
+                        datatype: 'json',
+                        beforSend: function () {
+
+                             $('#loader').show();
+                        },
+                        success: function (data) {
+                           var table;
+                            table = $('#tblreftrucktrip').DataTable();
+                            table.clear();
+
+                            if (data != '') {
+                                $.each(data, function (i, item) {
+                                    table.row.add([data[i].COMNAME, data[i].TICKET2, data[i].TRUCK, data[i].DAYOUT2, data[i].TMOUT, data[i].PRODUCT, data[i].PRONAME,
+                                    data[i].W1, data[i].W2, data[i].WNET, data[i].PRICE, data[i].AMOUNT, data[i].CHK]);
+                                });
+                            }
+                            table.draw();
+                            $('#loader').hide();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                });
+
+                var chkall = $('#chkall');
+                chkall.click(function () {
+                    //alert('check..');
+
+
+                    var chk = $('#chkall').is(':checked');
+                    //alert(chk);
+
+                    var table = $('#tblreftrucktrip').DataTable();
+
+                    if (chk == true) {
+                        $("input", table.rows({ search: 'applied' }).nodes()).each(function () {
+                            $(this).prop("checked", true);
+                        });
+                    }
+                    else {
+                        $("input", table.rows({ search: 'applied' }).nodes()).each(function () {
+                            $(this).prop("checked", false);
+                        });
+                    }
+                    
+                });
+
+                var btnadditemreftruck = $('#btnadditemreftruck');
+                btnadditemreftruck.click(function () {
+                    var table = $('#tblreftrucktrip').DataTable();
+
+                    var arr = [];
+                    var arrname = [];
+
+                    var chkvalues = table.$('input:checked').each(function () {
+                        arr.push($(this).attr('id'));
+                        arrname.push($(this).attr('name'));
+                    });
+
+                    arr = arr.toString();
+                    arrname = arrname.toString();
+
+                    var result = arr.split(",");
+
+                    var qtgid = param["gid"];
+                    var hidgid = $('#hidgid').val();
+                    var empgid = '<%= Session["imEmployeeGid"] %>';
+
+                    $('#txttruckrefno').val(result);
+                    //alert(result);                                        
+
+                    // todo somthing here......                   
+                                        
+                        Swal.fire({
+                            title: '<span class="txtLabel">ต้องการบันทึกข้อมูล ใช่หรือไม่..?</span>',
+                            //text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            cancelButtonColor: '#d33',
+                            confirmButtonColor: '#449d44',
+                            cancelButtonText: '<span class="txtLabel">ยกเลิกรายการ</span>',
+                            confirmButtonText: '<span class="txtLabel">เพิ่มข้อมูลอ้างอิง</span>'
+
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url: 'saleorder-services.asmx/GetUpdateTruckRefItems',
+                                    method: 'post',
+                                    data: {
+                                        acttrans: 'edit',
+                                        qtgid: qtgid,
+                                        gid: hidgid,
+                                        refno:  $('#txttruckrefno').val(),
+                                        usrupdate: empfullname
+                                    },
+                                    datatype: 'json',
+                                    beforSend: function () {
+                                        $('#overlay').show();
+                                    },
+                                    success: function (data) {
+                                        Swal.fire(
+                                            '<span class="txtLabel">บันทึกข้อมูลสำเร็จ..!</span>',
+                                            '',
+                                            'success'
+                                        );
+
+                                        //(async () => {
+                                        //    await getQuotationOrderById(gid);
+                                        //    await getQuotationDetails(gid);
+                                        //})();
+
+
+
+                                        //get sum total weight...
+                                        getQtrefItemsSumWeight(hidgid);
+
+                                        //show item details....
+                                        getQtRefItems(hidgid);
+
+
+
+                                        $("#modalrefitemtruck").modal({ backdrop: false });
+                                        $('[id=modalrefitemtruck]').modal('hide');
+
+                                        $('#overlay').hide();
+
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                    }
+                                });
+                            }
+                        })
+
+                              
+                });
+
 
                 var btnupdateitem = $('#btnupdateitem');
                 btnupdateitem.click(function () {
@@ -1873,6 +2089,7 @@
                         console.log(chk);
 
                         var amount = $('#txtamount').val().replace(',', '');
+                        var amount = $('#txtamount').val().replace(',', '');
                         var dispercent = $('#txtdispercenct').val().replace(',', '');
                         var dispamount = parseFloat(amount) * (parseFloat(dispercent) / 100);
                         var dispamount2 = dispamount.toFixed(2);
@@ -1884,11 +2101,11 @@
                         $('#txtafterdisamount').val(afterdisamount2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                         var vatpercent = $('#txtvatpercent').val();
-                        var vatamount = parseFloat(afterdisamount) * (parseFloat(vatpercent) / 100);
+                        var vatamount = parseFloat(afterdisamount) - (parseFloat(afterdisamount) * 100 / 107); // * (parseFloat(vatpercent) / 100);
                         var vatamount2 = vatamount.toFixed(2);
                         $('#txtvatamount').val(vatamount2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-                        var totalamount = parseFloat(afterdisamount) + parseFloat(vatamount);
+                        var totalamount = parseFloat(afterdisamount) - parseFloat(vatamount);  //parseFloat(afterdisamount) + parseFloat(vatamount);
                         var totalamount2 = totalamount.toFixed(2);
                         $('#txttotalamount').val(totalamount2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
@@ -1927,6 +2144,107 @@
 
                 }
             }
+
+            function getQtrefItemsSumWeight(gid) {
+                $.ajax({
+                    url: 'saleorder-services.asmx/GetQtRefItemsSumWeight',
+                    method: 'post',
+                    data: {
+                        gid: gid
+                    },
+                    datatype: 'json',
+                    beforSend: function () {
+                        $('#loader').show();
+                    },
+                    success: function (data) {
+                        var obj = jQuery.parseJSON(JSON.stringify(data));
+                        if (obj != '') {
+                            $.each(obj, function (i, data) {
+                                $('#txtquantity').val(data["WNET"]);
+                                $('#txtQtyRema').val(data["WNET"]);
+                            })
+                        }
+
+                        myCalc();
+                        myCalcTotal();
+
+                        $('#loader').hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            }
+
+            function getQtRefItems(gid) {
+                $.ajax({
+                        url: 'saleorder-services.asmx/GetQtRefItems',
+                        method: 'post',
+                        data: {
+                            gid: gid                        
+                        },
+                        datatype: 'json',
+                        beforSend: function () {
+
+                             $('#loader').show();
+                        },
+                        success: function (data) {
+                           var table;
+                            table = $('#tbltrucktrip').DataTable();
+                            table.clear();
+
+                            if (data != '') {
+                                $.each(data, function (i, item) {
+                                    table.row.add([data[i].ID, data[i].COMNAME, data[i].TICKET2, data[i].TRUCK, data[i].DAYOUT, data[i].TMOUT, data[i].PRODUCT, data[i].PRODUCTNAME,
+                                    data[i].W1, data[i].W2, data[i].WNET, data[i].PRICE, data[i].AMOUNT, data[i].CHK]);
+                                });
+                            }
+                            table.draw();
+                            $('#loader').hide();
+
+                            $('#tbltrucktrip tbody').on('click', 'td', function (e) {
+                                e.preventDefault();
+
+                                rIndex = this.parentElement.rowIndex;
+                                cIndex = this.cellIndex;
+
+                                var id = $("#tbltrucktrip").find('tr:eq(' + rIndex + ')').find('td:eq(0)');
+
+                                if (rIndex != 0 & cIndex == 13) {
+
+                                    //console.log(gid.text());
+
+                                    //$('#hidgid').val(gid.text());
+
+                                    $.ajax({
+                                        url: 'saleorder-services.asmx/GetQtRefItemsDelete',
+                                        method: 'post',
+                                        data: {
+                                            gid: id.text()
+                                        },
+                                        datatype: 'json',
+                                        beforSend: function () {
+                                            $('#loader').show();
+                                        },
+                                        success: function (data) {
+                                            getQtrefItemsSumWeight(gid);
+                                            getQtRefItems(gid);
+
+                                            myCalc();
+                                            myCalcTotal();
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                        }
+                                    });
+                                }
+                            });
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+            };
         </script>
 
         <h1>ใบเสนอราคาสินค้า           
@@ -1967,10 +2285,7 @@
                         </div>
 
                         <div class="box-body">
-                            <div class="cv-spinner" id="loaderdiv1011">
-                                <span class="spinner"></span>
-                            </div>
-
+                           
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
@@ -2179,31 +2494,31 @@
 
                                         <th style="width: 50px; text-align: center;">Gid</th>
                                         <th style="width: 50px; text-align: center;">imBranchGid</th>
-                                        <th style="width: 50px; text-align: center;">NO</th>
+                                        <th style="width: 50px; text-align: center;">ลำดับ</th>
                                         <th style="width: 50px; text-align: center;">QtGid</th>
                                         <th style="width: 50px; text-align: center;">adQTNO</th>
                                         <th style="width: 50px; text-align: center;">GoodGroupID</th>
-                                        <th style="width: 100px; text-align: center;">GROUP</th>
+                                        <th style="width: 100px; text-align: center;">กลุ่ม</th>
                                         <th style="width: 50px; text-align: center;">GoodCodeID</th>
-                                        <th style="width: 100px; text-align: center;">GOODCODE</th>
-                                        <th class="" style="text-align: center;">GOODNAME</th>
+                                        <th style="width: 100px; text-align: center;">รหัสสินค้า</th>
+                                        <th class="" style="width: 100%; text-align: center;">ชื่อสินค้า</th>
                                         <th style="width: 50px; text-align: center;">GoodUnitID</th>
-                                        <th style="width: 50px; text-align: center;">UNIT</th>
-                                        <th style="width: 100px; text-align: right;">QTY.</th>
+                                        <th style="width: 50px; text-align: center;">หน่วย</th>
+                                        <th style="width: 100px; text-align: right;">จำนวน</th>
 
                                         <th style="width: 50px; text-align: center;">QTYUNIT</th>
-                                        <th style="width: 50px; text-align: center;">UNIT</th>
-                                        <th style="width: 100px; text-align: right;">QTY REMA.</th>
+                                        <th style="width: 50px; text-align: center;">หน่วย</th>
+                                        <th style="width: 100px; text-align: right;">จำนวนซื้อ</th>
                                         <th style="width: 50px; text-align: center;">Pattern</th>
-                                        <th style="width: 50px; text-align: right;">QTY EXTRA</th>
+                                        <th style="width: 50px; text-align: right;">จำนวนเพิ่ม</th>
 
-                                        <th style="width: 100px; text-align: right;">UNIT PRICE</th>
-                                        <th style="width: 100px; text-align: right;">AMOUNT</th>
+                                        <th style="width: 100px; text-align: right;">ราคา/หน่วย</th>
+                                        <th style="width: 100px; text-align: right;">จำนวนรวม</th>
                                         <th style="width: 50px; text-align: center;">VATAmount</th>
                                         <th style="width: 50px; text-align: center;">AmountExcludeVAT</th>
-                                        <th style="width: 50px; text-align: center;">DiscPercent</th>
-                                        <th style="width: 100px; text-align: right;">DISCOUNT</th>
-                                        <th style="width: 100px; text-align: right;">TOTAL AMOUNT</th>
+                                        <th style="width: 50px; text-align: center;">ส่วนลด(%)</th>
+                                        <th style="width: 100px; text-align: right;">ส่วนลด</th>
+                                        <th style="width: 100px; text-align: right;">ยอดเงินรวม</th>
                                         <th style="width: 50px; text-align: center;">NetAmount</th>
                                         <th style="width: 50px; text-align: center;">UnitCostID</th>
                                         <th style="width: 50px; text-align: center;">UnitCost</th>
@@ -2211,9 +2526,8 @@
                                         <th style="width: 50px; text-align: center;">adUserID</th>
                                         <th style="width: 50px; text-align: center;">Lastdate</th>
 
-                                        <th style="width: 40px; text-align: right;">#</th>
-                                        <th style="width: 40px; text-align: right;">#</th>
-
+                                        <th style="width: 30px; text-align: center;">#</th>
+                                        <th style="width: 30px; text-align: center;">#</th>
 
                                     </tr>
                                 </thead>
@@ -2408,38 +2722,29 @@
 
                             </div>
 
-                        </div>
-                    </div>
-                </div>
 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr />
+                                    <div class="col-md-6">
+                                        <button type="button" id="btncancel" class="btn btn-primary outline text-bold " style="padding: 5px 10px" name="name" > <i class="fa fa-home" aria-hidden="true"></i> กลับหน้าหลัก</button>
+                                        <input type="button" id="btnprint" runat="server" onserverclick="btnprint_click" class="btn btn-primary outline text-bold " style="padding: 5px 10px" name="name" value="พิมพ์เอกสาร" />
+                                    </div>
 
-                <div class="row">
-                    <div class="col-md-12">
+                                    <div class="col-md-6 ">
+                                        <span class="pull-right">
 
-                        <div class="box box-solid">
+                                            <input type="button" id="btnsendmail" class="btn btn-primary outline text-bold  " style="padding: 5px 10px" name="name" value="ส่งขออนุมัติรายการ" />
+                                            <input type="button" id="btnsavedoc" class="btn btn-primary outline text-bold  " style="padding: 5px 10px" name="name" value="บันทึกรายการ" />
+                                            <input type="button" id="btnupdatedoc" class="btn btn-primary outline text-bold  " style="padding: 5px 10px" name="name" value="อัฟเดทรายการ" />
 
-                            <div class="box-body">
-                                <div class="col-md-6">
-                                    <input type="button" id="btncancel" class="btn btn-primary outline text-bold " style="padding: 5px 10px" name="name" value="ยกเลิกรายการ" />
+                                            <input type="button" id="btndeldoc" class="btn btn-danger outline text-bold  " style="padding: 5px 10px" name="name" value="ลบข้อมูลรายการ" />
 
-                                    <input type="button" id="btnprint" runat="server" onserverclick="btnprint_click" class="btn btn-primary outline text-bold " style="padding: 5px 10px" name="name" value="พิมพ์เอกสาร" />
-
+                                        </span>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-6 ">
-                                    <span class="pull-right">
-
-                                        <input type="button" id="btnsendmail" class="btn btn-primary outline text-bold  " style="padding: 5px 10px" name="name" value="ส่งขออนุมัติรายการ" />
-                                        <input type="button" id="btnsavedoc" class="btn btn-primary outline text-bold  " style="padding: 5px 10px" name="name" value="บันทึกรายการ" />
-                                        <input type="button" id="btnupdatedoc" class="btn btn-primary outline text-bold  " style="padding: 5px 10px" name="name" value="อัฟเดทรายการ" />
-
-                                        <input type="button" id="btndeldoc" class="btn btn-danger outline text-bold  " style="padding: 5px 10px" name="name" value="ลบข้อมูลรายการ" />
-
-                                    </span>
-                                </div>
-
-
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -2515,7 +2820,7 @@
 
         <%-- /.modal  modaledititem--%>
         <div class="modal  fade" id="modaledititem">
-            <div class="modal-dialog modal-dialog-center">
+            <div class="modal-dialog " style="width:1200px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -2523,11 +2828,12 @@
                     </div>
 
                     <div class="modal-body txtLabel">
+                        
                         <div class="row" style="margin-top: 5px;">
                             <div class="col-md-3">
                                 <span class=" pull-right">ลำดับ</span>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-3">
                                 <input type="hidden" id="hidgid" name="hidgid" class="form-control input-sm txtLabel" />
                                 <input type="text" id="txtno" class="form-control input-sm txtLabel" />
                             </div>
@@ -2535,23 +2841,45 @@
 
                         <div class="row" style="margin-top: 5px;">
                             <div class="col-md-3">
-                                <span class=" pull-right">กลุ่มสินค้า</span>
+                                <span class=" pull-right">กลุ่มสินค้า / รหัสสินค้า</span>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-2">
                                 <input type="text" id="txtgroup" class="form-control input-sm txtLabel" disabled />
                             </div>
+                            <div class="col-md-2">
+                                <input type="text" id="txtgoodcode" class="form-control input-sm txtLabel" disabled />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="txtgoodname" class="form-control input-sm txtLabel" disabled />
+                            </div>
+
+
                         </div>
 
-                        <div class="row" style="margin-top: 5px;">
+                        <div class="row hidden" style="margin-top: 5px;">
                             <div class="col-md-3">
                                 <span class=" pull-right">รหัสสินค้า</span>
                             </div>
-                            <div class="col-md-4">
-                                <input type="text" id="txtgoodcode" class="form-control input-sm txtLabel" disabled />
+                            <div class="col-md-3">
+                                
                             </div>
 
-                            <div class="col-md-5">
-                                <input type="text" id="txtgoodname" class="form-control input-sm txtLabel" disabled />
+                            <div class="col-md-3">
+                                
+                            </div>
+                        </div>
+
+                        <div class="row hidden" style="margin-top: 5px;">
+                            <div class="col-md-3">
+                                <span class=" pull-right">จำนวน</span>
+                            </div>
+
+                            <div class="col-md-3">
+                                <input type="text" id="txtunit" class="form-control input-sm txtLabel" readonly />
+                            </div>
+
+                            <div class="col-md-3">
+                                <input type="text" id="txtquantity" class="form-control input-sm txtLabel text-right" onkeyup="myCalc();" />
                             </div>
                         </div>
 
@@ -2559,21 +2887,7 @@
                             <div class="col-md-3">
                                 <span class=" pull-right">จำนวน</span>
                             </div>
-
-                            <div class="col-md-4">
-                                <input type="text" id="txtunit" class="form-control input-sm txtLabel" readonly />
-                            </div>
-
-                            <div class="col-md-5">
-                                <input type="text" id="txtquantity" class="form-control input-sm txtLabel text-right" onkeyup="myCalc();" />
-                            </div>
-                        </div>
-
-                        <div class="row" style="margin-top: 5px;">
                             <div class="col-md-3">
-                                <span class=" pull-right">ความต้องการ</span>
-                            </div>
-                            <div class="col-md-4">
                                 <span class="txtLabel ">
                                     <select id="selectgoodunit" class="form-control input-sm " style="width: 100%">
                                         <option value="-1">ระบุหน่วยสินค้า</option>
@@ -2581,34 +2895,34 @@
                                 </span>
                             </div>
 
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <input type="text" id="txtQtyRema" name="txtQtyRema" class="form-control input-sm txtLabel text-right" onkeyup="myCalc();" />
                             </div>
                         </div>
 
-                        <div class="row" style="margin-top: 5px;">
+                        <div class="row hidden" style="margin-top: 5px;">
                             <div class="col-md-3">
                                 <span class=" pull-right">รูปแบบ/แพทเทิร์น</span>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <span class="txtLabel ">
                                     <select id="selectpattern" class="form-control input-sm " style="width: 100%">
                                         <option value="-1">ไม่ระบุรูปแบบ</option>
-                                        <option value="R">Random</option>
+                                        <%--<option value="R">Random</option>
                                         <option value="B">Brick</option>
                                         <option value="H">Herringbone</option>
-                                        <option value="C">Chevron</option>
+                                        <option value="C">Chevron</option>--%>
                                     </select>
                                 </span>
                             </div>
                         </div>
 
-                        <div class="row" style="margin-top: 5px;">
+                        <div class="row hidden" style="margin-top: 5px;">
                             <div class="col-md-3">
                                 <span class=" pull-right">จำนวนเงินเพิ่ม</span>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <input type="text" id="txtQtyExtra" class="form-control input-sm txtLabel text-right" disabled />
                             </div>
                         </div>
@@ -2618,7 +2932,7 @@
                                 <span class=" pull-right">ราคาต่อหน่วย</span>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <input type="text" id="txtunitprice" class="form-control input-sm txtLabel text-right" onkeyup="myCalc();" />
                             </div>
                         </div>
@@ -2628,7 +2942,7 @@
                                 <span class=" pull-right">จำนวนเงินรวม</span>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <input type="text" id="txtitemamount" class="form-control input-sm txtLabel text-right" disabled />
                             </div>
                         </div>
@@ -2638,7 +2952,7 @@
                                 <span class=" pull-right">เปอร์เซ็นต์ / ส่วนลด</span>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <input type="checkbox" id="chkitemdiscount">
@@ -2647,7 +2961,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <input type="text" id="txtitemdiscount" class="form-control input-sm txtLabel text-right text-right" onkeyup="myCalc();" />
                             </div>
                         </div>
@@ -2657,20 +2971,54 @@
                                 <span class=" pull-right">จำนวนเงินรวมสุทธิ</span>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <input type="text" id="txtitemtotalamount" class="form-control input-sm txtLabel text-right" disabled />
                             </div>
                         </div>
 
-                        <div class="row" style="margin-top: 5px;">
+                        <div class="row hidden" style="margin-top: 5px;">
                             <div class="col-md-3">
                                 <span class=" pull-right">หมายเหตุ</span>
                             </div>
 
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <input type="text" id="txtitemremark" class="form-control input-sm txtLabel" />
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="button" class="btn btn-primary outline text-bold " id="btnadditemtruck" style="padding: 2px 10px" name="name" value=" + เลือกรายการ" />
+                            </div>
+                            <div class="col-md-12">
+                                <table id="tbltrucktrip" class="table table-striped table-bordered table-hover"  style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>ลำดับ</th>
+                                            <th>ชื่อบริษัท</th>
+                                            <th>เลขที่</th>
+                                            <th>ทะเบียนรถ</th>
+                                            <th>วันที่</th>
+                                            <th>เวลา</th>
+                                            <th>รหัสสินค้า</th>
+                                            <th>สินค้า</th>
+                                            <th>นน.เข้า</th>
+                                            <th>นน.ออก</th>
+                                            <th>นน.สุทธิ</th>
+                                            <th>ราคา</th>
+                                            <th>จำนวนเงิน</th>
+                                            <th class="text-center">                                               
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>                                             
+                                               </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+
                     </div>
 
                     <div class="modal-footer">
@@ -2686,5 +3034,95 @@
                 </div>
             </div>
         </div>
+
+        
+        <div class="modal  fade" id="modalrefitemtruck">
+            <div class="modal-dialog " style="width:1200px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">อ้างอิงรายการชั่งน้ำหนัก</h4>
+                    </div>
+
+                    <div class="modal-body txtLabel">   
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                   <%-- <label class="txtLabel">วันที่เริ่มต้น:</label>--%>
+                                    <input type="text" class="form-control hidden" autocomplete="off" id="txttruckrefno">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control pull-right" autocomplete="off" id="datestarttruck">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                   <%-- <label class="txtLabel">วันที่สิ้นสุด:</label>--%>
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control pull-right" autocomplete="off" id="datestoptruck">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="col-md-3 hidden">
+                                 <input type="text" class="form-control pull-right" autocomplete="off" id="txtproduct">
+                            </div>
+
+                            <div class="col-md-6">
+                                 <input type="text" class="form-control pull-right" autocomplete="off" id="txtsearch" placeholder="โปรดระบุชื่อบริษัท / ชื่อลูกค้า">
+                            </div>
+
+                            <div class="col-md-2">
+                                <span id="btnloadticket" class="btn btn-info btn-block "><i class="fa fa-refresh"></i> ตรวจสอบข้อมูล</span>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <table id="tblreftrucktrip" class="table table-striped table-bordered table-hover"  style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>ชื่อบริษัท</th>
+                                            <th>เลขที่</th>
+                                            <th>ทะเบียนรถ</th>
+                                            <th>วันที่</th>
+                                            <th>เวลา</th>
+                                            <th>รหัสสินค้า</th>
+                                            <th>สินค้า</th>
+                                            <th>นน.เข้า</th>
+                                            <th>นน.ออก</th>
+                                            <th>นน.สุทธิ</th>
+                                            <th>ราคา</th>
+                                            <th>จำนวนเงิน</th>
+                                            <th class="text-center">                                               
+                                                <input type="checkbox" id="chkall" name="chkall" />                                             
+                                               </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                       </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-danger outline text-bold txtLabel pull-left " style="padding: 5px 10px" data-dismiss="modal">ยกเลิกรายการ</button>
+                                <button type="button" id="btnadditemreftruck" class="btn btn-primary outline text-bold  txtLabel " style="padding: 5px 10px">ยืนยันเพิ่มข้อมูลรายการ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 </asp:Content>

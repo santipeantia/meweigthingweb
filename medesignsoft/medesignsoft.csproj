@@ -6956,6 +6956,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="mesales-order\cGetQtRefItems.cs" />
+    <Compile Include="mesales-order\cGetTruckRefItems.cs" />
     <Compile Include="Class\cGetTwProductGroupList.cs" />
     <Compile Include="meenterprise-management\ar-vendor-edit.aspx.cs">
       <DependentUpon>ar-vendor-edit.aspx</DependentUpon>

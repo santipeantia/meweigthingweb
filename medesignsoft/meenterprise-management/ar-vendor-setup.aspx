@@ -167,11 +167,11 @@
 
                                 //console.log(gid.text());
                                 if (rIndex != 0 & cIndex == 7) {
-                                    window.location.href = "ar-vendor-edit.aspx?opt=optic&mod=edit&gid=" + gid.text();
+                                    window.location.href = "ar-vendor-edit.aspx?opt=optar&mod=edit&gid=" + gid.text();
                                 }
 
                                 if (rIndex != 0 & cIndex == 8) {
-                                    window.location.href = "ar-vendor-edit.aspx?opt=optic&mod=del&gid=" + gid.text();
+                                    window.location.href = "ar-vendor-edit.aspx?opt=optar&mod=del&gid=" + gid.text();
                                 }
                             });
 

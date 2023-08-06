@@ -354,7 +354,7 @@ namespace medesignsoft.mesales_order
         [WebMethod]
         public void getGoodCodeSelectList() {
             List<cGoodCodeSelectList> datas = new List<cGoodCodeSelectList>();
-            SqlCommand comm = new SqlCommand("spGetGoodCodeSelectList", conn.OpenConn());
+            SqlCommand comm = new SqlCommand("spGetGoodCodeSelectTruckList", conn.OpenConn());
             comm.CommandType = CommandType.StoredProcedure;
           
             SqlDataReader rdr = comm.ExecuteReader();
@@ -559,6 +559,126 @@ namespace medesignsoft.mesales_order
             comm.CommandType = CommandType.StoredProcedure;
             comm.Parameters.AddWithValue("@qtgid", qtgid);
             comm.Parameters.AddWithValue("@docuno", docuno);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetTruckRefItems(string sdate, string edate, string search)
+        {
+            List<cGetTruckRefItems> datas = new List<cGetTruckRefItems>();
+            SqlCommand comm = new SqlCommand("spGetTruckRefItems", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@sdate", sdate);
+            comm.Parameters.AddWithValue("@edate", edate);
+            comm.Parameters.AddWithValue("@search", search);
+            comm.CommandTimeout = 3600;
+
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetTruckRefItems data = new cGetTruckRefItems();                
+                data.COMNAME = rdr["COMNAME"].ToString();
+                data.TICKET2 = rdr["TICKET2"].ToString();
+                data.TRUCK = rdr["TRUCK"].ToString();
+                data.DAYOUT2 = rdr["DAYOUT2"].ToString();
+                data.TMOUT = rdr["TMOUT"].ToString();
+                data.PRODUCT = rdr["PRODUCT"].ToString();
+                data.PRONAME = rdr["PRONAME"].ToString();
+                data.W1 = rdr["W1"].ToString();
+                data.W2 = rdr["W2"].ToString();
+                data.WNET = rdr["WNET"].ToString();
+                data.PRICE = rdr["PRICE"].ToString();
+                data.AMOUNT = rdr["AMOUNT"].ToString();
+                data.CHK = rdr["CHK"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetQtRefItems(string gid) {
+            List<cGetQtRefItems> datas = new List<cGetQtRefItems>();
+            SqlCommand comm = new SqlCommand("spGetQtRefItems", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@gid", gid);
+            comm.CommandTimeout = 3600;
+
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetQtRefItems data = new cGetQtRefItems();
+                data.ID = rdr["ID"].ToString();
+                data.COMNAME = rdr["COMNAME"].ToString();
+                data.TICKET2 = rdr["TICKET2"].ToString();
+                data.TRUCK = rdr["TRUCK"].ToString();
+                data.DAYOUT = rdr["DAYOUT"].ToString();
+                data.TMOUT = rdr["TMOUT"].ToString();
+                data.PRODUCT = rdr["PRODUCT"].ToString();
+                data.PRODUCTNAME = rdr["PRODUCTNAME"].ToString();
+                data.W1 = rdr["W1"].ToString();
+                data.W2 = rdr["W2"].ToString();
+                data.WNET = rdr["WNET"].ToString();
+                data.PRICE = rdr["PRICE"].ToString();
+                data.AMOUNT = rdr["AMOUNT"].ToString();
+                data.CHK = rdr["CHK"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetQtRefItemsSumWeight(string gid) {
+            List<cGetQtRefItems> datas = new List<cGetQtRefItems>();
+            SqlCommand comm = new SqlCommand("spGetQtRefItemsSumWeight", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@gid", gid);
+            comm.CommandTimeout = 3600;
+
+
+            SqlDataReader rdr = comm.ExecuteReader();
+            while (rdr.Read())
+            {
+                cGetQtRefItems data = new cGetQtRefItems();
+                data.WNET = rdr["WNET"].ToString();
+                datas.Add(data);
+            }
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            js.MaxJsonLength = Int32.MaxValue;
+            Context.Response.Write(js.Serialize(datas));
+            Context.Response.ContentType = "application/json";
+            conn.CloseConn();
+        }
+
+        [WebMethod]
+        public void GetQtRefItemsDelete(string gid) {
+            SqlCommand comm = new SqlCommand("spGetQtRefItemsDelete", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@gid", gid);
+            comm.ExecuteNonQuery();
+            conn.CloseConn();
+        }
+
+
+        [WebMethod]
+        public void GetUpdateTruckRefItems(string acttrans, string qtgid, string gid, string refno, string usrupdate) {
+            SqlCommand comm = new SqlCommand("spGetUpdateTruckRefItems", conn.OpenConn());
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.Parameters.AddWithValue("@acttrans", acttrans);
+            comm.Parameters.AddWithValue("@qtgid", qtgid);
+            comm.Parameters.AddWithValue("@gid", gid);
+            comm.Parameters.AddWithValue("@refno", refno);
+            comm.Parameters.AddWithValue("@usrupdate", usrupdate);
             comm.ExecuteNonQuery();
             conn.CloseConn();
         }
