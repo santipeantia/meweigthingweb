@@ -16,14 +16,14 @@ namespace medesignsoft.Reports.Quotation {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptQuotation : ReportClass {
+    public class rptQuotation_bk : ReportClass {
         
-        public rptQuotation() {
+        public rptQuotation_bk() {
         }
         
         public override string ResourceName {
             get {
-                return "rptQuotation.rpt";
+                return "rptQuotation_bk.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace medesignsoft.Reports.Quotation {
         
         public override string FullResourceName {
             get {
-                return "medesignsoft.Reports.Quotation.rptQuotation.rpt";
+                return "medesignsoft.Reports.Quotation.rptQuotation_bk.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace medesignsoft.Reports.Quotation {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace medesignsoft.Reports.Quotation {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace medesignsoft.Reports.Quotation {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -106,7 +106,7 @@ namespace medesignsoft.Reports.Quotation {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_qtgid {
+        public CrystalDecisions.Shared.IParameterField Parameter_xbahttext {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -114,7 +114,7 @@ namespace medesignsoft.Reports.Quotation {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_xbahttext {
+        public CrystalDecisions.Shared.IParameterField Parameter_qtgid {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -122,9 +122,9 @@ namespace medesignsoft.Reports.Quotation {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptQuotation : Component, ICachedReport {
+    public class CachedrptQuotation_bk : Component, ICachedReport {
         
-        public CachedrptQuotation() {
+        public CachedrptQuotation_bk() {
         }
         
         [Browsable(false)]
@@ -161,7 +161,7 @@ namespace medesignsoft.Reports.Quotation {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptQuotation rpt = new rptQuotation();
+            rptQuotation_bk rpt = new rptQuotation_bk();
             rpt.Site = this.Site;
             return rpt;
         }

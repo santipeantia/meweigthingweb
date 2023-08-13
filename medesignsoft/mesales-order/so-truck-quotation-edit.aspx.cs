@@ -22,12 +22,13 @@ namespace medesignsoft.mesales_order
         DataTable dt = new DataTable();
         bahttext bahttext = new bahttext();
 
-        ReportDocument rpt = new ReportDocument();
+        ReportDocument rpt = new ReportDocument();           
 
+        public string strServer = "SERVERAYL";
+        public string strSource = "DB_AYUTTAYALAND";
         public string strUser = "sa";
-        public string strPassword = "AmpelCloud@2020";
-        public string strServer = "147.50.150.243";
-        public string strSource = "ThantharaCo";
+        public string strPassword = "CA42se@ayl";
+               
         string ssql;
 
         protected void Page_Load(object sender, EventArgs e)

@@ -7791,10 +7791,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Class\public_variable.cs" />
-    <Compile Include="Reports\Quotation\rptQuotation1.cs">
+    <Compile Include="Reports\Quotation\rptQuotation_bk.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>rptQuotation.rpt</DependentUpon>
+      <DependentUpon>rptQuotation_bk.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\truck\truckdailyreport_pdf.cs">
@@ -8488,9 +8488,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />
-    <EmbeddedResource Include="Reports\Quotation\rptQuotation.rpt">
+    <EmbeddedResource Include="Reports\Quotation\rptQuotation_bk.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptQuotation1.cs</LastGenOutput>
+      <LastGenOutput>rptQuotation_bk.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\truck\truckdailyreport_pdf.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
