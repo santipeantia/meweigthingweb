@@ -1723,7 +1723,7 @@
                                     seqno: $('#txtno').val(),
                                     QtyUnit: $('#selectgoodunit').val(),
                                     QtyRema: $('#txtQtyRema').val(),
-                                    Quantity: $('#txtquantity').val(),
+                                    Quantity: $('#txtQtyRema').val(), //$('#txtquantity').val(),
                                     PricePerUnit: $('#txtunitprice').val(),
                                     Amount: $('#txtitemamount').val(),
                                     DiscPercent: $('#txtitemprecentdiscount').val(),
@@ -2477,7 +2477,7 @@
                                 <span class="spinner"></span>
                             </div>--%>
                             <input type="button" class="btn btn-primary outline text-bold " id="btnadditemnew" style="padding: 2px 10px" name="name" value=" + เพิ่มรายการ" />
-                            <table id="tblsoquotationitem" class="table table-striped table-bordered table-hover table-condensed" style="width: 100%">
+                            <table id="tblsoquotationitem" class="table table-bordered table-hover table-condensed" >
                                 <thead>
                                     <tr>
                                         <%--<th style="width: 50px; text-align: center;">ลำดับ</th>
@@ -2532,75 +2532,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%-- <tr>
-                                        <td style="width: 50px; text-align: center;">1</td>
-                                        <td style="text-align: center;">วัสดุติดตั้ง</td>
-                                        <td style="text-align: center;">100-MO-1523-8</td>
-                                        <td style="text-align: center;">Multilayer OakMO-1523-8</td>
-                                        <td style="width: 80px; text-align: right;">2</td>
-                                        <td style="width: 80px; text-align: right;">ตรม.</td>
-                                        <td style="width: 80px; text-align: right;">1,500.00</td>
-                                        <td style="width: 80px; text-align: right;">0.00</td>
-                                        <td style="width: 100px; text-align: right;">1,500.00</td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-success outline text-bold " style="padding: 2px 10px" name="name" value=" + " /></td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-danger outline text-bold " style="padding: 2px 10px" name="name" value=" - " /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="width: 50px; text-align: center;">2</td>
-                                        <td style="text-align: center;">วัสดุติดตั้ง</td>
-                                        <td style="text-align: center;">100-MO-1523-8</td>
-                                        <td style="text-align: center;">Multilayer OakMO-1523-8</td>
-                                        <td style="width: 80px; text-align: right;">2</td>
-                                        <td style="width: 80px; text-align: right;">ตรม.</td>
-                                        <td style="width: 80px; text-align: right;">1,500.00</td>
-                                        <td style="width: 80px; text-align: right;">0.00</td>
-                                        <td style="width: 100px; text-align: right;">1,500.00</td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-success outline text-bold " style="padding: 2px 10px" name="name" value=" + " /></td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-danger outline text-bold " style="padding: 2px 10px" name="name" value=" - " /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="width: 50px; text-align: center;">3</td>
-                                        <td style="text-align: center;">วัสดุติดตั้ง</td>
-                                        <td style="text-align: center;">100-MO-1523-8</td>
-                                        <td style="text-align: center;">Multilayer OakMO-1523-8</td>
-                                        <td style="width: 80px; text-align: right;">2</td>
-                                        <td style="width: 80px; text-align: right;">ตรม.</td>
-                                        <td style="width: 80px; text-align: right;">1,500.00</td>
-                                        <td style="width: 80px; text-align: right;">0.00</td>
-                                        <td style="width: 100px; text-align: right;">1,500.00</td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-success outline text-bold " style="padding: 2px 10px" name="name" value=" + " /></td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-danger outline text-bold " style="padding: 2px 10px" name="name" value=" - " /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="width: 50px; text-align: center;">4</td>
-                                        <td style="text-align: center;">บริการ</td>
-                                        <td style="text-align: center;">F-SK-FJP2</td>
-                                        <td style="text-align: center;">ค่าทำสีบัว FJ2",3" สีทึบ/ใส                                           </td>
-                                        <td style="width: 80px; text-align: right;">1</td>
-                                        <td style="width: 80px; text-align: right;">ชุด</td>
-                                        <td style="width: 80px; text-align: right;">1,500.00</td>
-                                        <td style="width: 80px; text-align: right;">0.00</td>
-                                        <td style="width: 100px; text-align: right;">1,500.00</td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-success outline text-bold " style="padding: 2px 10px" name="name" value=" + " /></td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-danger outline text-bold " style="padding: 2px 10px" name="name" value=" - " /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td style="width: 50px; text-align: center;">5</td>
-                                        <td style="text-align: center;">บริการ              </td>
-                                        <td style="text-align: center;">F-UN-FL-SM</td>
-                                        <td style="text-align: center;">ค่าแรงรื้อ+ติดตั้งไม้พื้นแบบเป็นกลุ่ม</td>
-                                        <td style="width: 80px; text-align: right;">1</td>
-                                        <td style="width: 80px; text-align: right;">ชุด</td>
-                                        <td style="width: 80px; text-align: right;">1,500.00</td>
-                                        <td style="width: 80px; text-align: right;">0.00</td>
-                                        <td style="width: 100px; text-align: right;">1,500.00</td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-success outline text-bold " style="padding: 2px 10px" name="name" value=" + " /></td>
-                                        <td style="width: 30px; text-align: center;"><input type="button" class="btn btn-danger outline text-bold " style="padding: 2px 10px" name="name" value=" - " /></td>
-                                    </tr>--%>
+                                   
                                 </tbody>
                             </table>
 
@@ -2762,7 +2694,7 @@
 
                     <div class="modal-body">
 
-                        <table id="tblgoodcodeselectitem" class="table table-striped table-bordered table-hover table-condensed" style="width: 100%">
+                        <table id="tblgoodcodeselectitem" class="table table-striped table-bordered table-hover " style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>GoodCodeID</th>
@@ -2986,7 +2918,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-md-12">
                                 <input type="button" class="btn btn-primary outline text-bold " id="btnadditemtruck" style="padding: 2px 10px" name="name" value=" + เลือกรายการ" />
                             </div>

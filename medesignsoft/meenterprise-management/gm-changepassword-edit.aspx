@@ -578,7 +578,7 @@
                                 </div>
 
                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label txtLabel text-right">รหัสพนักงาน gid <span id="erremployeesgid" class="text-red txtLabel hidden">***</span></label>
+                                    <label class="col-sm-4 col-form-label txtLabel text-right">รหัสพนักงาน <span id="erremployeesgid" class="text-red txtLabel hidden">***</span></label>
                                     <div class="col-sm-8">
                                         <input type="text" id="txtemployeegid" class="form-control ">
                                     </div>

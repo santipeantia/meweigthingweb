@@ -26,11 +26,11 @@ namespace medesignsoft.mesales_order
 
         ReportDocument rpt = new ReportDocument();
 
+        public string strServer = "SERVERAYL";
+        public string strSource = "DB_AYUTTAYALAND";
         public string strUser = "sa";
-        public string strPassword = "AmpelCloud@2020";
-        public string strServer = "147.50.150.243";
-        public string strSource = "ThantharaCo";
-        string ssql;
+        public string strPassword = "CA42se@ayl";
+        public string ssql = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
